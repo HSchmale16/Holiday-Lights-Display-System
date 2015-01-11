@@ -3,6 +3,6 @@
 
 int main()
 {
-
+	HL::initLights();
 	return 0;
 }

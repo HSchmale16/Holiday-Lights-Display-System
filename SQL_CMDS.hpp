@@ -24,10 +24,10 @@ const char MEDIA_TB[] = "Create table if not exists MEDIA("
  * CHANNELS is how many channels that controller has available
  */
 const char EFFECT_TB[] = "Create table if not exists EFFECTS("
-						"ID INTEGER PRIMARY KEY AUTOINCREMENT,"
-						"NAME TEXT,"
-						"IP_ADDERESS,"
-						"PORT INTEGER,"
-						"CHANNELS INTEGER);";
+						 "ID INTEGER PRIMARY KEY AUTOINCREMENT,"
+						 "NAME TEXT,"
+						 "IP_ADDERESS,"
+						 "PORT INTEGER,"
+						 "CHANNELS INTEGER);";
 
 #endif // SQL_CMDS_HPP_INCLUDED

@@ -20,10 +20,14 @@ void HL::initLights()
 // initializes the database
 void HL::initDB()
 {
+	// connect to the database
 	int rc = sqlite3_open(DB_FILE_PATH, &db);
+	char *z_ErrMsg = 0;
 	if(rc)
 	{
 		std::cerr << "Couldn't open database. Terminating..." << std::endl;
 		exit(1);
 	}
+	// create the tables
+
 }

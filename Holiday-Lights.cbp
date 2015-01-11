@@ -38,6 +38,8 @@
 			<Add option="-lsqlite3" />
 		</Linker>
 		<Unit filename="Defaults.hpp" />
+		<Unit filename="SQL_CMDS.hpp" />
+		<Unit filename="SqlCallbacks.cpp" />
 		<Unit filename="include/HolidayLights.hpp" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/HolidayLights.cpp" />

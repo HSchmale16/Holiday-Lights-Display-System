@@ -14,4 +14,5 @@ int admin::parseArgs(int argc, char** argv)
         printf("Usage: HolidayLights {args}\n");
         printf("See help for more information: HolidayLights --help\n");
 	}
+	return 0;
 }

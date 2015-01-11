@@ -26,6 +26,10 @@
 obj/*
 bin/*
 
+#project files
+*.depend
+*.layout
+
 #resource files
 *.db
 resources/*

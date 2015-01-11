@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1420950010 source:/home/hschmale/Documents/Projects/Holiday-Lights-Display-System/main.cpp
+	<iostream>
+	"include/HolidayLights.hpp"
+
+1420998603 /home/hschmale/Documents/Projects/Holiday-Lights-Display-System/include/HolidayLights.hpp
+
+1420999642 source:/home/hschmale/Documents/Projects/Holiday-Lights-Display-System/src/HolidayLights.cpp
+	"../include/HolidayLights.hpp"
+	"../Defaults.hpp"
+	"../SQL_CMDS.hpp"
+	<sqlite3.h>
+	<cstdlib>
+	<iostream>
+
+1420998753 /home/hschmale/Documents/Projects/Holiday-Lights-Display-System/Defaults.hpp
+
+1420999919 /home/hschmale/Documents/Projects/Holiday-Lights-Display-System/SQL_CMDS.hpp
+

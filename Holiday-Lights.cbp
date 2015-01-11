@@ -31,6 +31,16 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Linker>
+			<Add option="-lsfml-audio" />
+			<Add option="-lsfml-network" />
+			<Add option="-lsfml-system" />
+			<Add option="-lsqlite3" />
+		</Linker>
+		<Unit filename="Defaults.hpp" />
+		<Unit filename="include/HolidayLights.hpp" />
+		<Unit filename="main.cpp" />
+		<Unit filename="src/HolidayLights.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

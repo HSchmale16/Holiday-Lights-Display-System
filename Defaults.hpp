@@ -6,6 +6,7 @@
 #define DEFAULTS_H_INCLUDED
 
 // File Pathes
+#define DB_FILE_PATH "lights.db"
 
 // Other stuff yet to be thought of, probably config file defaults
 

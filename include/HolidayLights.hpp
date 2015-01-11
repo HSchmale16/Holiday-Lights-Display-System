@@ -26,7 +26,8 @@ namespace HL
 	 * \param
 	 * \param
 	 * \return Nothing
-	 *
+	 * Selects a random show to run from the database depending on config
+	 * settings.
 	 */
 	void startShow();
 }

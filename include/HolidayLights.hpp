@@ -31,6 +31,13 @@ namespace HL
 	 * settings.
 	 */
 	void startShow();
+
+	/** \brief Shuts down the server
+	 *
+	 * \return nothing
+	 * Terminates the database connection
+	 */
+	void shutdown();
 }
 
 #endif // HOLIDAYLIGHTS_HPP_INCLUDED

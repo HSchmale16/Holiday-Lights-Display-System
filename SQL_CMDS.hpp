@@ -32,7 +32,7 @@ namespace sql
 								 "PORT INTEGER,"
 								 "CHANNELS INTEGER);";
 	// Callbacks
-	// Does absolutely nothing
+	// This one does absolutely nothing
 	static int null(void *NotUsed, int argc, char **argv, char **azColName)
 	{
 		return 0;

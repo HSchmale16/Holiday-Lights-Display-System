@@ -45,7 +45,7 @@ void HL::initDB()
 		std::cout << "Created MEDIA table." << std::endl;
 	}
 	// create the effects table
-	rc = sqlite3_exec(DB, sql::SQL_EFFECT_TB, sql::null, 0, &z_ErrMsg);
+	rc = sqlite3_exec(db, sql::SQL_EFFECT_TB, sql::null, 0, &z_ErrMsg);
 	if(rc != SQLITE_OK)
 	{
 		std::cerr << "Failed to create EFFECTS table." << std::endl;

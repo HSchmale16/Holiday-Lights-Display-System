@@ -25,3 +25,7 @@
 #build dirs
 obj/*
 bin/*
+
+#resource files
+*.db
+resources/*

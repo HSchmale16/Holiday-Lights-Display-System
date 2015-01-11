@@ -5,6 +5,9 @@
 #ifndef DEFAULTS_H_INCLUDED
 #define DEFAULTS_H_INCLUDED
 
+// EXIT FAIL CODES
+#define SQL_FAIL 1
+
 // File Pathes
 #define DB_FILE_PATH "lights.db"
 

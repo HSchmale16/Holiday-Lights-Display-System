@@ -93,6 +93,21 @@ function dbCfg
 		sqlite3 $dbFile "$inst"
 	done
 	# @todo configure devices
+	until [ moreDevs != "y" ] ; do
+		echo "Enter Device Name: "
+		read devName
+		echo "Enter Device IP Address: "
+		read devIP
+		echo "Enter Device Listening Port: "
+		read devPort
+		echo "Enter Device Channels: "
+		read devCh
+		# create querry
+		q="INSERT INTO DEVICES(NAME, IP, PORT, CHANNELS) VALUES('$devName', '$devIP', $devPort, $devCh);"
+		sqlite3 $dbFile "$q"
+		echo "Do you have more devices to enter (y/n)? "
+		read moreDevs
+	done
 }
 
 # MAIN INSTALL SCRIPT
@@ -103,3 +118,4 @@ echo "Is this OK? Press Enter to Continue, otherwise ctrl-c to cancel."
 read # Wait for response
 BuildMv
 SetUpDir
+dbCfg

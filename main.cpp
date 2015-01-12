@@ -30,7 +30,7 @@ int main(int argc, char** argv)
 	// start up
 	gui::init();
 	HL::initLights();
-
+	HL::startShow();
 	// Launch the event loop
 	int rc;
 	if(SERVER_RUNS_FOR_SEC == 0)
@@ -44,6 +44,7 @@ int main(int argc, char** argv)
 
 	// Shutdown
 	gui::endGui();
+	HL::shutdown();
 	return rc;
 }
 

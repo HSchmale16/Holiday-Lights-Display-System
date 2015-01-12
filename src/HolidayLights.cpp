@@ -8,20 +8,29 @@
 #include <sqlite3.h>
 #include <cstdlib>
 #include <iostream>
+#include <cstdio>
 #include <string>
 #include <vector>
 
 // database connection
 static sqlite3 * db;
 
+// external globals
+extern std::string NOW_PLAYING;
+
 // Db Callbacks
-static int null(void *NotUsed, int argc, char **argv, char **azColName)
+static int cbNull(void *NotUsed, int argc, char **argv, char **azColName)
 {
 	return 0;
 }
 
+std::vector<std::string> cbSongRet;
 static int cbSong(void *NotUsed, int argc, char **argv, char **azColName)
 {
+	std::string str = argv[0];
+	cbSongRet.push_back(str);
+	str = argv[1];
+	cbSongRet.push_back(str);
     return 0;
 }
 
@@ -43,7 +52,7 @@ void HL::initDB()
 		exit(SQL_FAIL);
 	}
 	// create the tables - First is the media table
-	rc = sqlite3_exec(db, sql::SQL_MEDIA_TB, null, 0, &z_ErrMsg);
+	rc = sqlite3_exec(db, sql::SQL_MEDIA_TB, cbNull, 0, &z_ErrMsg);
 	if(rc != SQLITE_OK)
 	{
 		std::cerr << "Failed to create MEDIA table." << std::endl;
@@ -51,7 +60,7 @@ void HL::initDB()
 		exit(1);
 	}
 	// create the effects table
-	rc = sqlite3_exec(db, sql::SQL_EFFECT_TB, null, 0, &z_ErrMsg);
+	rc = sqlite3_exec(db, sql::SQL_EFFECT_TB, cbNull, 0, &z_ErrMsg);
 	if(rc != SQLITE_OK)
 	{
 		std::cerr << "Failed to create EFFECTS table." << std::endl;
@@ -63,7 +72,16 @@ void HL::initDB()
 // starts a show
 void HL::startShow()
 {
-
+	//cbSongRet.clear();
+	char *z_ErrMsg = 0;
+	int rc = sqlite3_exec(db, sql::SQL_SELECT_SONG, cbSong, 0, &z_ErrMsg);
+	if(rc)
+	{
+		sqlite3_free(z_ErrMsg);
+		printf("FAIL!\n");
+		exit(SQL_FAIL);
+	}
+	NOW_PLAYING = cbSongRet[0];
 }
 
 // shuts down the system

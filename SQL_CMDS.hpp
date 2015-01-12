@@ -33,8 +33,8 @@ namespace sql
 								 "CHANNELS INTEGER);";
 
 	// Selects a random song to load
-	const char SQL_SELECT_SONG[] = "Select name, path from MEDIA where row ="
-								   "%d; ";
+	const char SQL_SELECT_SONG[] = "Select NAME, PATH from MEDIA ORDER BY"
+								   " RANDOM() LIMIT 1;";
 	// Callbacks
 	// This one does absolutely nothing
 

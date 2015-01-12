@@ -8,10 +8,24 @@
 #include <sqlite3.h>
 #include <cstdlib>
 #include <iostream>
+#include <string>
+#include <vector>
 
 // database connection
 static sqlite3 * db;
 
+// Db Callbacks
+static int null(void *NotUsed, int argc, char **argv, char **azColName)
+{
+	return 0;
+}
+
+static int cbSong(void *NotUsed, int argc, char **argv, char **azColName)
+{
+    return 0;
+}
+
+// Holiday Lights Functions
 void HL::initLights()
 {
 	HL::initDB();
@@ -29,7 +43,7 @@ void HL::initDB()
 		exit(SQL_FAIL);
 	}
 	// create the tables - First is the media table
-	rc = sqlite3_exec(db, sql::SQL_MEDIA_TB, sql::null, 0, &z_ErrMsg);
+	rc = sqlite3_exec(db, sql::SQL_MEDIA_TB, null, 0, &z_ErrMsg);
 	if(rc != SQLITE_OK)
 	{
 		std::cerr << "Failed to create MEDIA table." << std::endl;
@@ -37,7 +51,7 @@ void HL::initDB()
 		exit(1);
 	}
 	// create the effects table
-	rc = sqlite3_exec(db, sql::SQL_EFFECT_TB, sql::null, 0, &z_ErrMsg);
+	rc = sqlite3_exec(db, sql::SQL_EFFECT_TB, null, 0, &z_ErrMsg);
 	if(rc != SQLITE_OK)
 	{
 		std::cerr << "Failed to create EFFECTS table." << std::endl;

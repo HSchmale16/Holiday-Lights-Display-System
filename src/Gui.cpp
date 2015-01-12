@@ -9,6 +9,9 @@
 
 using namespace gui;
 
+// External Variables
+extern std::string NOW_PLAYING;
+
 void gui::init()
 {
 	initscr();
@@ -20,6 +23,8 @@ void gui::updateGui()
 {
 	clear();
 	printInMiddle(NULL, 0, 0, 0, "Holiday Lighs System Server");
+	printInMiddle(NULL, 3, 0, 0, "Now Playing:");
+    printInMiddle(NULL, 4, 0, 0, NOW_PLAYING);
 	refresh();
 }
 

@@ -37,10 +37,7 @@ namespace sql
 								   "%d; ";
 	// Callbacks
 	// This one does absolutely nothing
-	static int null(void *NotUsed, int argc, char **argv, char **azColName)
-{
-	return 0;
-}
+
 }
 
 

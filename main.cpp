@@ -12,7 +12,8 @@
 #include "Defaults.hpp"
 
 // Global Variables
-int SERVER_RUNS_FOR_SEC;
+int SERVER_RUNS_FOR_SEC; // server runs for this many seconds
+std::string NOW_PLAYING; // What song is now playing
 
 // Event Loop Types
 int EventLoopLim();		// Limited run time
@@ -24,17 +25,17 @@ int main(int argc, char** argv)
 	// auto-exit
 	if(admin::parseArgs(argc, argv))
 	{
-        return 0; // if so quit
+		return 0; // if so quit
 	}
 	// start up
 	gui::init();
-    HL::initLights();
+	HL::initLights();
 
 	// Launch the event loop
 	int rc;
 	if(SERVER_RUNS_FOR_SEC == 0)
 	{
-        rc = EventLoopULim();
+		rc = EventLoopULim();
 	}
 	else
 	{
@@ -54,8 +55,9 @@ int EventLoopLim()
 	do
 	{
 		gui::updateGui();
-        sf::sleep(sf::milliseconds(UPDATE_T_PERIOD));
-	}while(difftime(now, start) < SERVER_RUNS_FOR_SEC);
+		sf::sleep(sf::milliseconds(UPDATE_T_PERIOD));
+	}
+	while(difftime(now, start) < SERVER_RUNS_FOR_SEC);
 	return 0;
 }
 

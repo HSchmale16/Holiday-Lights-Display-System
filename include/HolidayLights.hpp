@@ -24,8 +24,6 @@ namespace HL
 
 	/** \brief starts a show
 	 *
-	 * \param
-	 * \param
 	 * \return Nothing
 	 * Selects a random show to run from the database depending on config
 	 * settings.

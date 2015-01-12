@@ -13,6 +13,9 @@
 // File Pathes
 #define DB_FILE_PATH "lights.db"
 
+// Update Rates
+#define UPDATE_T_PERIOD 10	// how many milliseconds to wait between updates
+
 // Other stuff yet to be thought of, probably config file defaults
 
 #endif // DEFAULTS_H_INCLUDED

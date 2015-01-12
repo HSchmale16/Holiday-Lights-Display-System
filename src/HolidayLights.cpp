@@ -25,37 +25,31 @@ void HL::initDB()
 	char *z_ErrMsg = 0;
 	if(rc)
 	{
-		//std::cerr << "Couldn't open database. Terminating..." << std::endl;
+		std::cerr << "Couldn't open database. Terminating..." << std::endl;
 		exit(SQL_FAIL);
-	}
-	else
-	{
-		//std::cout << "Opened Database successfully" << std::endl;
 	}
 	// create the tables - First is the media table
 	rc = sqlite3_exec(db, sql::SQL_MEDIA_TB, sql::null, 0, &z_ErrMsg);
 	if(rc != SQLITE_OK)
 	{
-		//std::cerr << "Failed to create MEDIA table." << std::endl;
+		std::cerr << "Failed to create MEDIA table." << std::endl;
 		sqlite3_free(z_ErrMsg);
 		exit(1);
-	}
-	else
-	{
-		//std::cout << "Created MEDIA table." << std::endl;
 	}
 	// create the effects table
 	rc = sqlite3_exec(db, sql::SQL_EFFECT_TB, sql::null, 0, &z_ErrMsg);
 	if(rc != SQLITE_OK)
 	{
-		//std::cerr << "Failed to create EFFECTS table." << std::endl;
+		std::cerr << "Failed to create EFFECTS table." << std::endl;
 		sqlite3_free(z_ErrMsg);
 		exit(SQL_FAIL);
 	}
-	else
-	{
-		//std::cout << "Created EFFECTS table." << std::endl;
-	}
+}
+
+// starts a show
+void HL::startShow()
+{
+
 }
 
 // shuts down the system

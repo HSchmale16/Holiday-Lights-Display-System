@@ -19,6 +19,7 @@ The prefered compiler is GCC.
 	The following packages are required to build and run:
 	* SFML-devel
 	* sqlite3-devel
+	* ncurses-devel
 	* ffmpeg
 	## instructions
 	1. Have a directory with all the music you'll be running on the light system
@@ -34,3 +35,4 @@ It will also perform basic configuration on the program.
 #Depends on
 * SFML (Simple Fast Multimedia Library)
 * SQLite3
+* ncurses

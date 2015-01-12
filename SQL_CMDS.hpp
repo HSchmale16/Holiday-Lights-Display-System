@@ -31,12 +31,16 @@ namespace sql
 								 "IP_ADDERESS,"
 								 "PORT INTEGER,"
 								 "CHANNELS INTEGER);";
+
+	// Selects a random song to load
+	const char SQL_SELECT_SONG[] = "Select name, path from MEDIA where row ="
+								   "%d; ";
 	// Callbacks
 	// This one does absolutely nothing
 	static int null(void *NotUsed, int argc, char **argv, char **azColName)
-	{
-		return 0;
-	}
+{
+	return 0;
+}
 }
 
 

@@ -70,8 +70,8 @@ function dbCfg
 	# add to database
 	cd ~/$project
 	for f in $( ls resources/songs ) ; do
-		insert="Insert into MEDIA(name, path) values('$f', 'resources/songs/$f');"
-		sqlite3 $dbFile "$insert"
+		inst="Insert into MEDIA(name, path) values('$f', 'resources/songs/$f');"
+		sqlite3 $dbFile "$inst"
 	done
 }
 

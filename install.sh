@@ -12,7 +12,9 @@ exe="HolidayLights"
 # config file name
 cfgFile="cfg.ini"
 # song resources folder
-songResDir="$project/resources/songs"
+songResDir=~/$project/resources/songs
+# db File name
+dbFile="lights.db"
 
 #declare functions
 # builds the program and moves it to it's working directory
@@ -24,6 +26,9 @@ function BuildMv
 	# move to the install directory
 	mkdir ~/$project
 	mv ./$exe ~/$project
+	
+	# copy necessay scripts to prog directory
+	cp ./updateDB.sh ~/$project/	#database update script
 }
 
 # set up the prgm's working directory
@@ -48,12 +53,26 @@ function makeConfigFile
 # configures the database
 function dbCfg
 {
-	echo -n "Enter the directory containing desired songs relative to home: "
-	read songsDir
-	echo -n "Should those files be copied to the prog working dir(y/n)? "
-	read shouldCp
-	
-	
+	./$exe --createDB # create the database file
+	cd ~/$project	# return to primary directoryc 
+	# copy/move the selected files to the songs resource folder
+	for file in $( ls ~/Music/ ) ; do
+		if [ -e ~/Music/$file ]; then #check file existance
+			cp ~/Music/$file $songResDir
+		fi
+	done
+	# begin conversion
+	cd ~/$project/resources/songs
+	for f in $( ls ) ; do
+		ffmpeg -i $f $f.wav
+	done
+	rm -r *.mp3 # remove incompatible files
+	# add to database
+	cd ~/$project
+	for f in $( ls resources/songs ) ; do
+		insert="Insert into MEDIA(name, path) values('$f', 'resources/songs/$f');"
+		sqlite3 $dbFile "$insert"
+	done
 }
 
 # Main Bash script

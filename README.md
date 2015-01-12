@@ -21,6 +21,7 @@ The following packages are required to build and run:
 * sqlite3-devel
 * ncurses-devel
 * ffmpeg
+
 ## instructions
 1. Have a directory with all the music you'll be running on the light system
 server. You'll need to enter this during config.

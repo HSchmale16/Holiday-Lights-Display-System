@@ -18,20 +18,17 @@ static sqlite3 * db;
 // external globals
 extern std::string NOW_PLAYING;
 
-// Db Callbacks
-static int cbNull(void *NotUsed, int argc, char **argv, char **azColName)
-{
-	return 0;
-}
-
-std::vector<std::string> cbSongRet;
+// This callback sets the global current song to be playing
+HL::SongData currSongDat;
 static int cbSong(void *NotUsed, int argc, char **argv, char **azColName)
 {
-	std::string str = argv[0];
-	cbSongRet.push_back(str);
-	str = argv[1];
-	cbSongRet.push_back(str);
-    return 0;
+	if(argc >= 3)
+	{
+		currSongDat.m_songID = strtol(argv[0], NULL, 10);
+		currSongDat.m_name = argv[1];
+		currSongDat.m_path = argv[2];
+	}
+	return 0;
 }
 
 // Holiday Lights Functions
@@ -52,7 +49,7 @@ void HL::initDB()
 		exit(SQL_FAIL);
 	}
 	// create the tables - First is the media table
-	rc = sqlite3_exec(db, sql::SQL_MEDIA_TB, cbNull, 0, &z_ErrMsg);
+	rc = sqlite3_exec(db, sql::SQL_MEDIA_TB, sql::cbNull, 0, &z_ErrMsg);
 	if(rc != SQLITE_OK)
 	{
 		std::cerr << "Failed to create MEDIA table." << std::endl;
@@ -60,7 +57,7 @@ void HL::initDB()
 		exit(1);
 	}
 	// create the effects table
-	rc = sqlite3_exec(db, sql::SQL_EFFECT_TB, cbNull, 0, &z_ErrMsg);
+	rc = sqlite3_exec(db, sql::SQL_EFFECT_TB, sql::cbNull, 0, &z_ErrMsg);
 	if(rc != SQLITE_OK)
 	{
 		std::cerr << "Failed to create EFFECTS table." << std::endl;
@@ -72,7 +69,6 @@ void HL::initDB()
 // starts a show
 void HL::startShow()
 {
-	//cbSongRet.clear();
 	char *z_ErrMsg = 0;
 	int rc = sqlite3_exec(db, sql::SQL_SELECT_SONG, cbSong, 0, &z_ErrMsg);
 	if(rc)
@@ -81,7 +77,7 @@ void HL::startShow()
 		printf("FAIL!\n");
 		exit(SQL_FAIL);
 	}
-	NOW_PLAYING = cbSongRet[0];
+    NOW_PLAYING = currSongDat.m_name;
 }
 
 // shuts down the system

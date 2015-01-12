@@ -33,11 +33,14 @@ namespace sql
 								 "CHANNELS INTEGER);";
 
 	// Selects a random song to load
-	const char SQL_SELECT_SONG[] = "Select NAME, PATH from MEDIA ORDER BY"
+	const char SQL_SELECT_SONG[] = "Select * from MEDIA ORDER BY"
 								   " RANDOM() LIMIT 1;";
 	// Callbacks
 	// This one does absolutely nothing
-
+	static int cbNull(void *NotUsed, int argc, char **argv, char **azColName)
+	{
+		return 0;
+	}
 }
 
 

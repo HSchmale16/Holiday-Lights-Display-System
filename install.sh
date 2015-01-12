@@ -3,6 +3,7 @@
 # @date January 11, 2015
 # @file install.sh
 # installs the Holiday Lights System and performs default config on it
+# The install directory is the user's home directory
 
 # -- Global Variables --
 # project name
@@ -73,6 +74,7 @@ function dbCfg
 		inst="Insert into MEDIA(name, path) values('$f', 'resources/songs/$f');"
 		sqlite3 $dbFile "$inst"
 	done
+	# @todo configure devices
 }
 
 # Main Bash script

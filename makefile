@@ -14,5 +14,5 @@ $(EXE): $(OBJECTS)
 	$(CC) $(CFLAGS) $< -o $@
 
 clean:
-	rm $(EXE)
+	if [ -e $(EXE) ] ; then rm $(EXE); fi
 	rm -rf *.o

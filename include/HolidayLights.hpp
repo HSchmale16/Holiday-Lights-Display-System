@@ -24,6 +24,15 @@ namespace HL
 	 */
 	void initDB();
 
+	/** \brief Connects to the clients
+	 *
+	 * \return Manipulates global vector of clients
+	 * This function pings all of the listed clients in the database.
+	 * if it connects successfully, it adds the clients information to a global
+	 * vector.
+	 */
+	void initClients();
+
 	/** \brief starts a show
 	 *
 	 * \return Nothing
@@ -55,6 +64,15 @@ namespace HL
 			m_path = path;
 		}
 	};
+
+	/// Contains data about the client
+    struct Client
+    {
+        std::string m_name;			// User friendly name
+        std::string m_ipAddress;    // Ip Address of client
+        int m_port;					// Port Client is listening on
+        int m_channels;				// Number of output channels on that client
+    };
 }
 
 #endif // HOLIDAYLIGHTS_HPP_INCLUDED

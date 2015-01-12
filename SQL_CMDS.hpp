@@ -28,7 +28,7 @@ namespace sql
 	const char SQL_EFFECT_TB[] = "Create table if not exists EFFECTS("
 								 "ID INTEGER PRIMARY KEY AUTOINCREMENT,"
 								 "NAME TEXT,"
-								 "IP_ADDERESS,"
+								 "IP_ADDRESS TEXT,"
 								 "PORT INTEGER,"
 								 "CHANNELS INTEGER);";
 

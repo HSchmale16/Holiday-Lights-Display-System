@@ -66,7 +66,7 @@ namespace HL
 	};
 
 	/// Contains data about the client
-    struct Client
+    struct ClientDevice
     {
         std::string m_name;			// User friendly name
         std::string m_ipAddress;    // Ip Address of client

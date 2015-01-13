@@ -27,14 +27,18 @@ namespace sql
 	 */
 	const char SQL_EFFECT_TB[] = "Create table if not exists DEVICES("
 								 "ID INTEGER PRIMARY KEY AUTOINCREMENT,"
-								 "NAME TEXT PRIMARY KEY,"
-								 "IP TEXT PRIMARY KEY,"
+								 "NAME TEXT UNIQUE,"
+								 "IP TEXT UNIQUE,"
 								 "PORT INTEGER,"
 								 "CHANNELS INTEGER);";
 
 	// Selects a random song to load
 	const char SQL_SELECT_SONG[] = "Select * from MEDIA ORDER BY"
 								   " RANDOM() LIMIT 1;";
+
+	// Selects the client devices in the database
+	const char SQL_SELECT_DEVICES[] = "Select * from DEVICES;";
+
 	// Callbacks
 	// This one does absolutely nothing
 	static int cbNull(void *NotUsed, int argc, char **argv, char **azColName)

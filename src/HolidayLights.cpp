@@ -32,10 +32,36 @@ static int cbSong(void *NotUsed, int argc, char **argv, char **azColName)
 	return 0;
 }
 
+// This callback tests for clients, pings them, then pushes them into a vector
+std::vector<HL::ClientDevice> clients;
+static int cbClients(void *NotUsed, int argc, char **argv, char **azColName)
+{
+	HL::ClientDevice cli;
+    // fill in the struct
+    if(argc >= 5)
+	{
+        cli.m_name = argv[1];
+        cli.m_ipAddress = argv[2];
+        cli.m_port = strtol(argv[3], NULL, 10);
+        cli.m_channels = strtol(argv[4], NULL, 10);
+        // PING
+        sf::TcpSocket s;
+        if(s.connect(sf::IpAddress(cli.m_ipAddress),
+					cli.m_port) == sf::Socket::Done)
+		{
+            // Sweet Success
+            clients.push_back(cli);
+		}
+	}
+    return 0;
+}
+
+
 // Holiday Lights Functions
 void HL::initLights()
 {
 	HL::initDB();
+	HL::initClients();
 }
 
 // initializes the database
@@ -70,7 +96,15 @@ void HL::initDB()
 // initializes the clients
 void HL::initClients()
 {
-
+	clients.clear();
+	char * z_ErrMsg = 0;
+    int rc = sqlite3_exec(db, sql::SQL_SELECT_DEVICES, cbClients, 0, &z_ErrMsg);
+    if(rc)
+	{
+        sqlite3_free(z_ErrMsg);
+        printf("Selection Fail on Devices\n");
+        exit(SQL_FAIL);
+	}
 }
 
 // starts a show

@@ -16,3 +16,4 @@ $(EXE): $(OBJECTS)
 clean:
 	if [ -e $(EXE) ] ; then rm $(EXE); fi
 	rm -rf *.o
+	rm -rf src/*.o

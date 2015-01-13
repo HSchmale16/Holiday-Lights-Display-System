@@ -5,12 +5,13 @@
 #include "../include/HolidayLights.hpp"
 #include "../Defaults.hpp"
 #include "../SQL_CMDS.hpp"
-#include <sqlite3.h>
 #include <cstdlib>
 #include <iostream>
 #include <cstdio>
 #include <string>
 #include <vector>
+#include <sqlite3.h>
+#include <SFML/Network.hpp>
 
 // database connection
 static sqlite3 * db;
@@ -64,6 +65,12 @@ void HL::initDB()
 		sqlite3_free(z_ErrMsg);
 		exit(SQL_FAIL);
 	}
+}
+
+// initializes the clients
+void HL::initClients()
+{
+
 }
 
 // starts a show

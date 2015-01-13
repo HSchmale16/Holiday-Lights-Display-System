@@ -15,6 +15,7 @@ You'll need to modify the IP, Port and MAC_ADDRESS vars for you LAN.
 #How To Build
 This is written with assumption that you're running a Fedora or yum based distro.
 The prefered compiler is GCC.
+
 ## Requirements
 The following packages are required to build and run:
 * SFML-devel

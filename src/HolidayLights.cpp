@@ -37,23 +37,23 @@ std::vector<HL::ClientDevice> clients;
 static int cbClients(void *NotUsed, int argc, char **argv, char **azColName)
 {
 	HL::ClientDevice cli;
-    // fill in the struct
-    if(argc >= 5)
+	// fill in the struct
+	if(argc >= 5)
 	{
-        cli.m_name = argv[1];
-        cli.m_ipAddress = argv[2];
-        cli.m_port = strtol(argv[3], NULL, 10);
-        cli.m_channels = strtol(argv[4], NULL, 10);
-        // PING
-        sf::TcpSocket s;
-        if(s.connect(sf::IpAddress(cli.m_ipAddress),
-					cli.m_port) == sf::Socket::Done)
+		cli.m_name = argv[1];
+		cli.m_ipAddress = argv[2];
+		cli.m_port = strtol(argv[3], NULL, 10);
+		cli.m_channels = strtol(argv[4], NULL, 10);
+		// PING
+		sf::TcpSocket s;
+		if(s.connect(sf::IpAddress(cli.m_ipAddress),
+					 cli.m_port) == sf::Socket::Done)
 		{
-            // Sweet Success
-            clients.push_back(cli);
+			// Sweet Success
+			clients.push_back(cli);
 		}
 	}
-    return 0;
+	return 0;
 }
 
 
@@ -98,12 +98,12 @@ void HL::initClients()
 {
 	clients.clear();
 	char * z_ErrMsg = 0;
-    int rc = sqlite3_exec(db, sql::SQL_SELECT_DEVICES, cbClients, 0, &z_ErrMsg);
-    if(rc)
+	int rc = sqlite3_exec(db, sql::SQL_SELECT_DEVICES, cbClients, 0, &z_ErrMsg);
+	if(rc)
 	{
-        sqlite3_free(z_ErrMsg);
-        printf("Selection Fail on Devices\n");
-        exit(SQL_FAIL);
+		sqlite3_free(z_ErrMsg);
+		printf("Selection Fail on Devices\n");
+		exit(SQL_FAIL);
 	}
 }
 
@@ -118,7 +118,7 @@ void HL::startShow()
 		printf("FAIL!\n");
 		exit(SQL_FAIL);
 	}
-    NOW_PLAYING = currSongDat.m_name;
+	NOW_PLAYING = currSongDat.m_name;
 }
 
 // shuts down the system

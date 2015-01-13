@@ -21,7 +21,7 @@ namespace gui
 
 	// prints in the middle of the screen
 	void printInMiddle(WINDOW *win, int starty, int startx, int width,
-						 std::string str);
+					   std::string str);
 }
 
 #endif // GUI_HPP_INCLUDED

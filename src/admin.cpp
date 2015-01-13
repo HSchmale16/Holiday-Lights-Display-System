@@ -17,7 +17,7 @@ int admin::parseArgs(int argc, char** argv)
 	if(argc <= 1)
 	{
 		admin::args::noArgs();
-        return 1;
+		return 1;
 	}
 	std::vector<std::string> args = admin::args::createArgVector(argc, argv);
 	for(unsigned int i = 0;  i < args.size(); i++)
@@ -44,14 +44,14 @@ int admin::parseArgs(int argc, char** argv)
 					}
 					return 0;
 				case UPDATE_DB_ARG:
-                    // dirty hack to start the db update bash script
-                    system("./updateDB.sh");
-                    return 1;
+					// dirty hack to start the db update bash script
+					system("./updateDB.sh");
+					return 1;
 				case CREATE_DB_ARG:
-                    HL::initDB();
-                    HL::shutdown();
-                    printf("Created a database file\n");
-                    return 1;
+					HL::initDB();
+					HL::shutdown();
+					printf("Created a database file\n");
+					return 1;
 				}
 			}
 		}

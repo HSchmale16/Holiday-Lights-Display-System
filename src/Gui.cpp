@@ -24,7 +24,7 @@ void gui::updateGui()
 	clear();
 	printInMiddle(NULL, 0, 0, 0, "Holiday Lighs System Server");
 	printInMiddle(NULL, 3, 0, 0, "Now Playing:");
-    printInMiddle(NULL, 4, 0, 0, NOW_PLAYING);
+	printInMiddle(NULL, 4, 0, 0, NOW_PLAYING);
 	refresh();
 }
 

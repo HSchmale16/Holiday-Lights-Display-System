@@ -45,17 +45,18 @@ namespace admin
 
 		// Arguement List
 		const unsigned int NUM_POSSIBLE_ARGS = 4;
-        const std::string POSSIBLE_ARGS[] = {
-            "--help",		// Print Help the Quit
-            "--start",		// Starts the server process for n seconds
-            "--updateDB",	// Update the database
-            "--createDB"	// Creates the database file then exit
-        };
-        // Arguement Codes
-        #define HELP_ARG 0
-        #define START_ARG 1
-        #define UPDATE_DB_ARG 2
-        #define CREATE_DB_ARG 3
+		const std::string POSSIBLE_ARGS[] =
+		{
+			"--help",		// Print Help the Quit
+			"--start",		// Starts the server process for n seconds
+			"--updateDB",	// Update the database
+			"--createDB"	// Creates the database file then exit
+		};
+		// Arguement Codes
+#define HELP_ARG 0
+#define START_ARG 1
+#define UPDATE_DB_ARG 2
+#define CREATE_DB_ARG 3
 	}
 }
 

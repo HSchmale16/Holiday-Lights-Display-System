@@ -66,13 +66,13 @@ namespace HL
 	};
 
 	/// Contains data about the client
-    struct ClientDevice
-    {
-        std::string m_name;			// User friendly name
-        std::string m_ipAddress;    // Ip Address of client
-        int m_port;					// Port Client is listening on
-        int m_channels;				// Number of output channels on that client
-    };
+	struct ClientDevice
+	{
+		std::string m_name;			// User friendly name
+		std::string m_ipAddress;    // Ip Address of client
+		int m_port;					// Port Client is listening on
+		int m_channels;				// Number of output channels on that client
+	};
 }
 
 #endif // HOLIDAYLIGHTS_HPP_INCLUDED

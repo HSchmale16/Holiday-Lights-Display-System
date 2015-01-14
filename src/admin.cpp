@@ -48,8 +48,8 @@ int admin::parseArgs(int argc, char** argv)
 					system("./updateDB.sh");
 					return 1;
 				case CREATE_DB_ARG:
-					HL::initDB();
-					HL::shutdown();
+					hl::initDB();
+					hl::shutdown();
 					printf("Created a database file\n");
 					return 1;
 				}

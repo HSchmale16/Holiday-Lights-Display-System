@@ -20,7 +20,7 @@ static sqlite3 * db;
 extern std::string NOW_PLAYING;
 
 // This callback sets the global current song to be playing
-HL::SongData currSongDat;
+hl::SongData currSongDat;
 static int cbSong(void *NotUsed, int argc, char **argv, char **azColName)
 {
 	if(argc >= 3)
@@ -33,10 +33,10 @@ static int cbSong(void *NotUsed, int argc, char **argv, char **azColName)
 }
 
 // This callback tests for clients, pings them, then pushes them into a vector
-std::vector<HL::ClientDevice> clients;
+std::vector<hl::ClientDevice> clients;
 static int cbClients(void *NotUsed, int argc, char **argv, char **azColName)
 {
-	HL::ClientDevice cli;
+	hl::ClientDevice cli;
 	// fill in the struct
 	if(argc >= 5)
 	{
@@ -58,14 +58,14 @@ static int cbClients(void *NotUsed, int argc, char **argv, char **azColName)
 
 
 // Holiday Lights Functions
-void HL::initLights()
+void hl::initLights()
 {
-	HL::initDB();
-	HL::initClients();
+	hl::initDB();
+	hl::initClients();
 }
 
 // initializes the database
-void HL::initDB()
+void hl::initDB()
 {
 	// connect to the database
 	int rc = sqlite3_open(DB_FILE_PATH, &db);
@@ -94,7 +94,7 @@ void HL::initDB()
 }
 
 // initializes the clients
-void HL::initClients()
+void hl::initClients()
 {
 	clients.clear();
 	char * z_ErrMsg = 0;
@@ -108,7 +108,7 @@ void HL::initClients()
 }
 
 // starts a show
-void HL::startShow()
+void hl::startShow()
 {
 	char *z_ErrMsg = 0;
 	int rc = sqlite3_exec(db, sql::SQL_SELECT_SONG, cbSong, 0, &z_ErrMsg);
@@ -122,7 +122,7 @@ void HL::startShow()
 }
 
 // shuts down the system
-void HL::shutdown()
+void hl::shutdown()
 {
 	sqlite3_close(db);
 	//std::cout << "Closed Database" << std::endl;

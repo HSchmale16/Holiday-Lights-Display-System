@@ -6,7 +6,7 @@
 
 // Holiday Lights Primary Namespace
 // Contains all the functions that control the actual show
-namespace HL
+namespace hl
 {
 	/** \brief initializes the lights system
 	 *

@@ -38,12 +38,12 @@ static int cbClients(void *NotUsed, int argc, char **argv, char **azColName)
 {
 	hl::ClientDevice cli;
 	// fill in the struct
-	if(argc >= 5)
+	if(argc >= 6)
 	{
 		cli.m_name = argv[1];
 		cli.m_ipAddress = argv[2];
-		cli.m_port = strtol(argv[3], NULL, 10);
-		cli.m_channels = strtol(argv[4], NULL, 10);
+		cli.m_port = strtol(argv[4], NULL, 10);
+		cli.m_channels = strtol(argv[5], NULL, 10);
 		// PING
 		sf::TcpSocket s;
 		if(s.connect(sf::IpAddress(cli.m_ipAddress),

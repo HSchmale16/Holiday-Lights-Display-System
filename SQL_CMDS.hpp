@@ -24,11 +24,13 @@ namespace sql
 	 * IP_ADDRESS is the IP_ADDRESS of the effect on the Local Network
 	 * PORT is what port the clients are listening on for commands
 	 * CHANNELS is how many channels that controller has available
+	 * MAC is the MAC address of the device
 	 */
 	const char SQL_DEVICE_TB[] = "Create table if not exists DEVICES("
 								 "ID INTEGER PRIMARY KEY AUTOINCREMENT,"
 								 "NAME TEXT UNIQUE,"
 								 "IP TEXT UNIQUE,"
+								 "MAC TEXT UNIQUE,"
 								 "PORT INTEGER,"
 								 "CHANNELS INTEGER);";
 

@@ -11,6 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option parameters="--start 5" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
@@ -36,13 +37,18 @@
 			<Add option="-lsfml-network" />
 			<Add option="-lsfml-system" />
 			<Add option="-lsqlite3" />
+			<Add option="-lncurses" />
 		</Linker>
 		<Unit filename="Defaults.hpp" />
 		<Unit filename="SQL_CMDS.hpp" />
 		<Unit filename="include/Admin.hpp" />
+		<Unit filename="include/Gui.hpp" />
 		<Unit filename="include/HolidayLights.hpp" />
+		<Unit filename="include/Synthesis.hpp" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Gui.cpp" />
 		<Unit filename="src/HolidayLights.cpp" />
+		<Unit filename="src/Synthesis.cpp" />
 		<Unit filename="src/admin.cpp" />
 		<Extensions>
 			<code_completion />

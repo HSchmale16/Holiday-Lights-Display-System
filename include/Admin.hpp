@@ -50,7 +50,7 @@ namespace admin
 			"--help",		// Print Help the Quit
 			"--start",		// Starts the server process for n seconds
 			"--updateDB",	// Update the database
-			"--createDB"	// Creates the database file then exit
+			"--createDB",	// Creates the database file then exit
 		};
 		// Arguement Codes
 #define HELP_ARG 0

@@ -14,7 +14,12 @@
 #define DB_FILE_PATH "lights.db"
 
 // Update Rates
-#define UPDATE_T_PERIOD 10	// how many milliseconds to wait between updates
+#define UPDATE_T_PERIOD 10	// milliseconds to sleep each event loop, reduces
+							// CPU Usage
+
+#define INTERMISSION 10		// Seconds to wait between shows
+
+
 
 // Other stuff yet to be thought of, probably config file defaults
 

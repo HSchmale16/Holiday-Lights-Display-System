@@ -66,7 +66,8 @@ int EventLoopULim()
 {
 	while(true)
 	{
-
+		gui::updateGui();
+		sf::sleep(sf::milliseconds(UPDATE_T_PERIOD));
 	}
 	return 0;
 }

@@ -18,6 +18,13 @@ namespace syn
 	{
 		int m_channels;
 		std::string m_data;
+
+		// ctor
+		ShowData(int channels, std::string show)
+		{
+			m_channels = channels;
+			m_data = show;
+		}
 	};
 
 	ShowData parseSong(hl::SongData sd, int channels);

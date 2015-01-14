@@ -14,6 +14,7 @@
 // Global Variables
 int SERVER_RUNS_FOR_SEC; // server runs for this many seconds
 std::string NOW_PLAYING; // What song is now playing
+bool SHOW_EDIT_MODE_ON = false;	// is the prog in show edit mode
 
 // Event Loop Types
 int EventLoopLim();		// Limited run time

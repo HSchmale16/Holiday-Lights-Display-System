@@ -116,6 +116,8 @@ function dbCfg
 		# create querry
 		q="INSERT INTO DEVICES(NAME, IP, PORT, CHANNELS) VALUES('$devName', '$devIP', $devPort, $devCh);"
 		sqlite3 $dbFile "$q"
+		q="Create table if not exists $devName_SHOWS(ID INT NOT NULL AUTOINCREMENT, SHOW_HM TEXT, SHOW_GEN TEXT);"
+		sqlite3 $dbFile "$q"
 		echo -n "Do you have more devices to enter (y/n)? "
 		read moreDevs
 	done

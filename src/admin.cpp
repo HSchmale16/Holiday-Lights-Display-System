@@ -52,6 +52,9 @@ int admin::parseArgs(int argc, char** argv)
 					hl::shutdown();
 					printf("Created a database file\n");
 					return 1;
+				case MAKE_SHOWS_ARG:
+					/// @todo add ncurses based show editor call here
+                    return 1;
 				}
 			}
 		}

@@ -25,7 +25,7 @@ namespace sql
 	 * PORT is what port the clients are listening on for commands
 	 * CHANNELS is how many channels that controller has available
 	 */
-	const char SQL_EFFECT_TB[] = "Create table if not exists DEVICES("
+	const char SQL_DEVICE_TB[] = "Create table if not exists DEVICES("
 								 "ID INTEGER PRIMARY KEY AUTOINCREMENT,"
 								 "NAME TEXT UNIQUE,"
 								 "IP TEXT UNIQUE,"

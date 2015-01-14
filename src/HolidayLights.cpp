@@ -84,7 +84,7 @@ void hl::initDB()
 		exit(1);
 	}
 	// create the effects table
-	rc = sqlite3_exec(db, sql::SQL_EFFECT_TB, sql::cbNull, 0, &z_ErrMsg);
+	rc = sqlite3_exec(db, sql::SQL_DEVICE_TB, sql::cbNull, 0, &z_ErrMsg);
 	if(rc != SQLITE_OK)
 	{
 		std::cerr << "Failed to create EFFECTS table." << std::endl;

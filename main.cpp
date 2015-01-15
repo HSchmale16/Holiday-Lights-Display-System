@@ -56,7 +56,7 @@ int EventLoopLim()
 	time(&now);
 	do
 	{
-		gui::updateGui();
+		gui::updateShowGui();
 		sf::sleep(sf::milliseconds(UPDATE_T_PERIOD));
 	}
 	while(difftime(now, start) < SERVER_RUNS_FOR_SEC);
@@ -67,7 +67,7 @@ int EventLoopULim()
 {
 	while(true)
 	{
-		gui::updateGui();
+		gui::updateShowGui();
 		sf::sleep(sf::milliseconds(UPDATE_T_PERIOD));
 	}
 	return 0;

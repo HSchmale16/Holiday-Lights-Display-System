@@ -16,11 +16,20 @@ namespace admin
 	 *
 	 * \param argc - arguement count
 	 * \param argv - args array
-	 * \return 0 on success, Anything else is bad
+	 * \return 0 on success, Anything else is auto-quit and the prog should quit
 	 * Compares the args and sets the appropiate flags in the program based on
 	 * arguements passed
 	 */
 	int parseArgs(int argc, char** argv);
+
+	/** \brief Launches the song editor
+	 *
+	 * \return 0 on successful save of song
+	 * Launches the song editor in the terminal.
+	 * It makes the appropite calls to the GUI namespace and launches the song
+	 * editor event loop.
+	 */
+     int initSongEditor();
 
 	// Contains the command line arg parser functions
 	namespace args

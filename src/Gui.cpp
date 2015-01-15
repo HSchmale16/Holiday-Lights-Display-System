@@ -7,24 +7,37 @@
 #include <cstdlib>
 #include <cstring>
 
-using namespace gui;
-
 // External Variables
 extern std::string NOW_PLAYING;
 
 void gui::init()
 {
 	initscr();
+	noecho();
+	cbreak();
 	start_color();
 	init_pair(1, COLOR_RED, COLOR_BLACK);
 }
 
-void gui::updateGui()
+void gui::updateShowGui()
 {
 	clear();
-	printInMiddle(NULL, 0, 0, 0, "Holiday Lighs System Server");
-	printInMiddle(NULL, 3, 0, 0, "Now Playing:");
-	printInMiddle(NULL, 4, 0, 0, NOW_PLAYING);
+	gui::printInMiddle(NULL, 0, 0, 0, "Holiday Lighs System Server");
+	gui::printInMiddle(NULL, 3, 0, 0, "Now Playing:");
+	gui::printInMiddle(NULL, 4, 0, 0, NOW_PLAYING);
+	refresh();
+}
+
+void gui::updateEditorGui(char ** terminalData)
+{
+	clear();
+	for(int i = 0; i < SCR_HGHT; i++)
+	{
+		for(int j = 0; j < gui::SCR_WDTH; j++)
+		{
+            printw(&terminalData[i][j]);
+		}
+	}
 	refresh();
 }
 

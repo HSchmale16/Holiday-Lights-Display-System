@@ -6,6 +6,8 @@
 #include "../include/Admin.hpp"
 #include "../Defaults.hpp"
 #include "../include/HolidayLights.hpp" // for db commands
+#include "../include/Gui.hpp"
+#include "../include/Synthesis.hpp"
 #include <cstdio>
 #include <iostream>
 #include <cstdlib>
@@ -45,6 +47,7 @@ int admin::parseArgs(int argc, char** argv)
 					return 0;
 				case UPDATE_DB_ARG:
 					// dirty hack to start the db update bash script
+					// note this is only *nix compatible
 					system("./updateDB.sh");
 					return 1;
 				case CREATE_DB_ARG:
@@ -54,7 +57,7 @@ int admin::parseArgs(int argc, char** argv)
 					return 1;
 				case MAKE_SHOWS_ARG:
 					/// @todo add ncurses based show editor call here
-                    return 1;
+					return 1;
 				}
 			}
 		}
@@ -64,6 +67,16 @@ int admin::parseArgs(int argc, char** argv)
 	return 1;
 }
 
+// song editor launcher
+int admin::initSongEditor()
+{
+	gui::init(); // init
+
+	gui::endGui(); // end
+	return 0;
+}
+
+// --- Implementation of subnamespace Args functions below ---
 std::vector<std::string> admin::args::createArgVector(int argc, char ** argv)
 {
 	std::vector<std::string> vec;

@@ -11,6 +11,7 @@
 #include <cstdio>
 #include <iostream>
 #include <cstdlib>
+#include <ncurses.h>
 
 extern int SERVER_RUNS_FOR_SEC; // how long the server should run for
 
@@ -57,26 +58,58 @@ int admin::parseArgs(int argc, char** argv)
 					return 1;
 				case MAKE_SHOWS_ARG:
 					/// @todo add ncurses based show editor call here
+					admin::initSongEditor();
 					return 1;
 				}
 			}
 		}
 	}
 	// huh, bad args must've been passed, so quit
-	admin::args::badArgs();
-	return 1;
+	return admin::args::badArgs();
 }
+
+static int fg_cX = 0, fg_cY = 0; // Cursor Location, file globals
 
 // song editor launcher
 int admin::initSongEditor()
 {
 	gui::init(); // init
-
+	int inkey = getch(); // key just pressed
+	while(inkey != '~')
+	{
+        inkey = getch();
+		admin::songEditorEL(inkey);
+		gui::updateGeneralGui();
+	}
 	gui::endGui(); // end
+	std::cout << fg_cX << " " << fg_cY << std::endl;
 	return 0;
 }
 
-// --- Implementation of subnamespace Args functions below ---
+void admin::songEditorEL(int inkey)
+{
+	// Cursor
+	gui::printChrAt(fg_cY, fg_cX, ' '); // clear formar cursor pos
+	if((inkey == KEY_LEFT) && (fg_cX > 0))
+	{
+        fg_cX--;
+	}
+	if((inkey == KEY_RIGHT) && (fg_cX < gui::SCR_WDTH))
+	{
+        fg_cX++;
+	}
+	if((inkey == KEY_UP) && (fg_cY > 0))
+	{
+        fg_cY--;
+	}
+	if((inkey == KEY_DOWN) && (fg_cY < gui::SCR_HGHT))
+	{
+        fg_cY++;
+	}
+	gui::printChrAt(fg_cY, fg_cX, '+'); // update cursor posistion
+}
+
+// --- Implementation of  admin::args functions below ---
 std::vector<std::string> admin::args::createArgVector(int argc, char ** argv)
 {
 	std::vector<std::string> vec;
@@ -118,5 +151,6 @@ int admin::args::help()
 	cout << "--updateDB\tUpdate the media table by grabbing metadata using a"
 		 << "bash script. Then exits." << endl;
 	cout << "--createDB\tCreates the database file then exit" << endl;
+	cout << "--makeShow\tOpen the show editor program." << endl;
 	return 0;
 }

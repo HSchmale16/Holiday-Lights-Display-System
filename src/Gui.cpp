@@ -6,17 +6,32 @@
 #include "../include/Gui.hpp"
 #include <cstdlib>
 #include <cstring>
+#include <iostream>
 
 // External Variables
 extern std::string NOW_PLAYING;
 
+static char screen[gui::SCR_HGHT][gui::SCR_WDTH];
+
 void gui::init()
 {
+	// zero the file global screen
+	for(int i = 0; i < gui::SCR_HGHT; i++)
+		for(int j = 0; j < gui::SCR_WDTH; j++)
+			screen[i][j] = ' ';
+
+	// init ncurses
 	initscr();
+	keypad(stdscr, true);
 	noecho();
 	cbreak();
 	start_color();
 	init_pair(1, COLOR_RED, COLOR_BLACK);
+}
+
+void gui::printChrAt(int y, int x, char c)
+{
+    screen[y][x] = c;
 }
 
 void gui::updateShowGui()
@@ -28,14 +43,14 @@ void gui::updateShowGui()
 	refresh();
 }
 
-void gui::updateEditorGui(char ** terminalData)
+void gui::updateGeneralGui()
 {
 	clear();
 	for(int i = 0; i < SCR_HGHT; i++)
 	{
 		for(int j = 0; j < gui::SCR_WDTH; j++)
 		{
-            printw(&terminalData[i][j]);
+            printw(&screen[i][j]);
 		}
 	}
 	refresh();
@@ -44,6 +59,9 @@ void gui::updateEditorGui(char ** terminalData)
 void gui::endGui()
 {
 	endwin();
+	for(int i = 0; i < gui::SCR_HGHT; i++)
+		for(int j = 0; j < gui::SCR_WDTH; j++)
+			std::cout << screen[i][j];
 }
 
 void gui::printInMiddle(WINDOW *win, int starty, int startx, int width,

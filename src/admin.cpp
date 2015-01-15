@@ -11,7 +11,6 @@
 #include <cstdio>
 #include <iostream>
 #include <cstdlib>
-#include <ncurses.h>
 
 extern int SERVER_RUNS_FOR_SEC; // how long the server should run for
 
@@ -68,45 +67,10 @@ int admin::parseArgs(int argc, char** argv)
 	return admin::args::badArgs();
 }
 
-static int fg_cX = 0, fg_cY = 0; // Cursor Location, file globals
-
-// song editor launcher
+// Song Editor Init
 int admin::initSongEditor()
 {
-	gui::init(); // init
-	int inkey = getch(); // key just pressed
-	while(inkey != '~')
-	{
-        inkey = getch();
-		admin::songEditorEL(inkey);
-		gui::updateGeneralGui();
-	}
-	gui::endGui(); // end
-	std::cout << fg_cX << " " << fg_cY << std::endl;
-	return 0;
-}
 
-void admin::songEditorEL(int inkey)
-{
-	// Cursor
-	gui::printChrAt(fg_cY, fg_cX, ' '); // clear formar cursor pos
-	if((inkey == KEY_LEFT) && (fg_cX > 0))
-	{
-        fg_cX--;
-	}
-	if((inkey == KEY_RIGHT) && (fg_cX < gui::SCR_WDTH))
-	{
-        fg_cX++;
-	}
-	if((inkey == KEY_UP) && (fg_cY > 0))
-	{
-        fg_cY--;
-	}
-	if((inkey == KEY_DOWN) && (fg_cY < gui::SCR_HGHT))
-	{
-        fg_cY++;
-	}
-	gui::printChrAt(fg_cY, fg_cX, '+'); // update cursor posistion
 }
 
 // --- Implementation of  admin::args functions below ---

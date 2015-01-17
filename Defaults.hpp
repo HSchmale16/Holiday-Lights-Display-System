@@ -12,6 +12,7 @@
 
 // File Pathes
 #define DB_FILE_PATH "lights.db"
+#define RESOURCES_PATH "resources/songs/"
 
 // Update Rates
 #define UPDATE_T_PERIOD 10	// milliseconds to sleep each event loop, reduces

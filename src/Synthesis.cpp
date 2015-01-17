@@ -7,6 +7,7 @@
 
 #include "../include/Synthesis.hpp"
 #include "../include/HolidayLights.hpp"
+#include "../Defaults.hpp"
 #include "../SQL_CMDS.hpp"
 #include <cstdlib>
 #include <dirent.h>
@@ -63,18 +64,27 @@ int syn::se::SelectShow()
 {
 	CDKVIEWER *viewer;
 	const char * buttons[2] = {" Select", " Exit"};
+	char * filesList[30];
 	DIR *dp;
-	struct dirent *dirp;
-	if((dp = opendir("/home/hschmale")) == NULL){
-        exit(1);
+	dirent *dirp;
+	if((dp = opendir("/home/hschmale")) == NULL)
+	{
+		exit(1);
 	}
-
+	int i;
+	for(i = 0; ((i < 30) && ((dirp = readdir(dp)) != NULL)); i++)
+	{
+		filesList[i] = dirp->d_name;
+	}
+	closedir(dp);
 	viewer = newCDKViewer(cdkscreen,
-						CENTER, CENTER, 22, 70,
-						buttons, 2, WA_STANDOUT | WA_BLINK,
-						true, false);
+						  CENTER, CENTER, 22, 70,
+						  buttons, 2, WA_STANDOUT | WA_BLINK,
+						  true, false);
+	setCDKViewer(viewer, "Select A Song File", filesList, sizeof(filesList),
+				NULL, false, false, false);
 	drawCDKViewer(viewer, true);
-	int i = activateCDKViewer(viewer, NULL);
-
+	i = activateCDKViewer(viewer, NULL);
+	destroyCDKViewer(viewer);
 	return 0;
 }

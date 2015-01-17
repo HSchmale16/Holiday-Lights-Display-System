@@ -31,9 +31,6 @@ namespace admin
 	 */
      int initSongEditor();
 
-     // Song Editor Event Loop
-     int songEditorEL(int inkey);
-
 	// Contains the command line arg parser functions
 	namespace args
 	{

@@ -11,7 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="--start 5" />
+				<Option parameters="--makeShows" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
@@ -37,6 +37,7 @@
 			<Add option="-lsfml-network" />
 			<Add option="-lsfml-system" />
 			<Add option="-lsqlite3" />
+			<Add option="-lmenu" />
 			<Add option="-lncurses" />
 		</Linker>
 		<Unit filename="Defaults.hpp" />

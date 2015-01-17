@@ -70,7 +70,12 @@ int admin::parseArgs(int argc, char** argv)
 // Song Editor Init
 int admin::initSongEditor()
 {
-
+	// init
+	hl::initDB();
+	int rc = syn::se::ShowEditor();	// begin show editor, this blocks
+	// shut down
+	hl::shutdown();
+	return rc;
 }
 
 // --- Implementation of  admin::args functions below ---

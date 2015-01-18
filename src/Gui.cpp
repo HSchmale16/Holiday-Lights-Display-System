@@ -55,6 +55,7 @@ void gui::updateShowGui(hl::SongData sd)
 {
 	clear();
 	mvprintw(0, (COLS - sd.m_name.length()) / 2, sd.m_name.c_str());
+	mvprintw(1, (COLS - sd.m_album.length()) / 2, sd.m_album.c_str());
 	refresh();
 }
 

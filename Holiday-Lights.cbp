@@ -41,6 +41,7 @@
 			<Add option="-lncurses" />
 			<Add option="-lcdk" />
 			<Add option="-lsndfile" />
+			<Add option="-lglog" />
 		</Linker>
 		<Unit filename="Defaults.hpp" />
 		<Unit filename="SQL_CMDS.hpp" />

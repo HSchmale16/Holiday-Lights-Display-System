@@ -12,8 +12,10 @@ namespace hl
 struct SongData
 {
 	int m_songID;			//!< Song Id Number
-	std::string m_name;		//!< Song File Name
+	std::string m_name;		//!< Song Title
 	std::string m_path;		//!< Path to the song file
+    std::string m_artist;	//!< Who plays this song
+    std::string m_album;	//!< What album is it from
 
 	// ctor
 	SongData() {};	// empty ctor

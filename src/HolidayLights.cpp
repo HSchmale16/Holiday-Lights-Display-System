@@ -140,6 +140,11 @@ void hl::sendShowToClient(ClientDevice *cd , std::string show)
 				   << " listening on port " << cd->m_port << " with name " << cd->m_name;
 		return; // return because no use in waiting
 	}
+    // send the data
+    if(s.send(show.c_str(), show.length()) != sf::Socket::Done)
+	{
+        LOG(ERROR) << "Failed to send show to client";
+	}
 
 }
 

@@ -28,7 +28,13 @@ struct ShowData
 	}
 };
 
-ShowData* parseSong(hl::SongData sd, int channels);
+/** \brief parses a song into a light show
+ * \param sd - A struct containing the song metadata.
+ * \param channels - how many channels should the show be generated with
+ * \param res - how many milliseconds should be sampled
+ * \return a string that can be parsed by a client into a show
+ */
+std::string parseSong(hl::SongData *sd, int channels, int res);
 
 // --- Show Editor Namespace ---
 namespace se

@@ -14,7 +14,7 @@
 #include <dirent.h>
 #include <errno.h>
 #include <sqlite3.h>
-
+#include <sndfile.hh>
 
 // =============================================================================
 // Synthesis Functions                                                         =
@@ -24,9 +24,16 @@
 // =============================================================================
 
 // parses a song
-syn::ShowData* syn::parseSong(hl::SongData sd, int channels)
+std::string syn::parseSong(hl::SongData *sd, int channels, int res)
 {
-	return NULL;
+    std::string show;
+	SF_INFO *info;
+	SNDFILE *file = sf_open(sd->m_path.c_str(), SFM_READ, info);
+	// update song data fields
+    sd->m_album = std::string(sf_get_string(file, SF_STR_ALBUM));
+
+	sf_close(file);
+	return show;
 }
 
 // =============================================================================

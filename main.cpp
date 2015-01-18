@@ -56,7 +56,8 @@ int EventLoopLim()
 	time(&now);
 	do
 	{
-		gui::updateShowGui();
+		// Run the gui
+		// Activate the song when enough time has passed
 		sf::sleep(sf::milliseconds(UPDATE_T_PERIOD));
 	}
 	while(difftime(now, start) < SERVER_RUNS_FOR_SEC);
@@ -67,7 +68,8 @@ int EventLoopULim()
 {
 	while(true)
 	{
-		gui::updateShowGui();
+		// Run the gui
+		// Activate the song when enough time has passed
 		sf::sleep(sf::milliseconds(UPDATE_T_PERIOD));
 	}
 	return 0;

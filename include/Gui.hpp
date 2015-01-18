@@ -6,8 +6,9 @@
 #ifndef GUI_HPP_INCLUDED
 #define GUI_HPP_INCLUDED
 
-#include <ncurses.h>
 #include <string>
+#include <ncurses.h>
+#include <cdk.h>
 
 namespace gui
 {
@@ -15,19 +16,11 @@ namespace gui
 	// Initializes the gui
 	void init();
 
-	// Update the gui shown during shows
-	void updateShowGui();
-
 	// shutsdown the gui
 	void endGui();
 
-	// prints in the middle of the screen
-	void printInMiddle(WINDOW *win, int starty, int startx, int width,
-					   std::string str);
-
-	// --- CONSTANTS ---
-	const int SCR_WDTH = 80; // Width of the terminal
-	const int SCR_HGHT = 25; // Height of the terminal
+	// Global Variables
+	static CDKSCREEN *cdkscreen;
 }
 
 #endif // GUI_HPP_INCLUDED

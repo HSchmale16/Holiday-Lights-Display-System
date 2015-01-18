@@ -9,6 +9,7 @@
 #include "../include/HolidayLights.hpp"
 #include "../Defaults.hpp"
 #include "../SQL_CMDS.hpp"
+#include <iostream>
 #include <cstdlib>
 #include <dirent.h>
 #include <errno.h>
@@ -62,29 +63,11 @@ int syn::se::ShowEditor()
 // Menu to selectW a song
 int syn::se::SelectShow()
 {
-	CDKVIEWER *viewer;
-	const char * buttons[2] = {" Select", " Exit"};
-	char * filesList[30];
-	DIR *dp;
-	dirent *dirp;
-	if((dp = opendir("/home/hschmale")) == NULL)
-	{
-		exit(1);
-	}
-	int i;
-	for(i = 0; ((i < 30) && ((dirp = readdir(dp)) != NULL)); i++)
-	{
-		filesList[i] = dirp->d_name;
-	}
-	closedir(dp);
-	viewer = newCDKViewer(cdkscreen,
-						  CENTER, CENTER, 22, 70,
-						  buttons, 2, WA_STANDOUT | WA_BLINK,
-						  true, false);
-	setCDKViewer(viewer, "Select A Song File", filesList, sizeof(filesList),
-				NULL, false, false, false);
-	drawCDKViewer(viewer, true);
-	i = activateCDKViewer(viewer, NULL);
-	destroyCDKViewer(viewer);
+	CDKFSELECT *fselect;
+    fselect = newCDKFselect(cdkscreen, CENTER, CENTER, 20, 72, "Select A Song",
+							"\n", WA_NORMAL, WA_DIM, WA_STANDOUT, "</2>", "</0>",
+							"</3>", "</4>", true, false);
+	drawCDKFselect(fselect, true);
+	char *ch = activateCDKFselect(fselect, NULL);
 	return 0;
 }

@@ -8,6 +8,32 @@
 // Contains all the functions that control the actual show
 namespace hl
 {
+	/// Struct for holding song data
+	struct SongData
+	{
+		int m_songID;
+		std::string m_name;
+		std::string m_path;
+
+		// ctor
+		SongData() {};	// empty ctor
+		SongData(int id, std::string name, std::string path)
+		{
+			m_songID = id;
+			m_name = name;
+			m_path = path;
+		}
+	};
+
+	/// Contains data about the client
+	struct ClientDevice
+	{
+		std::string m_name;			// User friendly name
+		std::string m_ipAddress;    // Ip Address of client
+		int m_port;					// Port Client is listening on
+		int m_channels;				// Number of output channels on that client
+	};
+
 	/** \brief initializes the lights system
 	 *
 	 * \return Absolutely Nothing
@@ -41,38 +67,14 @@ namespace hl
 	 */
 	void startShow();
 
+	void sendShowToClient(ClientDevice cd);
+
 	/** \brief Shuts down the server
 	 *
 	 * \return nothing
 	 * Terminates the database connection
 	 */
 	void shutdown();
-
-	/// Struct for holding song data
-	struct SongData
-	{
-		int m_songID;
-		std::string m_name;
-		std::string m_path;
-
-		// ctor
-		SongData() {};	// empty ctor
-		SongData(int id, std::string name, std::string path)
-		{
-			m_songID = id;
-			m_name = name;
-			m_path = path;
-		}
-	};
-
-	/// Contains data about the client
-	struct ClientDevice
-	{
-		std::string m_name;			// User friendly name
-		std::string m_ipAddress;    // Ip Address of client
-		int m_port;					// Port Client is listening on
-		int m_channels;				// Number of output channels on that client
-	};
 }
 
 #endif // HOLIDAYLIGHTS_HPP_INCLUDED

@@ -9,7 +9,7 @@
 #include <vector>	// for holding args
 #include <string>	// args
 
-// Contains functions to administer this program
+//!< Contains functions to administer this program
 namespace admin
 {
 	/** \brief Parses the command line arguements
@@ -31,7 +31,7 @@ namespace admin
 	 */
      int initSongEditor();
 
-	// Contains the command line arg parser functions
+	//!< Contains the command line arg parser functions
 	namespace args
 	{
 		/** \brief Creates a vector of strings from arguements passed
@@ -49,7 +49,8 @@ namespace admin
 		// bad args were passed
 		int badArgs();
 
-		// prints help documentation
+		/** \brief prints help documentation
+		 */
 		int help();
 
 		// Arguement List

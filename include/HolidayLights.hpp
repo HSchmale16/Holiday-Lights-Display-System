@@ -4,16 +4,16 @@
 #include <string>
 #include <vector>
 
-// Holiday Lights Primary Namespace
-// Contains all the functions that control the actual show
+/// Holiday Lights Primary Namespace
+/// Contains all the functions that control the actual show
 namespace hl
 {
 	/// Struct for holding song data
 	struct SongData
 	{
-		int m_songID;
-		std::string m_name;
-		std::string m_path;
+		int m_songID;			//!< Song Id Number
+		std::string m_name;		//!< Song File Name
+		std::string m_path;		//!< Path to the song file
 
 		// ctor
 		SongData() {};	// empty ctor
@@ -28,10 +28,10 @@ namespace hl
 	/// Contains data about the client
 	struct ClientDevice
 	{
-		std::string m_name;			// User friendly name
-		std::string m_ipAddress;    // Ip Address of client
-		int m_port;					// Port Client is listening on
-		int m_channels;				// Number of output channels on that client
+		std::string m_name;			//!< User friendly name
+		std::string m_ipAddress;    //!< Ip Address of client
+		int m_port;					//!< Port Client is listening on
+		int m_channels;				//!< Number of output channels on that client
 	};
 
 	/** \brief initializes the lights system
@@ -62,8 +62,10 @@ namespace hl
 	/** \brief starts a show
 	 *
 	 * \return Nothing
+	 *
 	 * Selects a random show to run from the database depending on config
-	 * settings.
+	 * settings. Then depending on initial settings it either generates a new
+	 * show or pulls a show from the database.
 	 */
 	void startShow();
 

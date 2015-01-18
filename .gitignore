@@ -33,6 +33,10 @@ bin/*
 # Thing created by doxygen
 doxygen/*
 
+#things created by code::blocks plugins
+*.cscope_file_list
+
+
 #resource files
 *.db
 resources/*

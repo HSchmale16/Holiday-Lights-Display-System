@@ -14,16 +14,16 @@
 namespace gui
 {
 	// --- Functions ---
-	// Initializes the gui namespace
+	//!< Initializes the gui namespace
 	void init();
 
-	// shutsdown the gui namespace
+	//!< shutsdown the gui namespace
 	void endGui();
 
-	// Initializes the gui for the show
+	//!< Initializes the gui for the show
     void initShowGui();
 
-	// update the show gui
+	//!< update the show gui
     void updateShowGui(hl::SongData sd);
 
 	// Ends the Show gui

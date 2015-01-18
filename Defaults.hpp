@@ -20,7 +20,8 @@
 
 #define INTERMISSION 10		// Seconds to wait between shows
 
-
+// Network Defaults
+#define SOCKET_TIMEOUT 150	// milliseconds before socket timesout
 
 // Other stuff yet to be thought of, probably config file defaults
 

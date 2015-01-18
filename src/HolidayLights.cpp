@@ -117,6 +117,21 @@ void hl::startShow()
 	}
 }
 
+// Sends data to a client
+void hl::sendShowToClient(ClientDevice *cd , std::string show)
+{
+	sf::TcpSocket s;
+
+	if(s.connect(sf::IpAddress(cd->m_ipAddress),
+				 cd->m_port,
+				 sf::milliseconds(SOCKET_TIMEOUT)) != sf::Socket::Done)
+	{
+        return; // return because no use in waiting
+	}
+
+}
+
+
 // shuts down the system
 void hl::shutdown()
 {

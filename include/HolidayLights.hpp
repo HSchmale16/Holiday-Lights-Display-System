@@ -4,8 +4,8 @@
 #include <string>
 #include <vector>
 
-/// Holiday Lights Primary Namespace
-/// Contains all the functions that control the actual show
+/**\brief Contains all the functions that control the actual show
+ */
 namespace hl
 {
 	/// Struct for holding song data
@@ -69,7 +69,12 @@ namespace hl
 	 */
 	void startShow();
 
-	void sendShowToClient(ClientDevice cd);
+    /** \brief sends a show to the client device named in params
+     * \param cd - The client to contact.
+     * \param show - the show string to send
+     * \return nothing
+     */
+	void sendShowToClient(ClientDevice *cd, std::string show);
 
 	/** \brief Shuts down the server
 	 *
@@ -79,7 +84,7 @@ namespace hl
 	void shutdown();
 
 	// external globals
-	extern SongData currSongDat;
+	extern SongData currSongDat; //!< Contains data about current song
 }
 
 #endif // HOLIDAYLIGHTS_HPP_INCLUDED

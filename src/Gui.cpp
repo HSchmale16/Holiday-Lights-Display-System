@@ -38,8 +38,6 @@ void gui::endGui()
 	}
 }
 
-static CDKLABEL *showState;
-static const char *currentShow[1];
 void gui::initShowGui()
 {
 	if(!gui::m_bGuiInited)
@@ -58,7 +56,6 @@ void gui::updateShowGui(hl::SongData sd)
 
 void gui::endShowGui()
 {
-	destroyCDKLabel(showState);
 	if(gui::m_bGuiInited)
 	{
 		gui::endGui();

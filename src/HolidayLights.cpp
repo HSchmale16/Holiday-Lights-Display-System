@@ -3,6 +3,7 @@
 // @date January 10, 2015
 
 #include "../include/HolidayLights.hpp"
+#include "../include/Synthesis.hpp"
 #include "../Defaults.hpp"
 #include "../SQL_CMDS.hpp"
 #include <cstdlib>
@@ -24,8 +25,8 @@ static int cbSong(void *NotUsed, int argc, char **argv, char **azColName)
 	if(argc >= 3)
 	{
 		hl::currSongDat.m_songID = strtol(argv[0], NULL, 10);
-		hl::currSongDat.m_name = argv[1];
-		hl::currSongDat.m_path = argv[2];
+		hl::currSongDat.m_name = std::string(argv[1]);
+		hl::currSongDat.m_path = std::string(argv[2]);
 	}
 	return 0;
 }
@@ -124,6 +125,13 @@ void hl::startShow()
 		sqlite3_free(z_ErrMsg);
 		LOG(FATAL) << "Failed to fetch a song from the database";
 		exit(SQL_FAIL);
+	}
+	// create a show
+	std::vector<std::string> shows;
+	for(unsigned int i = 0; i < clients.size(); i++)
+	{
+		shows.push_back(syn::parseSong(currSongDat, clients[i].m_channels,
+										100));
 	}
 }
 

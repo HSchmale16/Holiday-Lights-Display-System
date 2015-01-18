@@ -13,6 +13,7 @@
 #include <cstdlib>
 #include <dirent.h>
 #include <errno.h>
+#include <glog/logging.h>
 #include <sqlite3.h>
 #include <sndfile.hh>
 
@@ -24,13 +25,16 @@
 // =============================================================================
 
 // parses a song
-std::string syn::parseSong(hl::SongData *sd, int channels, int res)
+std::string syn::parseSong(hl::SongData &sd, int channels, int res)
 {
     std::string show;
-	SF_INFO *info;
-	SNDFILE *file = sf_open(sd->m_path.c_str(), SFM_READ, info);
-	// update song data fields
-    sd->m_album = std::string(sf_get_string(file, SF_STR_ALBUM));
+	SF_INFO info;
+	SNDFILE *file;
+	if(!(file = sf_open(sd.m_path.c_str(), SFM_READ, &info)))
+	{
+        LOG(ERROR) << "Couldn't open file: " << sd.m_path;
+	}
+
 
 	sf_close(file);
 	return show;

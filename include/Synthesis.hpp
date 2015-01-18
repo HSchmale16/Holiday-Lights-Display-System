@@ -34,7 +34,16 @@ struct ShowData
  * \param res - how many milliseconds should be sampled
  * \return a string that can be parsed by a client into a show
  */
-std::string parseSong(hl::SongData *sd, int channels, int res);
+std::string parseSong(hl::SongData &sd, int channels, int res);
+
+/** \brief performs super position on a set of 2 waves
+ * \param ch1 - Channel 1 data
+ * \param ch2 - Channel 2 data
+ * \param ret - data to return
+ * \param smp - number of samples in arrays
+ * \return An array of samples of size smp
+ */
+void performSuperposition2Ch(short *ch1, short*ch2, short *ret, int smp);
 
 // --- Show Editor Namespace ---
 namespace se
@@ -49,7 +58,7 @@ int ShowEditor();
  * select a show to edit.
  */
 int SelectShow();
-}
-}
+} // end of show editor namespace
+}// end of synth namespace
 
 #endif // SYNTHESIS_HPP_INCLUDED

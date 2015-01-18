@@ -16,7 +16,7 @@
 
 // Update Rates
 #define UPDATE_T_PERIOD 10	// milliseconds to sleep each event loop, reduces
-							// CPU Usage
+// CPU Usage
 
 #define INTERMISSION 10		// Seconds to wait between shows
 

@@ -8,15 +8,17 @@
 #include <cstring>
 #include <iostream>
 #include <string.h>
+#include <glog/logging.h>
 
 // Declare Namespace Globals to work with extern.
-CDKSCREEN *gui::m_cdkscreen;
+CDKSCREEN *gui::m_cdkscreen;	//!< CDK SCREEN Required for use of CDK
 bool gui::m_bGuiInited = false;
 
 void gui::init()
 {
 	if(!gui::m_bGuiInited)
 	{
+		LOG(INFO) << "Initializing ncurses and cdk";
 		initscr();
 		m_cdkscreen = initCDKScreen (stdscr);
 
@@ -32,6 +34,7 @@ void gui::endGui()
 {
 	if(gui::m_bGuiInited)
 	{
+		LOG(INFO) << "Calling the ncurses and cdk shutdown functions";
 		destroyCDKScreen (m_cdkscreen);
 		endCDK();
 		gui::m_bGuiInited = false;
@@ -40,6 +43,7 @@ void gui::endGui()
 
 void gui::initShowGui()
 {
+	LOG(INFO) << "Initializing GUI for show";
 	if(!gui::m_bGuiInited)
 	{
 		gui::init();
@@ -58,6 +62,7 @@ void gui::endShowGui()
 {
 	if(gui::m_bGuiInited)
 	{
+		LOG(INFO) << "Ending Show mode GUI";
 		gui::endGui();
 	}
 }

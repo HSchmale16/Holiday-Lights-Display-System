@@ -11,6 +11,7 @@
 #include <cstdio>
 #include <iostream>
 #include <cstdlib>
+#include <glog/logging.h>
 
 extern int SERVER_RUNS_FOR_SEC; // how long the server should run for
 
@@ -31,6 +32,7 @@ int admin::parseArgs(int argc, char** argv)
 				switch(j)
 				{
 				case HELP_ARG:
+					LOG(INFO) << "Just printing the help and then exiting";
 					admin::args::help();
 					return 1;
 				case START_ARG:
@@ -38,25 +40,29 @@ int admin::parseArgs(int argc, char** argv)
 					{
 						SERVER_RUNS_FOR_SEC = strtol(args[i+1].c_str(),
 													 NULL, 10);
+						LOG(INFO) << "Server has been set to run for "
+								  <<SERVER_RUNS_FOR_SEC << " Seconds";
 					}
 					else
 					{
 						// No Num specified, just run forever
 						SERVER_RUNS_FOR_SEC = 0;
+						LOG(INFO) << "Server has been set to run forever";
 					}
 					return 0;
 				case UPDATE_DB_ARG:
-					// dirty hack to start the db update bash script
-					// note this is only *nix compatible
-					system("./updateDB.sh");
+					LOG(INFO) << "Performing update of media table in the "
+							  << "database";
+					system("./updateDB.sh"); //!< @todo make crossplatform
 					return 1;
 				case CREATE_DB_ARG:
+					LOG(INFO) << "Just creating a database file then exiting";
 					hl::initDB();
 					hl::shutdown();
-					printf("Created a database file\n");
 					return 1;
 				case MAKE_SHOWS_ARG:
 					/// @todo add ncurses based show editor call here
+					LOG(INFO) << "Launching show editor";
 					admin::initSongEditor();
 					return 1;
 				}
@@ -64,6 +70,7 @@ int admin::parseArgs(int argc, char** argv)
 		}
 	}
 	// huh, bad args must've been passed, so quit
+	LOG(FATAL) << "Bad Arguements were passed to the programs";
 	return admin::args::badArgs();
 }
 

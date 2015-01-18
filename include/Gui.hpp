@@ -13,25 +13,25 @@
 
 namespace gui
 {
-	// --- Functions ---
-	//!< Initializes the gui namespace
-	void init();
+// --- Functions ---
+//!< Initializes the gui namespace
+void init();
 
-	//!< shutsdown the gui namespace
-	void endGui();
+//!< shutsdown the gui namespace
+void endGui();
 
-	//!< Initializes the gui for the show
-    void initShowGui();
+//!< Initializes the gui for the show
+void initShowGui();
 
-	//!< update the show gui
-    void updateShowGui(hl::SongData sd);
+//!< update the show gui
+void updateShowGui(hl::SongData sd);
 
-	// Ends the Show gui
-	void endShowGui();
+// Ends the Show gui
+void endShowGui();
 
-	// Global Variables
-	extern CDKSCREEN *m_cdkscreen;
-	extern bool m_bGuiInited;
+// Global Variables
+extern CDKSCREEN *m_cdkscreen;	//!< Required for use of cdk
+extern bool m_bGuiInited;
 }
 
 #endif // GUI_HPP_INCLUDED

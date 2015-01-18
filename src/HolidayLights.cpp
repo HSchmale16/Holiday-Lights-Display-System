@@ -12,6 +12,7 @@
 #include <vector>
 #include <sqlite3.h>
 #include <SFML/Network.hpp>
+#include <glog/logging.h>
 
 // database connection
 static sqlite3 * db;
@@ -48,6 +49,8 @@ static int cbClients(void *NotUsed, int argc, char **argv, char **azColName)
 		{
 			// Sweet Success
 			clients.push_back(cli);
+			LOG(INFO) << "Added client at " << cli.m_ipAddress
+			 << " listening on port " << cli.m_port;
 		}
 	}
 	return 0;

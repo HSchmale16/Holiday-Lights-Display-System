@@ -22,7 +22,8 @@ The following packages are required to build and run:
 * sqlite3-devel
 * ncurses-devel
 * cdk-devel (Curses development kit)
-* libsndfile-devel 
+* libsndfile-devel
+* glog-devel (Note: on fedora you also need to grab `gflags-devel` )
 * ffmpeg
 These are the packages as named on the Fedora repo.
 
@@ -42,3 +43,7 @@ It will also perform basic configuration on the program.
 * SFML (Simple Fast Multimedia Library)
 * SQLite3
 * ncurses
+* google glog
+* ffmpeg
+* libsndfile 
+* Curses Development Kit

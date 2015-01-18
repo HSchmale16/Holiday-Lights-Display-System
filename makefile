@@ -1,7 +1,7 @@
 CC=g++
 CFLAGS=-Wall -std=c++11 -o2
 LDFLAGS=-lsfml-system -lsfml-audio -lsfml-network -lsqlite3 -lncurses -lcdk \
-	-lsndfile
+	-lsndfile -lglog
 SOURCES=main.cpp src/admin.cpp src/HolidayLights.cpp src/Gui.cpp \
 	src/Synthesis.cpp
 OBJECTS=$(SOURCES:.cpp=.o)

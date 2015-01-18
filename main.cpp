@@ -6,6 +6,7 @@
 #include <iostream>
 #include <ctime>
 #include <SFML/System.hpp>
+#include <glog/logging.h>
 #include "include/HolidayLights.hpp"
 #include "include/Admin.hpp"
 #include "include/Gui.hpp"
@@ -21,6 +22,9 @@ int EventLoopULim();	// Perpetual
 
 int main(int argc, char** argv)
 {
+	// init logging
+    google::InitGoogleLogging(argv[0]);
+	LOG(INFO) << "Initialized Google Logging";
 	// check if the args passed from terminal were bad or if the args were
 	// auto-exit
 	if(admin::parseArgs(argc, argv))

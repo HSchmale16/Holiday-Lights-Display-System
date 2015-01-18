@@ -35,7 +35,8 @@ doxygen/*
 
 #things created by code::blocks plugins
 *.cscope_file_list
-
+ValgrindOut.*
+*.out.*
 
 #resource files
 *.db

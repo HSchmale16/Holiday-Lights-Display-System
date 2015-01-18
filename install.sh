@@ -25,7 +25,7 @@ fi
 # project name
 project="Holiday-Lights-Display-System"
 # executable name
-exe="HolidayLights"
+exe="HolidayLights.out"
 # config file name
 cfgFile="resources/cfg.ini"
 # db File name
@@ -107,7 +107,7 @@ function dbCfg
 	echo "converting files"
 	cd $songResDir
 	for f in $( ls ) ; do
-		ffmpeg -v quiet -i $f $f.wav
+		ffmpeg -v quiet -i $f $f.ogg
 	done
 	rm -r *.mp3 # remove incompatible files
 	rm -r *.MP3

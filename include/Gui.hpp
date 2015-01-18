@@ -13,14 +13,24 @@
 namespace gui
 {
 	// --- Functions ---
-	// Initializes the gui
+	// Initializes the gui namespace
 	void init();
 
-	// shutsdown the gui
+	// shutsdown the gui namespace
 	void endGui();
 
+	// Initializes the gui for the show
+    void initShowGui();
+
+	// update the show gui
+    void updateShowGui();
+
+	// Ends the Show gui
+	void endShowGui();
+
 	// Global Variables
-	extern CDKSCREEN *cdkscreen;
+	extern CDKSCREEN *m_cdkscreen;
+	extern bool m_bGuiInited;
 }
 
 #endif // GUI_HPP_INCLUDED

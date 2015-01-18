@@ -21,16 +21,19 @@ The following packages are required to build and run:
 * SFML-devel
 * sqlite3-devel
 * ncurses-devel
-* ffmpeg
 * cdk-devel (Curses development kit)
+* libsndfile-devel 
+* ffmpeg
+These are the packages as named on the Fedora repo.
 
 ## instructions
-1. Have a directory with all the music you'll be running on the light system
+1. Make sure you have all the dependices (listed above) installed.
+2. Have a directory with all the music you'll be running on the light system
 server. You'll need to enter this during config.
 It will ask you if you want to move or copy the files to the server 
 resources folder later during the configuration.
-2. run install.sh
-3. Follow the on screen prompts
+3. run install.sh
+4. Follow the on screen prompts
 
 The install script will build the program and install it in your home directory.
 It will also perform basic configuration on the program.

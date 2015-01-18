@@ -29,23 +29,24 @@ int main(int argc, char** argv)
 		return 0; // if so quit
 	}
 	// start up
-	//gui::init();
+	//gui::initShowGui();
 	hl::initLights();
 	hl::startShow();
 	// Launch the event loop
 	int rc;
 	if(SERVER_RUNS_FOR_SEC == 0)
 	{
-		rc = EventLoopULim();
+		//rc = EventLoopULim();
 	}
 	else
 	{
-		rc = EventLoopLim();
+		//rc = EventLoopLim();
 	}
 
 	// Shutdown
-	//gui::endGui();
+	gui::endShowGui();
 	hl::shutdown();
+	std::cout << NOW_PLAYING << std::endl;
 	return rc;
 }
 
@@ -59,6 +60,7 @@ int EventLoopLim()
 		time(&now);
 		// Run the gui
 		// Activate the song when enough time has passed
+		gui::updateShowGui();
 		sf::sleep(sf::milliseconds(UPDATE_T_PERIOD));
 	}
 	while(difftime(now, start) < SERVER_RUNS_FOR_SEC);

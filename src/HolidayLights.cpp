@@ -50,7 +50,12 @@ static int cbClients(void *NotUsed, int argc, char **argv, char **azColName)
 			// Sweet Success
 			clients.push_back(cli);
 			LOG(INFO) << "Added client at " << cli.m_ipAddress
-			 << " listening on port " << cli.m_port;
+					  << " listening on port " << cli.m_port;
+		}
+		else
+		{
+			LOG(WARNING) << "There is a bad client in the database. Client Name"
+						 << " is " << cli.m_name;
 		}
 	}
 	return 0;
@@ -61,7 +66,7 @@ static int cbClients(void *NotUsed, int argc, char **argv, char **azColName)
 void hl::initLights()
 {
 	hl::initDB();
-	hl::initClients();
+	hl::initClients(); // this can be very time consuming
 }
 
 // initializes the database
@@ -72,14 +77,15 @@ void hl::initDB()
 	char *z_ErrMsg = 0;
 	if(rc)
 	{
-		std::cerr << "Couldn't open database. Terminating..." << std::endl;
+		LOG(ERROR) << "Couldn't open database. Terminating...";
 		exit(SQL_FAIL);
 	}
+	LOG(INFO) << "Opened database successfully";
 	// create the tables - First is the media table
 	rc = sqlite3_exec(db, sql::SQL_MEDIA_TB, sql::cbNull, 0, &z_ErrMsg);
 	if(rc != SQLITE_OK)
 	{
-		std::cerr << "Failed to create MEDIA table." << std::endl;
+		LOG(ERROR) << "Failed to create MEDIA table.";
 		sqlite3_free(z_ErrMsg);
 		exit(1);
 	}
@@ -87,7 +93,7 @@ void hl::initDB()
 	rc = sqlite3_exec(db, sql::SQL_DEVICE_TB, sql::cbNull, 0, &z_ErrMsg);
 	if(rc != SQLITE_OK)
 	{
-		std::cerr << "Failed to create EFFECTS table." << std::endl;
+		LOG(ERROR) << "Failed to create EFFECTS table.";
 		sqlite3_free(z_ErrMsg);
 		exit(SQL_FAIL);
 	}
@@ -102,7 +108,8 @@ void hl::initClients()
 	if(rc)
 	{
 		sqlite3_free(z_ErrMsg);
-		printf("Selection Fail on Devices\n");
+		LOG(INFO) << "A problem occured with selection querry on the devices"
+				  << " table.";
 		exit(SQL_FAIL);
 	}
 }
@@ -115,7 +122,7 @@ void hl::startShow()
 	if(rc)
 	{
 		sqlite3_free(z_ErrMsg);
-		printf("FAIL!\n");
+		LOG(FATAL) << "Failed to fetch a song from the database";
 		exit(SQL_FAIL);
 	}
 }
@@ -129,7 +136,9 @@ void hl::sendShowToClient(ClientDevice *cd , std::string show)
 				 cd->m_port,
 				 sf::milliseconds(SOCKET_TIMEOUT)) != sf::Socket::Done)
 	{
-        return; // return because no use in waiting
+		LOG(ERROR) << "Failed to connect to client at " << cd->m_ipAddress
+				   << " listening on port " << cd->m_port << " with name " << cd->m_name;
+		return; // return because no use in waiting
 	}
 
 }
@@ -139,5 +148,5 @@ void hl::sendShowToClient(ClientDevice *cd , std::string show)
 void hl::shutdown()
 {
 	sqlite3_close(db);
-	//std::cout << "Closed Database" << std::endl;
+	LOG(INFO) << "Closed the database file";
 }

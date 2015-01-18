@@ -9,8 +9,11 @@ to the music based on frequency analysis.
 
 # Important notes
 * MP3 Files are not supported. Use ogg or wav files instead.
-* The source code in the arduino folder is meant to be uploaded to an arduino.
-You'll need to modify the IP, Port and MAC_ADDRESS vars for you LAN.
+* The source code in the arduino folder is meant to be uploaded to an arduino or
+other arduino compatible microcontroller. You'll need to modify the IP, Port
+and MAC_ADDRESS vars for you LAN. As well as how many channels are being ran on
+that controller.
+* Note flags to glog have to be set through enviroment variables
 
 #How To Build
 This is written with assumption that you're running a Fedora or yum based distro.

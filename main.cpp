@@ -29,6 +29,7 @@ int main(int argc, char** argv)
 	// auto-exit
 	if(admin::parseArgs(argc, argv))
 	{
+		LOG(INFO) << "Quiting because the args passed said to do so";
 		return 0; // if so quit
 	}
 	// start up

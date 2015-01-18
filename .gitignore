@@ -44,3 +44,4 @@ resources/*
 
 # log files
 *.log*
+*.INFO*

@@ -20,7 +20,7 @@ namespace gui
 	void endGui();
 
 	// Global Variables
-	static CDKSCREEN *cdkscreen;
+	extern CDKSCREEN *cdkscreen;
 }
 
 #endif // GUI_HPP_INCLUDED

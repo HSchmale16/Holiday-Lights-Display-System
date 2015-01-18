@@ -11,6 +11,10 @@
 // External Variables
 extern std::string NOW_PLAYING;
 
+// Declare Namespace Globals to work with extern.
+CDKSCREEN *gui::cdkscreen;
+
+
 void gui::init()
 {
 	// init ncurses

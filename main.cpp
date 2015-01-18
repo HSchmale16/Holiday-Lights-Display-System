@@ -29,7 +29,7 @@ int main(int argc, char** argv)
 		return 0; // if so quit
 	}
 	// start up
-	gui::init();
+	//gui::init();
 	hl::initLights();
 	hl::startShow();
 	// Launch the event loop
@@ -44,7 +44,7 @@ int main(int argc, char** argv)
 	}
 
 	// Shutdown
-	gui::endGui();
+	//gui::endGui();
 	hl::shutdown();
 	return rc;
 }
@@ -56,6 +56,7 @@ int EventLoopLim()
 	time(&now);
 	do
 	{
+		time(&now);
 		// Run the gui
 		// Activate the song when enough time has passed
 		sf::sleep(sf::milliseconds(UPDATE_T_PERIOD));

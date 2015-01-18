@@ -1,9 +1,25 @@
-#!/bin/bash
+#!/bin/sh
 # @author Henry Schmale
 # @date January 11, 2015
 # @file install.sh
 # installs the Holiday Lights System and performs default config on it
 # USAGE: ./install.sh INSTALL_DIRECTORY SONG_SEARCH_DIR
+
+#initial arg check
+if [ -z $1 ] ; then
+	echo "INSTALL_DIR is undefined"
+	echo "Usage: ./install.sh INSTALL_DIR SONG_SEARCH_DIR"
+	echo "  INSTALL_DIR       The Directory to install to"
+	echo "  SONG_SEARCH_DIR   The directory search for songs in"
+	exit
+fi
+if [ -z $2 ] ; then
+	echo "SONG_SEARCH_DIR is not defined"
+	echo "Usage: ./install.sh INSTALL_DIR SONG_SEARCH_DIR"
+	echo "  INSTALL_DIR       The Directory to install to"
+	echo "  SONG_SEARCH_DIR   The directory search for songs in"
+	exit
+fi
 
 # -- Global Variables --
 # project name
@@ -45,6 +61,7 @@ else
 fi
 # song resources folder, where to put the songs
 songResDir=$installDir/resources/songs
+
 
 #declare functions
 # builds the program and moves it to it's working directory

@@ -13,7 +13,6 @@
 
 // Global Variables
 int SERVER_RUNS_FOR_SEC; // server runs for this many seconds
-std::string NOW_PLAYING; // What song is now playing
 bool SHOW_EDIT_MODE_ON = false;	// is the prog in show edit mode
 
 // Event Loop Types
@@ -29,24 +28,24 @@ int main(int argc, char** argv)
 		return 0; // if so quit
 	}
 	// start up
-	//gui::initShowGui();
+	gui::initShowGui();
 	hl::initLights();
 	hl::startShow();
 	// Launch the event loop
 	int rc;
 	if(SERVER_RUNS_FOR_SEC == 0)
 	{
-		//rc = EventLoopULim();
+		rc = EventLoopULim();
 	}
 	else
 	{
-		//rc = EventLoopLim();
+		rc = EventLoopLim();
 	}
 
 	// Shutdown
 	gui::endShowGui();
 	hl::shutdown();
-	std::cout << NOW_PLAYING << std::endl;
+	std::cout << double(clock()) / CLOCKS_PER_SEC << std::endl;
 	return rc;
 }
 
@@ -60,7 +59,7 @@ int EventLoopLim()
 		time(&now);
 		// Run the gui
 		// Activate the song when enough time has passed
-		gui::updateShowGui();
+		gui::updateShowGui(hl::currSongDat);
 		sf::sleep(sf::milliseconds(UPDATE_T_PERIOD));
 	}
 	while(difftime(now, start) < SERVER_RUNS_FOR_SEC);

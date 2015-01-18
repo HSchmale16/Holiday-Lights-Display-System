@@ -16,18 +16,15 @@
 // database connection
 static sqlite3 * db;
 
-// external globals
-extern std::string NOW_PLAYING;
-
 // This callback sets the global current song to be playing
-hl::SongData currSongDat;
+hl::SongData hl::currSongDat;
 static int cbSong(void *NotUsed, int argc, char **argv, char **azColName)
 {
 	if(argc >= 3)
 	{
-		currSongDat.m_songID = strtol(argv[0], NULL, 10);
-		currSongDat.m_name = argv[1];
-		currSongDat.m_path = argv[2];
+		hl::currSongDat.m_songID = strtol(argv[0], NULL, 10);
+		hl::currSongDat.m_name = argv[1];
+		hl::currSongDat.m_path = argv[2];
 	}
 	return 0;
 }
@@ -118,7 +115,6 @@ void hl::startShow()
 		printf("FAIL!\n");
 		exit(SQL_FAIL);
 	}
-	NOW_PLAYING = currSongDat.m_name;
 }
 
 // shuts down the system

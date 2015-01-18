@@ -101,6 +101,7 @@ function dbCfg
 	for file in $( ls $songSearchDir ) ; do
 		if [ -e $songSearchDir/$file ]; then #check file existance
 			cp $songSearchDir/$file $songResDir
+			echo $file
 		fi
 	done
 	# begin conversion
@@ -133,7 +134,8 @@ function dbCfg
 		# create querry
 		q="INSERT INTO DEVICES(NAME, IP, PORT, CHANNELS) VALUES('$devName', '$devIP', $devPort, $devCh);"
 		sqlite3 $dbFile "$q"
-		q="Create table if not exists $devName_SHOWS(ID INT NOT NULL AUTOINCREMENT, SHOW_HM TEXT, SHOW_GEN TEXT);"
+		devName+="_Shows"
+		q="Create table if not exists $devName(ID INT NOT NULL AUTOINCREMENT, SHOW_HM TEXT, SHOW_GEN TEXT);"
 		sqlite3 $dbFile "$q"
 		echo -n "Do you have more devices to enter (y/n)? "
 		read moreDevs

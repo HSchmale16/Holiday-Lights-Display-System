@@ -9,9 +9,6 @@
 #include <iostream>
 #include <string.h>
 
-// External Variables
-extern std::string NOW_PLAYING;
-
 // Declare Namespace Globals to work with extern.
 CDKSCREEN *gui::m_cdkscreen;
 bool gui::m_bGuiInited = false;
@@ -20,12 +17,8 @@ void gui::init()
 {
 	if(!gui::m_bGuiInited)
 	{
-		// init ncurses
-		WINDOW *screen;
-
-		// Initialize the Cdk screen.
-		screen = initscr();
-		m_cdkscreen = initCDKScreen (screen);
+		initscr();
+		m_cdkscreen = initCDKScreen (stdscr);
 
 		// Start CDK Colors
 		initCDKColor();
@@ -53,31 +46,14 @@ void gui::initShowGui()
 	{
 		gui::init();
 	}
-	currentShow[0] = NOW_PLAYING.c_str();
-	showState = newCDKLabel(m_cdkscreen, CENTER, CENTER,
-							currentShow, 1, true, true);
-	if(!showState)
-	{
-		std::cout << "Failed to create current show label" << std::endl;
-		exit(1);
-	}
-	drawCDKLabel(showState, true);
+
 }
 
-void gui::updateShowGui()
+void gui::updateShowGui(hl::SongData sd)
 {
-	if(showState)
-	{
-		currentShow[0] = NOW_PLAYING.c_str();
-		setCDKLabel(showState, currentShow, 1, true);
-	}
-	else
-	{
-		std::cout << "show label is NULL: Can't use a null CDK Widget"
-				  << std::endl;
-		exit(1);
-	}
-	drawCDKLabel(showState, false);
+	clear();
+	mvprintw(0, (COLS - sd.m_name.length()) / 2, sd.m_name.c_str());
+	refresh();
 }
 
 void gui::endShowGui()

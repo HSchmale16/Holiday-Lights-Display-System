@@ -75,6 +75,9 @@ namespace hl
 	 * Terminates the database connection
 	 */
 	void shutdown();
+
+	// external globals
+	extern SongData currSongDat;
 }
 
 #endif // HOLIDAYLIGHTS_HPP_INCLUDED

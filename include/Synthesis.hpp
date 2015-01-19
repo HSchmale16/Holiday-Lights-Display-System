@@ -39,7 +39,8 @@ struct ShowData
 std::string parseSong(hl::SongData &sd, int channels, int res);
 
 
-long long analysis(short *buff, int buffSz, int *peaks, int nPeaks);
+long long analysis(short *buff, int buffSz, int *peaks, int nPeaks,
+				   int channels);
 
 /** \brief functions to work with the show editor
  */

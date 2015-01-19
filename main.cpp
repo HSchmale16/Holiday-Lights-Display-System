@@ -23,6 +23,7 @@ int EventLoopULim();	// Perpetual
 int main(int argc, char** argv)
 {
 	// init logging
+	FLAGS_log_dir = "./logs/";
 	google::InitGoogleLogging(argv[0]);
 	LOG(INFO) << "Initialized Google Logging";
 	// check if the args passed from terminal were bad or if the args were

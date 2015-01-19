@@ -76,7 +76,7 @@ void startShow();
  * \param show - the show string to send
  * \return nothing
  */
-void sendShowToClient(ClientDevice *cd, std::string show);
+void sendShowToClient(ClientDevice cd, std::string show);
 
 /** \brief Shuts down the server
  *

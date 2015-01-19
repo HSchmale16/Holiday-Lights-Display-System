@@ -46,7 +46,8 @@ static int cbClients(void *NotUsed, int argc, char **argv, char **azColName)
 		// PING
 		sf::TcpSocket s;
 		if(s.connect(sf::IpAddress(cli.m_ipAddress),
-					 cli.m_port) == sf::Socket::Done)
+					 cli.m_port,
+					 sf::milliseconds(SOCKET_TIMEOUT)) == sf::Socket::Done)
 		{
 			// Sweet Success
 			clients.push_back(cli);
@@ -127,31 +128,38 @@ void hl::startShow()
 		exit(SQL_FAIL);
 	}
 	// create a show
+	unsigned int i;
 	std::vector<std::string> shows;
-	for(unsigned int i = 0; i < clients.size(); i++)
+	for(i = 0; i < clients.size(); i++)
 	{
 		shows.push_back(syn::parseSong(currSongDat, clients[i].m_channels,
-										100));
+									   100));
 	}
+	for(i = 0; i < shows.size(); i++)
+	{
+		hl::sendShowToClient(clients[i], shows[i]);
+	}
+
 }
 
 // Sends data to a client
-void hl::sendShowToClient(ClientDevice *cd , std::string show)
+void hl::sendShowToClient(ClientDevice cd , std::string show)
 {
 	sf::TcpSocket s;
 
-	if(s.connect(sf::IpAddress(cd->m_ipAddress),
-				 cd->m_port,
+	if(s.connect(sf::IpAddress(cd.m_ipAddress),
+				 cd.m_port,
 				 sf::milliseconds(SOCKET_TIMEOUT)) != sf::Socket::Done)
 	{
-		LOG(ERROR) << "Failed to connect to client at " << cd->m_ipAddress
-				   << " listening on port " << cd->m_port << " with name " << cd->m_name;
+		LOG(ERROR) << "Failed to connect to client at " << cd.m_ipAddress
+				   << " listening on port " << cd.m_port << " with name "
+				   << cd.m_name;
 		return; // return because no use in waiting
 	}
-    // send the data
-    if(s.send(show.c_str(), show.length()) != sf::Socket::Done)
+	// send the data
+	if(s.send(show.c_str(), show.length()) != sf::Socket::Done)
 	{
-        LOG(ERROR) << "Failed to send show to client";
+		LOG(ERROR) << "Failed to send show to client";
 	}
 
 }

@@ -34,7 +34,7 @@ std::string syn::parseSong(hl::SongData &sd, int channels, int res)
 	{
         LOG(ERROR) << "Couldn't open file: " << sd.m_path;
 	}
-
+    short *primaryBuff = new short[int(info.channels * info.samplerate * .1)];
 
 	sf_close(file);
 	return show;

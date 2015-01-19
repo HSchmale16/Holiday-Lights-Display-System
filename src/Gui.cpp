@@ -8,7 +8,11 @@
 #include <cstring>
 #include <iostream>
 #include <string.h>
+#include <vector>
 #include <glog/logging.h>
+
+// decl externs
+extern std::vector<hl::ClientDevice> clients;
 
 // Declare Namespace Globals to work with extern.
 CDKSCREEN *gui::m_cdkscreen;	//!< CDK SCREEN Required for use of CDK
@@ -56,6 +60,7 @@ void gui::updateShowGui(hl::SongData sd)
 	clear();
 	mvprintw(0, (COLS - sd.m_name.length()) / 2, sd.m_name.c_str());
 	mvprintw(1, (COLS - sd.m_album.length()) / 2, sd.m_album.c_str());
+    mvprintw(23, 0, "%d Clients Connected", clients.size());
 	refresh();
 }
 

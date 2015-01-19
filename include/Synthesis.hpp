@@ -59,6 +59,6 @@ int ShowEditor();
  */
 int SelectShow();
 } // end of show editor namespace
-}// end of synth namespace
+} // end of synth namespace
 
 #endif // SYNTHESIS_HPP_INCLUDED

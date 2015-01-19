@@ -29,6 +29,8 @@ const int SOCKET_TIMEOUT = 150;	//!< milliseconds before socket timesout
  */
 const bool DYNAMIC_SHOW_GEN = true;
 
+const int BUFF_SIZE = 4410*2; //!< Num of Elements in buffer
+
 // Other stuff yet to be thought of, probably config file defaults
 
 #endif // DEFAULTS_H_INCLUDED

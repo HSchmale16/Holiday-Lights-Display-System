@@ -11,7 +11,9 @@
 #include "HolidayLights.hpp"	// for the SongData Struct
 #include <string>
 
-// contains functions for analyising sound
+/** \brief Sound and waveform analysis functions are here
+ *
+ */
 namespace syn
 {
 struct ShowData
@@ -36,16 +38,11 @@ struct ShowData
  */
 std::string parseSong(hl::SongData &sd, int channels, int res);
 
-/** \brief performs super position on a set of 2 waves
- * \param ch1 - Channel 1 data
- * \param ch2 - Channel 2 data
- * \param ret - data to return
- * \param smp - number of samples in arrays
- * \return An array of samples of size smp
- */
-void performSuperposition2Ch(short *ch1, short*ch2, short *ret, int smp);
 
-// --- Show Editor Namespace ---
+long long analysis(short *buff, int buffSz, int *peaks, int nPeaks);
+
+/** \brief functions to work with the show editor
+ */
 namespace se
 {
 // Show Editor Entry Point

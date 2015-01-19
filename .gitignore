@@ -46,3 +46,5 @@ resources/*
 *.log*
 *.INFO*
 *.WARN*
+*.ERR*
+logs/*

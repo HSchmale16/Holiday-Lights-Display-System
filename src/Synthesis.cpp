@@ -40,8 +40,7 @@ std::string syn::parseSong(hl::SongData &sd, int channels, int res)
 	return show;
 }
 
-long long syn::analysis(short *buff, int buffSz, int *peaks, int nPeaks,
-						int channels)
+long long syn::analysis(short *buff, int buffSz, int *peaks, int nPeaks)
 {
 	long long myLong; // support for upto 64 channels
 	// zero peaks

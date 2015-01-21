@@ -117,8 +117,9 @@ void hl::initClients()
 }
 
 // starts a show
-void hl::startShow()
+int hl::startShow()
 {
+	int waitPeriod = 0;;
 	char *z_ErrMsg = 0;
 	int rc = sqlite3_exec(db, sql::SQL_SELECT_SONG, cbSong, 0, &z_ErrMsg);
 	if(rc)
@@ -130,18 +131,19 @@ void hl::startShow()
 	// create a show
 	unsigned int i;
 	std::vector<std::string> shows;
-	int showLasts;
 	for(i = 0; i < clients.size(); i++)
 	{
 		std::string shStr = syn::parseSong(currSongDat, clients[i].m_channels,
 										   100);
 		shows.push_back(shStr);
+		waitPeriod = shStr.length() / BYTES_PER_INSTRUCT;
 	}
+	// send the show
 	for(i = 0; i < shows.size(); i++)
 	{
 		hl::sendShowToClient(clients[i], shows[i]);
 	}
-
+	return waitPeriod;
 }
 
 // Sends data to a client

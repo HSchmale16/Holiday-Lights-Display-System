@@ -63,13 +63,13 @@ void initClients();
 
 /** \brief starts a show
  *
- * \return Nothing
+ * \return Number of seconds to wait before calling again
  *
  * Selects a random show to run from the database depending on config
  * settings. Then depending on initial settings it either generates a new
  * show or pulls a show from the database.
  */
-void startShow();
+int startShow();
 
 /** \brief sends a show to the client device named in params
  * \param cd - The client to contact.

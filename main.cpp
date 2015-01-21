@@ -57,18 +57,25 @@ int main(int argc, char** argv)
 
 int EventLoopLim()
 {
-	time_t start, now;
-	time(&start);
+	int waitPeriod = 0;
+	time_t serverStartTime, now, songStartedTime;
+	time(&songStartedTime);
+	time(&serverStartTime);
 	time(&now);
 	do
 	{
 		time(&now);
 		// Run the gui
 		// Activate the song when enough time has passed
+		if(waitPeriod < difftime(now, songStartedTime))
+		{
+            waitPeriod = hl::startShow();
+            time(&songStartedTime);
+		}
 		gui::updateShowGui(hl::currSongDat);
 		sf::sleep(sf::milliseconds(UPDATE_T_PERIOD));
 	}
-	while(difftime(now, start) < SERVER_RUNS_FOR_SEC);
+	while(difftime(now, serverStartTime) < SERVER_RUNS_FOR_SEC);
 	return 0;
 }
 

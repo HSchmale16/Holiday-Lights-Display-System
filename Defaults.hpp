@@ -21,8 +21,13 @@ const int UPDATE_T_PERIOD = 10;	//!< milliseconds to sleep each event loop
 
 const int INTERMISSION = 10;	//!< Seconds to wait between shows
 
+const int CLIENT_WAIT_PERIOD = 100; //!< MS to wait between updates on client
+
 // Network Defaults
 const int SOCKET_TIMEOUT = 150;	//!< milliseconds before socket timesout
+
+// INSTRUCTION DEFAULTS
+const int BYTES_PER_INSTRUCT = 8; //!< bytes per instruction sent to client
 
 // Song Generation Method
 /** \brief Should shows be dynamically generated?

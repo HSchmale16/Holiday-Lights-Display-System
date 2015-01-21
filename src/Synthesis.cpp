@@ -11,6 +11,7 @@
 #include "../SQL_CMDS.hpp"
 #include <iostream>
 #include <cstdlib>
+#include <math.h>
 #include <dirent.h>
 #include <errno.h>
 #include <glog/logging.h>
@@ -27,28 +28,50 @@
 // parses a song
 std::string syn::parseSong(hl::SongData &sd, int channels, int res)
 {
-	std::string show;
-    static short buff[BUFF_SIZE];
-    SndfileHandle file;
-    file = SndfileHandle(sd.m_path.c_str());
-    int peaks[channels] = {0};
-    while(file.read(buff, BUFF_SIZE) == BUFF_SIZE)
+	LOG(INFO) << "Begining Analysis of song with file path = " << sd.m_path;
+	union ConversionUnion
 	{
-        // perform analysis
-		analysis(buff, BUFF_SIZE, peaks, channels);
+		long long numericValue;
+		char byteValues[sizeof(long long)];
+	} myCU;
+	std::string show;
+	static short buff[BUFF_SIZE];
+	SndfileHandle file;
+	file = SndfileHandle(sd.m_path.c_str());
+	while(file.read(buff, BUFF_SIZE) == BUFF_SIZE)
+	{
+		// perform analysis
+		myCU.numericValue = analysis(buff, BUFF_SIZE, channels);
+		show += myCU.byteValues;
 	}
 	return show;
 }
 
-long long syn::analysis(short *buff, int buffSz, int *peaks, int nPeaks)
+long long syn::analysis(short *buff, int buffSz, int channels)
 {
-	long long myLong; // support for upto 64 channels
-	// zero peaks
-    int i = 0;
-    for(i = 0; i < nPeaks; i++)
-		peaks[i] = 0;
-    // Perform analysis
-
+	long long myLong = 0;
+	double average = 0;
+	for(int i = 0; i < buffSz; i++)
+	{
+		average += abs(buff[i]);
+	}
+	average /= buffSz;
+	// determine amount of time that volume is higher than average
+	int greaterThanAvg = 0;
+	for(int i = 0; i < buffSz; i++)
+	{
+		if(buff[i] > average)
+		{
+			greaterThanAvg++;
+		}
+	}
+	int percentToFlip = double(greaterThanAvg) / buffSz * 100;
+	for(int i = 0; i < std::min(64, channels); i++)
+	{
+		if((rand() % 100) < percentToFlip)
+			myLong ^= long(rand() * rand() * rand());
+	}
+	return myLong;
 }
 
 // =============================================================================

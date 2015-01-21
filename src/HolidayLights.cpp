@@ -130,10 +130,12 @@ void hl::startShow()
 	// create a show
 	unsigned int i;
 	std::vector<std::string> shows;
+	int showLasts;
 	for(i = 0; i < clients.size(); i++)
 	{
-		shows.push_back(syn::parseSong(currSongDat, clients[i].m_channels,
-									   100));
+		std::string shStr = syn::parseSong(currSongDat, clients[i].m_channels,
+										   100);
+		shows.push_back(shStr);
 	}
 	for(i = 0; i < shows.size(); i++)
 	{
@@ -152,8 +154,7 @@ void hl::sendShowToClient(ClientDevice cd , std::string show)
 				 sf::milliseconds(SOCKET_TIMEOUT)) != sf::Socket::Done)
 	{
 		LOG(ERROR) << "Failed to connect to client at " << cd.m_ipAddress
-				   << " listening on port " << cd.m_port << " with name "
-				   << cd.m_name;
+				   << " listening on port " << cd.m_port;
 		return; // return because no use in waiting
 	}
 	// send the data
@@ -161,7 +162,13 @@ void hl::sendShowToClient(ClientDevice cd , std::string show)
 	{
 		LOG(ERROR) << "Failed to send show to client";
 	}
-
+	else
+	{
+		// Success on sending data log to file
+		LOG(INFO) << "Sent show data to " << cd.m_name << " at "
+				  << cd.m_ipAddress << " listening on port " << cd.m_port
+				  << " with name "<< cd.m_name;
+	}
 }
 
 

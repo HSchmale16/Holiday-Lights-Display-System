@@ -42,10 +42,10 @@ std::string parseSong(hl::SongData &sd, int channels, int res);
 /** \brief Performs analysis on a song
  * \param buff - section analyese
  * \param buffSz - Number of samples in buffer
- * \param peaks - contains the count of peaks on various sections
- * \param nPeaks - size of the peaks array
+ * \param channels - how many channels are in the target (up to 64 the size of
+ * a long long are supported) display.
  */
-long long analysis(short *buff, int buffSz, int *peaks, int nPeaks);
+long long analysis(short *buff, int buffSz, int channels);
 
 /** \brief functions to work with the show editor
  */

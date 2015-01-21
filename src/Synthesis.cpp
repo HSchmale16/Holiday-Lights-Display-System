@@ -38,6 +38,7 @@ std::string syn::parseSong(hl::SongData &sd, int channels, int res)
 	SndfileHandle file;
 	file = SndfileHandle(sd.m_path.c_str());
 	int buffSz = file.samplerate() * file.channels();
+	LOG(INFO) << "song = " << sd.m_name << "\tBuff=" << buffSz;
 	short *buff = new short[buffSz];
 	while(file.read(buff, buffSz) == buffSz)
 	{

@@ -78,11 +78,18 @@ int EventLoopLim()
 		// Activate the song when enough time has passed
 		if(waitPeriod < difftime(now, songStartedTime))
 		{
-			waitPeriod = hl::startShow() + INTERMISSION;
-			time(&songStartedTime);
-			mySd.m_songStarted = songStartedTime;
-			mySd.m_waitPeriod = waitPeriod;
-			mySd.m_currSong = hl::currSongDat.m_name;
+			if((waitPeriod + INTERMISSION) < difftime(now, songStartedTime))
+			{
+				waitPeriod = hl::startShow();
+				time(&songStartedTime);
+				mySd.m_songStarted = songStartedTime;
+				mySd.m_waitPeriod = waitPeriod;
+				mySd.m_currSong = hl::currSongDat.m_name;
+			}
+			else
+			{
+				mySd.m_currSong = "THIS IS AN INTERMISSION";
+			}
 		}
 		gui::updateShowGui(mySd);
 		sf::sleep(sf::milliseconds(UPDATE_T_PERIOD));

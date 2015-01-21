@@ -108,3 +108,11 @@ int EventLoopULim()
     }
     return 0;
 }
+
+void emergencyShutdown(int rc)
+{
+	LOG(FATAL) << "Something bad happened causing an emergency shutdown";
+    gui::endShowGui();
+    hl::shutdown();
+    exit(rc);
+}

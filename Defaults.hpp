@@ -42,80 +42,94 @@ const bool DYNAMIC_SHOW_GEN = true;
  * such things at hand.
  */
 const long long BIT_FLAGS[64] = {0x1l,
-                                 0x2l,
-                                 0x4l,
-                                 0x8l,
-                                 0x10l,
-                                 0x20l,
-                                 0x40l,
-                                 0x80l,
-                                 0x100l,
-                                 0x200l,
-                                 0x400l,
-                                 0x800l,
-                                 0x1000l,
-                                 0x2000l,
-                                 0x4000l,
-                                 0x8000l,
-                                 0x10000l,
-                                 0x20000l,
-                                 0x40000l,
-                                 0x80000l,
-                                 0x100000l,
-                                 0x200000l,
-                                 0x400000l,
-                                 0x800000l,
-                                 0x1000000l,
-                                 0x2000000l,
-                                 0x4000000l,
-                                 0x8000000l,
-                                 0x10000000l,
-                                 0x20000000l,
-                                 0x40000000l,
-                                 0x80000000l,
-                                 0x100000000l,
-                                 0x200000000l,
-                                 0x400000000l,
-                                 0x800000000l,
-                                 0x1000000000l,
-                                 0x2000000000l,
-                                 0x4000000000l,
-                                 0x8000000000l,
-                                 0x10000000000l,
-                                 0x20000000000l,
-                                 0x40000000000l,
-                                 0x80000000000l,
-                                 0x100000000000l,
-                                 0x200000000000l,
-                                 0x400000000000l,
-                                 0x800000000000l,
-                                 0x1000000000000l,
-                                 0x2000000000000l,
-                                 0x4000000000000l,
-                                 0x8000000000000l,
-                                 0x10000000000000l,
-                                 0x20000000000000l,
-                                 0x40000000000000l,
-                                 0x80000000000000l,
-                                 0x100000000000000l,
-                                 0x200000000000000l,
-                                 0x400000000000000l,
-                                 0x800000000000000l,
-                                 0x1000000000000000l
-                                };
+								 0x2l,
+								 0x4l,
+								 0x8l,
+								 0x10l,
+								 0x20l,
+								 0x40l,
+								 0x80l,
+								 0x100l,
+								 0x200l,
+								 0x400l,
+								 0x800l,
+								 0x1000l,
+								 0x2000l,
+								 0x4000l,
+								 0x8000l,
+								 0x10000l,
+								 0x20000l,
+								 0x40000l,
+								 0x80000l,
+								 0x100000l,
+								 0x200000l,
+								 0x400000l,
+								 0x800000l,
+								 0x1000000l,
+								 0x2000000l,
+								 0x4000000l,
+								 0x8000000l,
+								 0x10000000l,
+								 0x20000000l,
+								 0x40000000l,
+								 0x80000000l,
+								 0x100000000l,
+								 0x200000000l,
+								 0x400000000l,
+								 0x800000000l,
+								 0x1000000000l,
+								 0x2000000000l,
+								 0x4000000000l,
+								 0x8000000000l,
+								 0x10000000000l,
+								 0x20000000000l,
+								 0x40000000000l,
+								 0x80000000000l,
+								 0x100000000000l,
+								 0x200000000000l,
+								 0x400000000000l,
+								 0x800000000000l,
+								 0x1000000000000l,
+								 0x2000000000000l,
+								 0x4000000000000l,
+								 0x8000000000000l,
+								 0x10000000000000l,
+								 0x20000000000000l,
+								 0x40000000000000l,
+								 0x80000000000000l,
+								 0x100000000000000l,
+								 0x200000000000000l,
+								 0x400000000000000l,
+								 0x800000000000000l,
+								 0x1000000000000000l
+								};
 
 /** \brief Holds the current state of the server
  */
 struct ServerData
 {
-    std::string m_currSong;	//!< Song currently playing
-    std::string m_currShow;	//!< A Show string
-    int m_waitPeriod;		//!< Seconds to wait before starting next show
-    int m_clientsConnected; //!< Number of clients connected
-    time_t m_serverStarted;	//!< When the server was started
-    time_t m_songStarted;	//!< When the current song was started
-    time_t m_now;			//!< What time is it?
+	std::string m_currSong;	//!< Song currently playing
+	std::string m_currShow;	//!< A Show string
+	int m_waitPeriod;		//!< Seconds to wait before starting next show
+	int m_clientsConnected; //!< Number of clients connected
+	time_t m_serverStarted;	//!< When the server was started
+	time_t m_songStarted;	//!< When the current song was started
+	time_t m_now;			//!< What time is it?
 };
+
+// ============================================================================
+// Default Function Prototypes
+// ============================================================================
+
+/** \brief allows the program to be shut down in a non standard way
+ *
+ * This will log the non standard shutdown to file then call shutdown functions
+ * of various libriaries. Then print a stack trace on standard output of when
+ * this function was quit
+ * \param rc return code of the prog to the operating system
+ * \todo Stack trace
+ */
+void emergencyShutdown(int rc);
 
 // Other stuff yet to be thought of, probably config file defaults
 

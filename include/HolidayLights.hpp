@@ -11,29 +11,29 @@ namespace hl
 /// Struct for holding song data
 struct SongData
 {
-	int m_songID;			//!< Song Id Number
-	std::string m_name;		//!< Song Title
-	std::string m_path;		//!< Path to the song file
+    int m_songID;			//!< Song Id Number
+    std::string m_name;		//!< Song Title
+    std::string m_path;		//!< Path to the song file
     std::string m_artist;	//!< Who plays this song
     std::string m_album;	//!< What album is it from
 
-	// ctor
-	SongData() {};	// empty ctor
-	SongData(int id, std::string name, std::string path)
-	{
-		m_songID = id;
-		m_name = name;
-		m_path = path;
-	}
+    // ctor
+    SongData() {};	// empty ctor
+    SongData(int id, std::string name, std::string path)
+    {
+        m_songID = id;
+        m_name = name;
+        m_path = path;
+    }
 };
 
 /// Contains data about the client
 struct ClientDevice
 {
-	std::string m_name;			//!< User friendly name
-	std::string m_ipAddress;    //!< Ip Address of client
-	int m_port;					//!< Port Client is listening on
-	int m_channels;				//!< Number of output channels on that client
+    std::string m_name;			//!< User friendly name
+    std::string m_ipAddress;    //!< Ip Address of client
+    int m_port;					//!< Port Client is listening on
+    int m_channels;				//!< Number of output channels on that client
 };
 
 /** \brief initializes the lights system

@@ -57,11 +57,11 @@ int help();
 const unsigned int NUM_POSSIBLE_ARGS = 5;
 const std::string POSSIBLE_ARGS[] =
 {
-	"--help",		// Print Help the Quit
-	"--start",		// Starts the server process for n seconds
-	"--updateDB",	// Update the database
-	"--createDB",	// Creates the database file then exit
-	"--makeShows"	// Make a new show
+    "--help",		// Print Help the Quit
+    "--start",		// Starts the server process for n seconds
+    "--updateDB",	// Update the database
+    "--createDB",	// Creates the database file then exit
+    "--makeShows"	// Make a new show
 };
 // Arguement Codes
 #define HELP_ARG 0

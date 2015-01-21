@@ -18,16 +18,16 @@ namespace syn
 {
 struct ShowData
 {
-	int m_channels;		// How many channels this show has
-	int m_resMilliSec;	// Resolution of song parse in milliseconds
-	std::string m_data;	// Show data to send to client
+    int m_channels;		// How many channels this show has
+    int m_resMilliSec;	// Resolution of song parse in milliseconds
+    std::string m_data;	// Show data to send to client
 
-	// ctor
-	ShowData(int channels, std::string show)
-	{
-		m_channels = channels;
-		m_data = show;
-	}
+    // ctor
+    ShowData(int channels, std::string show)
+    {
+        m_channels = channels;
+        m_data = show;
+    }
 };
 
 /** \brief parses a song into a light show

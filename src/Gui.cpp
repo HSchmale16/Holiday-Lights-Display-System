@@ -55,12 +55,15 @@ void gui::initShowGui()
 
 }
 
-void gui::updateShowGui(hl::SongData sd)
+void gui::updateShowGui(ServerData sd)
 {
 	clear();
-	mvprintw(0, (COLS - sd.m_name.length()) / 2, sd.m_name.c_str());
-	mvprintw(1, (COLS - sd.m_album.length()) / 2, sd.m_album.c_str());
-    mvprintw(23, 0, "%d Clients Connected", clients.size());
+	mvprintw(0, (COLS - sd.m_currSong.length()) / 2, sd.m_currSong.c_str());
+	mvprintw(21, 0, "%d Clients Connected", clients.size());
+	mvprintw(22, 0, "Current Song Ends: %d Seconds",
+			sd.m_waitPeriod - int(difftime(sd.m_now, sd.m_songStarted)));
+	mvprintw(23, 0, "Server Has Been Running: %d Seconds",
+			 int(difftime(sd.m_now, sd.m_serverStarted)));
 	refresh();
 }
 

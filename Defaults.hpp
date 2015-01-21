@@ -40,7 +40,9 @@ const bool DYNAMIC_SHOW_GEN = true;
 
 const int BUFF_SIZE = 4410*2; //!< Num of Elements in buffer
 
-// Bit Flags
+/** \brief a list of bit flags for checking bits. It's nice to have a list of
+ * such things at hand.
+ */
 const long long BIT_FLAGS[64] = {0x1l,
 								 0x2l,
 								 0x4l,
@@ -112,6 +114,7 @@ struct ServerData
 	int m_waitPeriod;		//!< Seconds to wait before starting next show
 	time_t m_serverStarted;	//!< When the server was started
 	time_t m_songStarted;	//!< When the current song was started
+	time_t m_now;			//!< What time is it?
 };
 
 // Other stuff yet to be thought of, probably config file defaults

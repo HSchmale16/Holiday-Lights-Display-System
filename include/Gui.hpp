@@ -6,6 +6,7 @@
 #ifndef GUI_HPP_INCLUDED
 #define GUI_HPP_INCLUDED
 
+#include "../Defaults.hpp"
 #include "HolidayLights.hpp"
 #include <string>
 #include <ncurses.h>
@@ -24,7 +25,7 @@ void endGui();
 void initShowGui();
 
 //!< update the show gui
-void updateShowGui(hl::SongData sd);
+void updateShowGui(ServerData sd);
 
 // Ends the Show gui
 void endShowGui();

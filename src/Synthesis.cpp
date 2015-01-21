@@ -76,7 +76,7 @@ long long syn::analysis(short *buff, int buffSz, int channels)
     {
         if((rand() % 100) < percentToFlip)
         {
-            myLong ^= long(rand() * rand() * rand());
+            myLong ^= BIT_FLAGS[i];
         }
     }
     return myLong;

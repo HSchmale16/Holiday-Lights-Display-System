@@ -70,17 +70,17 @@ const char *generateVisualizer(char c[8])
 	static char ch[65];
 	ch[64] = '\0';
 	int index = 0;
-    for(int i = 0; i < 8; i++)
+	for(int i = 0; i < 8; i++)
 	{
 		for(int j = 0; j < 8; j++)
 		{
-            if((c[i] & BIT_FLAGS[j]) == BIT_FLAGS[j])
+			if((c[i] & BIT_FLAGS[j]) == BIT_FLAGS[j])
 			{
-                ch[index] = '@';
+				ch[index] = '@';
 			}
 			else
 			{
-                ch[index] = ' ';
+				ch[index] = ' ';
 			}
 			index++;
 		}
@@ -94,11 +94,15 @@ void gui::updateShowGui(ServerData sd)
 	// title
 	mvprintw(0, (COLS - sd.m_currSong.length()) / 2, sd.m_currSong.c_str());
 	// Song visualizer
-	int tIndex = difftime(sd.m_now, sd.m_songStarted) * BYTES_PER_INSTRUCT;
+	unsigned int tIndex =
+		difftime(sd.m_now, sd.m_songStarted) * BYTES_PER_INSTRUCT;
 	ConversionUnion myCU;
-	strncpy(myCU.byteValues, // this is a dirty hack
-			sd.m_currShow.substr(tIndex, tIndex + BYTES_PER_INSTRUCT).c_str(),
-			sizeof(long long));
+	if(tIndex < sd.m_currShow.length())
+	{
+		strncpy(myCU.byteValues, // this is a dirty hack
+				sd.m_currShow.substr(tIndex, tIndex + BYTES_PER_INSTRUCT).c_str(),
+				sizeof(long long));
+	}
 	mvprintw(LINES / 2, (COLS - 64)/2,
 			 generateVisualizer(myCU.byteValues));
 

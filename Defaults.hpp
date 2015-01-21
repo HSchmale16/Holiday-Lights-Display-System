@@ -109,7 +109,9 @@ const long long BIT_FLAGS[64] = {0x1l,
 struct ServerData
 {
     std::string m_currSong;	//!< Song currently playing
+    std::string m_currShow;	//!< A Show string
     int m_waitPeriod;		//!< Seconds to wait before starting next show
+    int m_clientsConnected; //!< Number of clients connected
     time_t m_serverStarted;	//!< When the server was started
     time_t m_songStarted;	//!< When the current song was started
     time_t m_now;			//!< What time is it?

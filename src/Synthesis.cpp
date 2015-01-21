@@ -59,7 +59,7 @@ long long syn::analysis(short *buff, int buffSz, int channels)
     double average = 0;
     for(int i = 0; i < buffSz; i++)
     {
-        average += abs(buff[i]);
+        average += buff[i];
     }
     average /= buffSz;
     // determine amount of time that volume is higher than average
@@ -72,7 +72,7 @@ long long syn::analysis(short *buff, int buffSz, int channels)
         }
     }
     int percentToFlip = double(greaterThanAvg) / buffSz * 100;
-    for(int i = 0; i < std::min(64, channels); i++)
+    for(int i = 0; i < 64; i++)
     {
         if((rand() % 100) < percentToFlip)
         {

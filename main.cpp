@@ -69,7 +69,7 @@ int EventLoopLim()
 		// Activate the song when enough time has passed
 		if(waitPeriod < difftime(now, songStartedTime))
 		{
-            waitPeriod = hl::startShow();
+            waitPeriod = hl::startShow() + INTERMISSION;
             time(&songStartedTime);
 		}
 		gui::updateShowGui(hl::currSongDat);

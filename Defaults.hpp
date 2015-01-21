@@ -7,6 +7,10 @@
 #ifndef DEFAULTS_H_INCLUDED
 #define DEFAULTS_H_INCLUDED
 
+// Default Includes
+#include <string>
+#include <ctime>
+
 // EXIT FAIL CODES
 const int SQL_FAIL = 1;     //!< SQL Failure
 const int FILE_FAIL =  2;	//!< Failed to do something with a file
@@ -99,6 +103,16 @@ const long long BIT_FLAGS[64] = {0x1l,
 								 0x800000000000000l,
 								 0x1000000000000000l
 								};
+
+/** \brief Holds the current state of the server
+ */
+struct ServerData
+{
+	std::string m_currSong;	//!< Song currently playing
+	int m_waitPeriod;		//!< Seconds to wait before starting next show
+	time_t m_serverStarted;	//!< When the server was started
+	time_t m_songStarted;	//!< When the current song was started
+};
 
 // Other stuff yet to be thought of, probably config file defaults
 

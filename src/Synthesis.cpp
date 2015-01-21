@@ -35,15 +35,18 @@ std::string syn::parseSong(hl::SongData &sd, int channels, int res)
 		char byteValues[sizeof(long long)];
 	} myCU;
 	std::string show;
-	static short buff[BUFF_SIZE];
 	SndfileHandle file;
 	file = SndfileHandle(sd.m_path.c_str());
-	while(file.read(buff, BUFF_SIZE) == BUFF_SIZE)
+	int buffSz = file.samplerate() * file.channels();
+	short *buff = new short[buffSz];
+	while(file.read(buff, buffSz) == buffSz)
 	{
 		// perform analysis
-		myCU.numericValue = analysis(buff, BUFF_SIZE, channels);
-		show += myCU.byteValues;
+		myCU.numericValue = analysis(buff, buffSz, channels);
+		for(unsigned int i = 0; i < sizeof(long long); i++)
+            show += myCU.byteValues[i];
 	}
+	delete[] buff;
 	return show;
 }
 

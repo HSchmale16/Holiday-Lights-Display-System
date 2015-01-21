@@ -38,8 +38,6 @@ const int BYTES_PER_INSTRUCT = 8; //!< bytes per instruction sent to client
  */
 const bool DYNAMIC_SHOW_GEN = true;
 
-const int BUFF_SIZE = 4410*2; //!< Num of Elements in buffer
-
 /** \brief a list of bit flags for checking bits. It's nice to have a list of
  * such things at hand.
  */

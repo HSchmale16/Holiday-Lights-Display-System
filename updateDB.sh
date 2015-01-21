@@ -12,6 +12,7 @@ dbFile="lights.db"
 sqlite3 $dbFile "Delete from Media;"
 
 for f in $( ls resources/songs ) ; do
+	echo "Found $f"
 	insert="Insert into MEDIA(name, path) values('$f', 'resources/songs/$f');"
 	sqlite3 $dbFile "$insert"	
 done

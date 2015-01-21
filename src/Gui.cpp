@@ -103,11 +103,11 @@ void gui::updateShowGui(ServerData sd)
 			 generateVisualizer(myCU.byteValues));
 
 	// Status messages bottom left corner
-	mvprintw(21, 0, "%d Clients Connected", clients.size());
-	mvprintw(22, 0, "dT Index: %d of %d",
+	mvprintw(LINES - 3, 0, "%d Clients Connected", clients.size());
+	mvprintw(LINES - 2, 0, "dT Index: %d of %d",
 			 int(difftime(sd.m_now, sd.m_songStarted)),
 			 sd.m_waitPeriod);
-	mvprintw(23, 0, "Server Has Been Running: %d Seconds",
+	mvprintw(LINES - 1, 0, "Server Has Been Running: %d Seconds",
 			 int(difftime(sd.m_now, sd.m_serverStarted)));
 	refresh();
 }

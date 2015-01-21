@@ -14,6 +14,7 @@
 #include <sqlite3.h>
 #include <SFML/Network.hpp>
 #include <glog/logging.h>
+#include <SFML/Audio.hpp>
 
 // database connection
 static sqlite3 * db;
@@ -122,6 +123,7 @@ void hl::initClients()
 }
 
 // starts a show
+sf::Music music;
 int hl::startShow()
 {
 	int waitPeriod = 0;;
@@ -132,6 +134,10 @@ int hl::startShow()
 		sqlite3_free(z_ErrMsg);
 		LOG(FATAL) << "Failed to fetch a song from the database";
 		exit(SQL_FAIL);
+	}
+	if(!music.openFromFile(currSongDat.m_path))
+	{
+        LOG(ERROR) << "Failed to load song: " << currSongDat.m_path;
 	}
 	// create a show
 	unsigned int i;
@@ -146,11 +152,11 @@ int hl::startShow()
 		serverstate.m_currShow = shStr;
 	}
 	// send the show
-
 	for(i = 0; i < shows.size(); i++)
 	{
 		hl::sendShowToClient(clients[i], shows[i]);
 	}
+	music.play();
 	return waitPeriod;
 }
 

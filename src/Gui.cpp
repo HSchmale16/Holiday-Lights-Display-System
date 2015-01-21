@@ -67,7 +67,7 @@ void gui::initShowGui()
 
 const char *generateVisualizer(char c[8])
 {
-	char ch[65];
+	static char ch[65];
 	ch[64] = '\0';
 	int index = 0;
     for(int i = 0; i < 8; i++)

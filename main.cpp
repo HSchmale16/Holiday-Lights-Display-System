@@ -15,6 +15,7 @@
 // Global Variables
 int SERVER_RUNS_FOR_SEC; // server runs for this many seconds
 bool SHOW_EDIT_MODE_ON = false;	// is the prog in show edit mode
+ServerData serverstate;
 
 // Event Loop Types
 int EventLoopLim();		// Limited run time
@@ -57,23 +58,22 @@ int main(int argc, char** argv)
 
 int EventLoopLim()
 {
-    ServerData mySd;
     int waitPeriod = 0;
     time_t serverStartTime, now, songStartedTime;
     time(&songStartedTime);
     time(&serverStartTime);
     time(&now);
     // init struct
-    mySd.m_serverStarted = serverStartTime;
-    mySd.m_songStarted = songStartedTime;
-    mySd.m_waitPeriod = waitPeriod;
-    mySd.m_currSong = hl::currSongDat.m_name;
+    serverstate.m_serverStarted = serverStartTime;
+    serverstate.m_songStarted = songStartedTime;
+    serverstate.m_waitPeriod = waitPeriod;
+    serverstate.m_currSong = hl::currSongDat.m_name;
     // event loop
     do
     {
         time(&now);
         // update server state
-        mySd.m_now = now;
+        serverstate.m_now = now;
         // Run the gui
         // Activate the song when enough time has passed
         if(waitPeriod < difftime(now, songStartedTime))
@@ -82,16 +82,16 @@ int EventLoopLim()
             {
                 waitPeriod = hl::startShow();
                 time(&songStartedTime);
-                mySd.m_songStarted = songStartedTime;
-                mySd.m_waitPeriod = waitPeriod;
-                mySd.m_currSong = hl::currSongDat.m_name;
+                serverstate.m_songStarted = songStartedTime;
+                serverstate.m_waitPeriod = waitPeriod;
+                serverstate.m_currSong = hl::currSongDat.m_name;
             }
             else
             {
-                mySd.m_currSong = "THIS IS AN INTERMISSION";
+                serverstate.m_currSong = "THIS IS AN INTERMISSION";
             }
         }
-        gui::updateShowGui(mySd);
+        gui::updateShowGui(serverstate);
         sf::sleep(sf::milliseconds(UPDATE_T_PERIOD));
     }
     while(difftime(now, serverStartTime) < SERVER_RUNS_FOR_SEC);

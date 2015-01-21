@@ -14,6 +14,12 @@
 // decl externs
 extern std::vector<hl::ClientDevice> clients;
 
+union ConversionUnion
+{
+	long long numericValue;
+	char byteValues[sizeof(long long)];
+};
+
 // Declare Namespace Globals to work with extern.
 CDKSCREEN *gui::m_cdkscreen;	//!< CDK SCREEN Required for use of CDK
 bool gui::m_bGuiInited = false;
@@ -59,10 +65,44 @@ void gui::initShowGui()
 
 }
 
+const char *generateVisualizer(char c[8])
+{
+	char ch[65];
+	ch[64] = '\0';
+	int index = 0;
+    for(int i = 0; i < 8; i++)
+	{
+		for(int j = 0; j < 8; j++)
+		{
+            if((c[i] & BIT_FLAGS[j]) == BIT_FLAGS[j])
+			{
+                ch[index] = '@';
+			}
+			else
+			{
+                ch[index] = ' ';
+			}
+			index++;
+		}
+	}
+	return ch;
+}
+
 void gui::updateShowGui(ServerData sd)
 {
 	clear();
+	// title
 	mvprintw(0, (COLS - sd.m_currSong.length()) / 2, sd.m_currSong.c_str());
+	// Song visualizer
+	int tIndex = difftime(sd.m_now, sd.m_songStarted) * BYTES_PER_INSTRUCT;
+	ConversionUnion myCU;
+	strncpy(myCU.byteValues, // this is a dirty hack
+			sd.m_currShow.substr(tIndex, tIndex + BYTES_PER_INSTRUCT).c_str(),
+			sizeof(long long));
+	mvprintw(LINES / 2, (COLS - 64)/2,
+			 generateVisualizer(myCU.byteValues));
+
+	// Status messages bottom left corner
 	mvprintw(21, 0, "%d Clients Connected", clients.size());
 	mvprintw(22, 0, "dT Index: %d of %d",
 			 int(difftime(sd.m_now, sd.m_songStarted)),

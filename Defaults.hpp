@@ -21,7 +21,7 @@ const int ARG_FAIL  = 255;	//!< Something is wrong with the args passed to prog
 #define RESOURCES_PATH "resources/songs/"	//!< Path to resources directory
 
 // Update Rates
-const int UPDATE_T_PERIOD = 10;	//!< milliseconds to sleep each event loop
+const int UPDATE_T_PERIOD = 100;	//!< milliseconds to sleep each event loop
 
 const int INTERMISSION = 10;	//!< Seconds to wait between shows
 
@@ -116,6 +116,8 @@ struct ServerData
 	time_t m_songStarted;	//!< When the current song was started
 	time_t m_now;			//!< What time is it?
 };
+
+extern ServerData serverstate; //!< Current Server State
 
 // ============================================================================
 // Default Function Prototypes

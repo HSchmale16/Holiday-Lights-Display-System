@@ -143,6 +143,7 @@ int hl::startShow()
 		CHECK(shStr.length() > 1);
 		shows.push_back(shStr);
 		waitPeriod = shStr.length() / BYTES_PER_INSTRUCT;
+		serverstate.m_currShow = shStr;
 	}
 	// send the show
 

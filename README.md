@@ -20,14 +20,15 @@ This is written with assumption that you're running a Fedora or yum based distro
 The prefered compiler is GCC.
 
 ## Requirements
-The following packages are required to build and run:
-* SFML-devel
-* sqlite3-devel
-* ncurses-devel
-* cdk-devel (Curses development kit)
-* libsndfile-devel
-* glog-devel (Note: on fedora you also need to grab `gflags-devel` )
-* ffmpeg
+The following packages (as named in the fedora repos) are required to build
+and run:
+* `SFML-devel`
+* `sqlite3-devel`
+* `ncurses-devel`
+* `cdk-devel` (Curses development kit)
+* `libsndfile-devel`
+* `glog-devel` (Note: on fedora you also need to grab `gflags-devel` )
+* ` ffmpeg`
 These are the packages as named on the Fedora repo.
 
 ## instructions

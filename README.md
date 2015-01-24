@@ -15,6 +15,11 @@ and MAC_ADDRESS vars for you LAN. As well as how many channels are being ran on
 that controller.
 * Note flags to glog have to be set through enviroment variables
 
+## Limitations ##
+This program has some odd limitations.
+* It can run up to 2 clients with the current arduino sketch. It needs to be
+modified to use a handshake protocal with the server.
+
 #How To Build
 This is written with assumption that you're running a Fedora or yum based distro.
 The prefered compiler is GCC.

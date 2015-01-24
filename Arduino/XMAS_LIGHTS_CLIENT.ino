@@ -28,7 +28,7 @@
 
 // constants
 const int NUM_OUTPUTS = 8;	// must be a multiple of 8
-const int BYTES_PER_INSTRUCTION = NUM_OUTPUTS / 8;
+const int BYTES_PER_INSTRUCTION = 8;
 const int NUM_FORBIDDEN = 10;
 const int forbiddenPins[NUM_FORBIDDEN] = {2, 3, 10, 11, 12, 13, 50, 51, 52, 53};
 // How many milliseconds to wait between write-outs
@@ -88,8 +88,12 @@ void loop()
 			{
 				char c = client.read();
 				songData += c;
+				if(songData.length() % BYTES_PER_INSTRUCTION == 0)
+				{
+					execute();
+					songData = "";
+				}
 			}
-			execute();
 			// close the connection:
 			client.stop();
 		}
@@ -97,6 +101,7 @@ void loop()
 	} // if (client) closed
 }
 
+// integer exponetion. Very standard
 int powi(int m, int n)
 {
 	int j = m;
@@ -119,7 +124,9 @@ bool checkForbidden(int pin)
 
 void execute()
 {
-	//Serial.println(songData);
+#ifdef DEBUG_MODE
+	Serial.println(songData);	// print out current song data
+#endif
 	for(int i = 0; i < (songData.length() / BYTES_PER_INSTRUCTION); i++)
 	{
 		int pin = 0;

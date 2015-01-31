@@ -137,7 +137,7 @@ int hl::startShow()
 	}
 	if(!music.openFromFile(currSongDat.m_path))
 	{
-        LOG(ERROR) << "Failed to load song: " << currSongDat.m_path;
+		LOG(ERROR) << "Failed to load song: " << currSongDat.m_path;
 	}
 	// create a show
 	unsigned int i;

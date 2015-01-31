@@ -14,6 +14,8 @@ other arduino compatible microcontroller. You'll need to modify the IP, Port
 and MAC_ADDRESS vars for you LAN. As well as how many channels are being ran on
 that controller.
 * Note flags to glog have to be set through enviroment variables
+* As this program expects to have clients, weird behavior will occur if there
+are no clients connected.
 
 ## Limitations ##
 This program has some odd limitations.

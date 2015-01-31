@@ -100,7 +100,8 @@ void gui::updateShowGui(ServerData sd)
 	if(tIndex < sd.m_currShow.length())
 	{
 		strncpy(myCU.byteValues, // this is a dirty hack
-				sd.m_currShow.substr(tIndex, tIndex + BYTES_PER_INSTRUCT).c_str(),
+				sd.m_currShow.substr(tIndex,
+									 tIndex + BYTES_PER_INSTRUCT).c_str(),
 				sizeof(long long));
 	}
 	mvprintw(LINES / 2, (COLS - 64)/2,

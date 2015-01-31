@@ -9,7 +9,7 @@
 namespace hl
 {
 /// Struct for holding song data
-struct SongData
+    struct SongData
 {
     int m_songID;			//!< Song Id Number
     std::string m_name;		//!< Song Title

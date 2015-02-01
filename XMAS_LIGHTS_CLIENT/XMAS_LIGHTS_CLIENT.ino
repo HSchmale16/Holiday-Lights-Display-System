@@ -20,6 +20,7 @@
  * 
  * 
  */
+
 #include <SPI.h>
 #include <Ethernet.h>
 
@@ -27,10 +28,10 @@
 #define DEBUG_MODE
 
 // constants
-const int NUM_OUTPUTS = 8;	// must be a multiple of 8
-const int BYTES_PER_INSTRUCTION = 8;
-const int NUM_FORBIDDEN = 10;
-const int forbiddenPins[NUM_FORBIDDEN] = {2, 3, 10, 11, 12, 13, 50, 51, 52, 53};
+const int NUM_OUTPUTS = 8;		// must be a multiple of 8
+const int BYTES_PER_INSTRUCTION = 8;	// How many bytes are in each instruction
+const int NUM_FORBIDDEN = 7;		// Number of Forbiden Pins
+const int forbiddenPins[NUM_FORBIDDEN] = {0, 1, 4, 10, 11, 12, 13};
 // How many milliseconds to wait between write-outs
 const int LIGHTS_UPDATE_T_PERIOD = 100;
 
@@ -61,6 +62,10 @@ void setup()
 		while(checkForbidden(p++));
 		pinMode(p, OUTPUT);
 		outs++;
+#ifdef DEBUG_MODE
+		Serial.print("Output: ");
+		Serial.println(p);
+#endif
 	}
 
 	// start the Ethernet connection and the server:
@@ -127,7 +132,7 @@ void execute()
 #ifdef DEBUG_MODE
 	Serial.println(songData);	// print out current song data
 #endif
-	for(int i = 0; i < (songData.length() / BYTES_PER_INSTRUCTION); i++)
+	for(int i = 0; i < (songData.length() / BYTES_PER_INSTRUCTION); i += BYTES_PER_INSTRUCTION)
 	{
 		int pin = 0;
 		String dat = songData.substring(i, i + BYTES_PER_INSTRUCTION);

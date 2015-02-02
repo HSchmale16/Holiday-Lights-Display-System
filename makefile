@@ -33,7 +33,6 @@ EXE=HolidayLights.out
 all: $(SOURCES) $(EXE)
 
 $(EXE): $(OBJECTS)
-	echo $(CC_FLAGS)
 	$(CC) $(LD_FLAGS) $(OBJECTS) -o $@
 	
 .o:

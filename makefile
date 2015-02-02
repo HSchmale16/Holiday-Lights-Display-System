@@ -32,12 +32,14 @@ EXE=HolidayLights.out
 
 all: $(SOURCES) $(EXE)
 
+# Primary build target
 $(EXE): $(OBJECTS)
 	$(CC) $(LD_FLAGS) $(OBJECTS) -o $@
 	
 .o:
 	$(CC) -c $(CC_FLAGS) -o $@ $<
 
+# Remove all the object files
 clean:
 	if [ -e $(EXE) ] ; then rm $(EXE); fi
 	rm -rf *.o

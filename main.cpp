@@ -35,8 +35,9 @@ int main(int argc, char** argv)
         return 0; // if so quit
     }
     // start up
-    gui::initShowGui();
     hl::initLights();
+    gui::initShowGui();
+
     // Launch the event loop
     int rc;
     if(SERVER_RUNS_FOR_SEC == 0)

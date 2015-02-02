@@ -115,7 +115,7 @@ void hl::initClients()
                   << " table.";
         exit(SQL_FAIL);
     }
-    CHECK(clients.size() >= 0); // There had better be some clients.
+    CHECK(clients.size() > 0) << "There were no clients to talk to"; // There had better be some clients.
     if(clients.size() == 0)
     {
         LOG(WARNING) << "There are 0 clients connected.";

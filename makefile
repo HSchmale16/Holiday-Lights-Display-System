@@ -1,10 +1,10 @@
 # Makefile for Holiday-Lights-Display-System
 # @author Henry J Schmale
 
-CC=g++
+CXX=g++
 
 # Flags for the C compiler
-CC_FLAGS= \
+CXX_FLAGS= \
 	-Wall \
 	-std=c++11 \
 	-O2
@@ -34,10 +34,10 @@ all: $(SOURCES) $(EXE)
 
 # Primary build target
 $(EXE): $(OBJECTS)
-	$(CC) $(LD_FLAGS) $(OBJECTS) -o $@
+	$(CXX) $(LD_FLAGS) $(OBJECTS) -o $@
 	
-.o:
-	$(CC) -c $(CC_FLAGS) -o $@ $<
+.cpp.o:
+	$(CXX) -c $(CXX_FLAGS) -o $@ $<
 
 # Remove all the object files
 clean:

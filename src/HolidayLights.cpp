@@ -2,6 +2,7 @@
 // @author Henry Schmale
 // @date January 10, 2015
 
+#define SQL_NULL_CALLBACK
 #include "../include/HolidayLights.hpp"
 #include "../include/Synthesis.hpp"
 #include "../Defaults.hpp"

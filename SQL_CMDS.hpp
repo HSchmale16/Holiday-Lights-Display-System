@@ -42,12 +42,14 @@ const char SQL_SELECT_SONG[] = "Select * from MEDIA ORDER BY"
 const char SQL_SELECT_DEVICES[] = "Select * from DEVICES;";
 
 // Callbacks
+
+#ifdef SQL_NULL_CALLBACK
 // This one does absolutely nothing
 static int cbNull(void *NotUsed, int argc, char **argv, char **azColName)
 {
     return 0;
 }
-
+#endif // SQL_NULL_CALLBACK
 }
 
 

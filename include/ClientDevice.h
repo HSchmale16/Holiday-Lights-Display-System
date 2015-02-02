@@ -15,10 +15,6 @@
 class ClientDevice
 {
 public:
-    /** \brief default ctor
-     */
-    ClientDevice();
-
     /** \brief Constructs this device fully and completely with all params
      * inited.
      * \param ipAddress the ip address of this device
@@ -61,7 +57,10 @@ public:
     void setChannels(int c) { m_channels = c;}
 
     // Primary Functions
-    /** \brief updates the socket connection */
+    /** \brief updates the socket connection
+     *
+     * This function should be called after using any of the setter methods.
+     */
     void updateConnection();
 
     /** \brief sets the show to play
@@ -79,8 +78,11 @@ private:
     std::string m_show;
     int m_listeningPort;
     int m_channels;
-    sf::TcpSocket m_socket;
+    sf::TcpSocket m_socket;  //!< Socket to send data over
     sf::Thread m_thread;
+
+    // Constants
+    const int m_SHOW_CHUNCK_SZ = 128;//!< Size of show chuncks to send to client
 
     // Private member functions
 

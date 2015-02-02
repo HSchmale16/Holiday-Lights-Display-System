@@ -37,7 +37,7 @@ all: $(SOURCES) $(EXE)
 
 # Primary build target
 $(EXE): $(OBJECTS)
-	$(CXX) $(LD_FLAGS) $(OBJECTS) -o $@
+	$(CXX) $(LD_FLAGS) -o $@ $(OBJECTS)
 	
 # Recipe to build the files
 .cpp.o:

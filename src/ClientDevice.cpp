@@ -48,9 +48,11 @@ void ClientDevice::setShowToSend(std::string show)
 
 void ClientDevice::sendShow()
 {
-    for(int i = 0; i < m_show.length(); i+= this->SHOW_CHUNCK_SZ)
+    for(unsigned int i = 0; i < m_show.length(); i += this->SHOW_CHUNK_SZ)
     {
-
+        // Prepare a chunk to send over the network
+        std::string chunk = m_show.substr(i, i + this->SHOW_CHUNK_SZ);
     }
+    LOG(INFO) << "Finished sending a show to " << this->m_name;
 }
 

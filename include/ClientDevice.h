@@ -64,19 +64,30 @@ public:
     /** \brief updates the socket connection */
     void updateConnection();
 
-    /** \brief sets the show to play */
-    void setShow(std::string show);
+    /** \brief sets the show to play
+     *
+     * \param show The show to send to the client
+     *
+     * Then launches a thread to send the show over the socket.
+     */
+    void setShowToSend(std::string show);
 protected:
 private:
     // Member Variables
     std::string m_ipAddress;  //!< The ip address of this device
     std::string m_name;
+    std::string m_show;
     int m_listeningPort;
     int m_channels;
     sf::TcpSocket m_socket;
+    sf::Thread m_thread;
 
     // Private member functions
 
+    /** \brief this the thread entry point to send the show by using the
+     * resend feature of the TCP protocal.
+     */
+    void sendShow();
 };
 
 #endif // CLIENTDEVICE_H

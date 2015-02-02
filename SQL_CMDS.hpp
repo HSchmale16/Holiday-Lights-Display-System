@@ -47,6 +47,7 @@ static int cbNull(void *NotUsed, int argc, char **argv, char **azColName)
 {
     return 0;
 }
+
 }
 
 

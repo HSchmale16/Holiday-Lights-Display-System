@@ -3,11 +3,14 @@
 
 #include <string>
 #include <SFML/Network.hpp>
+#include <SFML/System/Thread.hpp>
 
 
 /** \brief A client device connected to the server.
+ *
  * \author Henry J Schmale
  * \date February 1, 2015
+ *
  */
 class ClientDevice
 {
@@ -61,14 +64,19 @@ public:
     /** \brief updates the socket connection */
     void updateConnection();
 
+    /** \brief sets the show to play */
+    void setShow(std::string show);
 protected:
 private:
     // Member Variables
-    std::string m_ipAddress;
+    std::string m_ipAddress;  //!< The ip address of this device
     std::string m_name;
     int m_listeningPort;
     int m_channels;
     sf::TcpSocket m_socket;
+
+    // Private member functions
+
 };
 
 #endif // CLIENTDEVICE_H

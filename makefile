@@ -2,10 +2,16 @@
 # @author Henry J Schmale
 
 CC=g++
-CFLAGS=-Wall -std=c++11 -Ofast
+
+# Flags for the C compiler
+CC_FLAGS= \
+	-Wall \
+	-std=c++11 \
+	-O2
 
 # Linker Flags
-LDFLAGS=-lsfml-system \
+LD_FLAGS= \
+	-lsfml-system \
 	-lsfml-audio \
 	-lsfml-network \
 	-lsqlite3 \
@@ -27,10 +33,11 @@ EXE=HolidayLights.out
 all: $(SOURCES) $(EXE)
 
 $(EXE): $(OBJECTS)
-	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
+	echo $(CC_FLAGS)
+	$(CC) $(LD_FLAGS) $(OBJECTS) -o $@
 	
 .o:
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) -c $(CC_FLAGS) -o $@ $<
 
 clean:
 	if [ -e $(EXE) ] ; then rm $(EXE); fi

@@ -82,7 +82,7 @@ private:
     sf::Thread m_thread;
 
     // Constants
-    const int m_SHOW_CHUNCK_SZ = 128;//!< Size of show chuncks to send to client
+    const int SHOW_CHUNCK_SZ = 128;//!< Size of show chuncks to send to client
 
     // Private member functions
 

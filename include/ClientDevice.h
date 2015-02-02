@@ -74,12 +74,12 @@ protected:
 private:
     // Member Variables
     std::string m_ipAddress;  //!< The ip address of this device
-    std::string m_name;
-    std::string m_show;
-    int m_listeningPort;
-    int m_channels;
-    sf::TcpSocket m_socket;  //!< Socket to send data over
-    sf::Thread m_thread;
+    std::string m_name;       //!< The name of this device
+    std::string m_show;       //!< The current show to be playing
+    int m_listeningPort;      //!< The port that this device listens on
+    int m_channels;           //!< Number of Channels this device can output on
+    sf::TcpSocket m_socket;   //!< Socket to send data over
+    sf::Thread m_thread;      //!< Thread for sending data
 
     // Constants
     const int SHOW_CHUNCK_SZ = 128;//!< Size of show chuncks to send to client

@@ -21,13 +21,16 @@ LD_FLAGS= \
 	-lglog
 
 # Sources to compile
-SOURCES=main.cpp \
+SOURCES= \
+	main.cpp \
 	src/admin.cpp \
 	src/HolidayLights.cpp \
 	src/Gui.cpp \
 	src/Synthesis.cpp \
 	src/ClientDevice.cpp
+
 OBJECTS=$(SOURCES:.cpp=.o)
+
 EXE=HolidayLights.out
 
 all: $(SOURCES) $(EXE)
@@ -36,6 +39,7 @@ all: $(SOURCES) $(EXE)
 $(EXE): $(OBJECTS)
 	$(CXX) $(LD_FLAGS) $(OBJECTS) -o $@
 	
+# Recipe to build the files
 .cpp.o:
 	$(CXX) -c $(CXX_FLAGS) -o $@ $<
 

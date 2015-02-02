@@ -39,13 +39,18 @@ void ClientDevice::updateConnection()
 
 }
 
+/// Sets the data to send then launches a thread to send it to the device
 void ClientDevice::setShowToSend(std::string show)
 {
-
+    m_show = show;
+    m_thread.launch(); // send the show using a thread
 }
 
 void ClientDevice::sendShow()
 {
+    for(int i = 0; i < m_show.length(); i+= this->SHOW_CHUNCK_SZ)
+    {
 
+    }
 }
 

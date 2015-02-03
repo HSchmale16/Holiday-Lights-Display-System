@@ -43,7 +43,6 @@ void ClientDevice::updateConnection()
 void ClientDevice::setShowToSend(std::string show)
 {
     m_show = show;
-    m_thread.launch(); // send the show using a thread
 }
 
 void ClientDevice::sendShow()
@@ -66,4 +65,21 @@ void ClientDevice::sendShow()
     }
     m_socket.disconnect();
 }
+
+void ClientDevice::beginShow()
+{
+    m_thread.launch();
+}
+
+bool ClientDevice::ping()
+{
+    if(m_socket.connect(sf::IpAddress(m_ipAddress),
+                        m_listeningPort != sf::Socket::Done))
+    {
+        return false;
+    }
+    m_socket.disconnect();
+    return true;
+}
+
 

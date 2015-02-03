@@ -89,7 +89,7 @@ public:
     }
 
     // ==================================================================
-
+    // Regular Member Functions
 
     /** \brief updates the socket connection
      *
@@ -104,6 +104,20 @@ public:
      * Then launches a thread to send the show over the socket.
      */
     void setShowToSend(std::string show);
+
+    /** \brief begins the show
+     */
+    void beginShow();
+
+    /** \brief pings the client to see if it's still there
+     * \return true if the ping was successful otherwise false.
+     *
+     * It makes a connection then disconnects. If this was successful it returns
+     * true.
+     */
+    bool ping();
+
+
 protected:
 private:
     // Member Variables

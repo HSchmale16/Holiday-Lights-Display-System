@@ -20,10 +20,9 @@ ClientDevice::ClientDevice(std::string ipAddress,
     if(m_socket.connect(sf::IpAddress(m_ipAddress),
                         m_listeningPort) != sf::Socket::Done)
     {
-        // Throw an exception that something bad happened, also log it
-        LOG(WARNING) << "An instance of client device was not constructed "
-                     << "properly. This is really bad, but it is recoverable.";
-        exit(0);
+        LOG(WARNING) << "Couldn't connect to client listed in database with ip "
+                     << "of " << m_ipAddress << " listening on port "
+                     << m_listeningPort;
     }
 }
 
@@ -31,6 +30,7 @@ ClientDevice::~ClientDevice()
 {
     //dtor
     m_socket.disconnect(); // disconnect from the clients
+    LOG(INFO) << "ClientDevice DTOR: name = " << m_name;
 }
 
 
@@ -48,11 +48,22 @@ void ClientDevice::setShowToSend(std::string show)
 
 void ClientDevice::sendShow()
 {
-    for(unsigned int i = 0; i < m_show.length(); i += this->SHOW_CHUNK_SZ)
+    if(m_socket.connect(sf::IpAddress(m_ipAddress),
+                        m_listeningPort) != sf::Socket::Done)
     {
-        // Prepare a chunk to send over the network
-        std::string chunk = m_show.substr(i, i + this->SHOW_CHUNK_SZ);
+        LOG(WARNING) << "Couldn't connect to client listed in database with ip "
+                     << "of " << m_ipAddress << " listening on port "
+                     << m_listeningPort;
     }
-    LOG(INFO) << "Finished sending a show to " << this->m_name;
+    else
+    {
+        for(unsigned int i = 0; i < m_show.length(); i += this->SHOW_CHUNK_SZ)
+        {
+            // Prepare a chunk to send over the network
+            std::string chunk = m_show.substr(i, i + this->SHOW_CHUNK_SZ);
+        }
+        LOG(INFO) << "Finished sending a show to " << this->m_name;
+    }
+    m_socket.disconnect();
 }
 

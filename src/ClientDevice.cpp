@@ -39,7 +39,7 @@ void ClientDevice::updateConnection()
 
 }
 
-/// Sets the data to send then launches a thread to send it to the device
+/// Sets the data to send
 void ClientDevice::setShowToSend(std::string show)
 {
     m_show = show;
@@ -60,6 +60,11 @@ void ClientDevice::sendShow()
         {
             // Prepare a chunk to send over the network
             std::string chunk = m_show.substr(i, i + this->SHOW_CHUNK_SZ);
+            if(m_socket.send(chunk.c_str(), chunk.length()) != sf::Socket::Done)
+            {
+                LOG(WARNING) << "Data Transmission Interupted: Name = "
+                             << m_name;
+            }
         }
         LOG(INFO) << "Finished sending a show to " << this->m_name;
     }

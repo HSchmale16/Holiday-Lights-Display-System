@@ -130,7 +130,8 @@ private:
     sf::Thread m_thread;      //!< Thread for sending data
 
     // Constants
-    const int SHOW_CHUNK_SZ = 128;//!< Size of show chuncks to send to client
+    const int SHOW_CHUNK_SZ = 128; //!< Size of show chuncks to send to client
+    const int INSTR_PER_SEC = 10;  //!< How many INSTR the client runs per sec
 
     // Private member functions
 

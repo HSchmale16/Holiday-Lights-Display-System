@@ -63,7 +63,9 @@ void ClientDevice::sendShow()
             if(m_socket.send(chunk.c_str(), chunk.length()) != sf::Socket::Done)
             {
                 LOG(WARNING) << "Data Transmission Interupted: Name = "
-                             << m_name;
+                             << m_name << "Fail Code = "
+                             << "Wouldn't you like to know";
+
             }
         }
         LOG(INFO) << "Finished sending a show to " << this->m_name;
@@ -79,7 +81,7 @@ void ClientDevice::beginShow()
 bool ClientDevice::ping()
 {
     if(m_socket.connect(sf::IpAddress(m_ipAddress),
-                        m_listeningPort != sf::Socket::Done))
+                        m_listeningPort != sf::Socket::Done)) // FAIL
     {
         return false;
     }

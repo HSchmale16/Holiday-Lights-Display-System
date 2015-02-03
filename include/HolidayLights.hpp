@@ -27,7 +27,13 @@ namespace hl
     }
 };
 
-/// Contains data about the client
+/** \deprecated This struct has been deprecated due to difficulties in working
+ * with many clients using this struct. It has been replaced with the
+ * ClientDevice class which provides similar functionality in a better package,
+ * and has more error checking. This will remain here as reminder of past
+ * stupidity.
+ * \brief Contains data about the client
+ */
 struct ClientDevice
 {
     std::string m_name;			//!< User friendly name

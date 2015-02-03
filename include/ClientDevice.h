@@ -132,6 +132,7 @@ private:
     // Constants
     const int SHOW_CHUNK_SZ = 128; //!< Size of show chuncks to send to client
     const int INSTR_PER_SEC = 10;  //!< How many INSTR the client runs per sec
+    const int BYTE_INSTRUCT = 8;   //!< How many bytes comprise 1 insturction
 
     // Private member functions
 

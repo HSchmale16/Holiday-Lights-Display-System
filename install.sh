@@ -81,11 +81,12 @@ function BuildMv
 # set up the prgm's working directory
 function SetUpDir
 {
-	cd $installDir	# change to working directory
+	cd $installDir  # change to working directory
+	mkdir logs      # Create the directory for server logs
 	mkdir resources
 	cd resources
-	mkdir songs 	# this directory holds the song data
-	cd ..			# return from the resources directory
+	mkdir songs     # this directory holds the song data
+	cd $installDir  # return from the resources directory
 }
 
 #database configurator

@@ -19,6 +19,7 @@ namespace hl
 
     // ctor
     SongData() {};	// empty ctor
+
     SongData(int id, std::string name, std::string path)
     {
         m_songID = id;

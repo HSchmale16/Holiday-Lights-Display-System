@@ -25,7 +25,16 @@
 // @date Jan 2015
 // =============================================================================
 
+// calculates the twiggle factor
+std::complex<long double> syn::twiddle(int N, int n, int k)
+{
 
+}
+
+long long dft(short *xk, int N, int n, double T)
+{
+
+}
 
 // parses a song
 std::string syn::parseSong(hl::SongData &sd, int channels, int res)

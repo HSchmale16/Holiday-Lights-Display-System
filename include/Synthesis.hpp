@@ -41,7 +41,7 @@ struct ShowData
 std::complex<long double> twiddle(int N, int n, int k);
 
 /** \brief calculates the discrete fourier transform on a set of data.
- * \return something
+ * \return returns the phase at a specific point `n`
  * \param xk the data set to perform a dft on
  * \param N the size of the data set
  * \param n the `n` in f(n)

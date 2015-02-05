@@ -42,6 +42,11 @@ std::complex<long double> twiddle(int N, int n, int k);
 
 /** \brief calculates the discrete fourier transform on a set of data.
  * \return something
+ * \param xk the data set to perform a dft on
+ * \param N the size of the data set
+ * \param n the `n` in f(n)
+ * \param T the time period over which these samples were collected,
+ *  how long it took to collect these samples.
  */
 long long dft(short * xk, int N, int n, double T);
 

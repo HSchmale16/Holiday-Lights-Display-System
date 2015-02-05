@@ -10,6 +10,8 @@
 
 #include "HolidayLights.hpp"	// for the SongData Struct
 #include <string>
+#include <cmath>
+#include <complex>
 
 /** \brief Sound and waveform analysis functions are here
  *
@@ -29,6 +31,19 @@ struct ShowData
         m_data = show;
     }
 };
+
+/** \brief calculates the twiddle factor for dfts
+ * \return a complex number containing the twiddle factor
+ * \param N Number of samples
+ * \param n it's the n in f(n)
+ * \param k it's the current value of K
+ */
+std::complex<long double> twiddle(int N, int n, int k);
+
+/** \brief calculates the discrete fourier transform on a set of data.
+ * \return something
+ */
+long long dft(short * xk, int N, int n, double T);
 
 /** \brief parses a song into a light show
  * \param sd - A struct containing the song metadata.

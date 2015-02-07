@@ -33,7 +33,8 @@ void syn::pkdft(TYP * xt, TYP * pk, int n)
     TYP * iXk = new TYP[n];
     TYP * rXk = new TYP[n];
 
-    ///!< X(k) = sum(x(t) * e^(2 * Pi * k * t), 0, n)
+    /// Discrete Fourier Transform
+    /// X(k) = sum(x(t) * e^(2 * Pi * k * t), 0, n)
     for(int k = 0; k < n; k++)
     {
         iXk[k] = 0;
@@ -43,6 +44,13 @@ void syn::pkdft(TYP * xt, TYP * pk, int n)
             iXk[k] = (xt[t] * std::cos((2 * PI * k * t) / n));
             rXk[k] = (xt[t] * std::sin((2 * PI * k * t) / n));
         }
+    }
+
+    /// Calculate Power Spectrum
+    /// P(k) = Re(X(k))^2 + Im(X(k))^2
+    for(int k = 0; k < n; k++)
+    {
+        pk[k] = (rXk[k] * rXk[k]) + (iXk[k] * iXk[k]);
     }
 
     delete[] iXk;

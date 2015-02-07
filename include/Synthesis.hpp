@@ -34,6 +34,10 @@ struct ShowData
 
 /** \brief Performs a discrete fourier transform on a set of real numbers
  * \return the power spectrum of the dft derived from the data via pointer.
+ * \param xt The set of _real_ numbers to analyeze.
+ * \param pk The set of return set, This will hold the power spectrum.
+ * \param n The number of elements in the data set.
+ * \note pk must have same __amount or more__ space allocated as xt
  */
 template<typename TYP>
 void pkdft(TYP * xt, TYP * pk, int n);

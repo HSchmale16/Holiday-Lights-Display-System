@@ -25,11 +25,25 @@
 // @date Jan 2015
 // =============================================================================
 
+const long double PI = 3.14159265;
+
 template<typename TYP>
 void syn::pkdft(TYP * xt, TYP * pk, int n)
 {
     TYP * iXk = new TYP[n];
     TYP * rXk = new TYP[n];
+
+    ///!< X(k) = sum(x(t) * e^(2 * Pi * k * t), 0, n)
+    for(int k = 0; k < n; k++)
+    {
+        iXk[k] = 0;
+        rXk[k] = 0;
+        for(int t = 0; t < n; t++)
+        {
+            iXk[k] = (xt[t] * std::cos((2 * PI * k * t) / n));
+            rXk[k] = (xt[t] * std::sin((2 * PI * k * t) / n));
+        }
+    }
 
     delete[] iXk;
     delete[] rXk;

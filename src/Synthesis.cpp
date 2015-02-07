@@ -25,15 +25,14 @@
 // @date Jan 2015
 // =============================================================================
 
-// calculates the twiggle factor
-std::complex<long double> syn::twiddle(int N, int n, int k)
+template<typename TYP>
+void syn::pkdft(TYP * xt, TYP * pk, int n)
 {
+    TYP * iXk = new TYP[n];
+    TYP * rXk = new TYP[n];
 
-}
-
-long long dft(short *xk, int N, int n, double T)
-{
-
+    delete[] iXk;
+    delete[] rXk;
 }
 
 // parses a song

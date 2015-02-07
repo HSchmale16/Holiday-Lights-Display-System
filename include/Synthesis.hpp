@@ -32,23 +32,11 @@ struct ShowData
     }
 };
 
-/** \brief calculates the twiddle factor for dfts
- * \return a complex number containing the twiddle factor
- * \param N Number of samples
- * \param n it's the n in f(n)
- * \param k it's the current value of K
+/** \brief Performs a discrete fourier transform on a set of real numbers
+ * \return the power spectrum of the dft derived from the data via pointer.
  */
-std::complex<long double> twiddle(int N, int n, int k);
-
-/** \brief calculates the discrete fourier transform on a set of data.
- * \return returns the phase at a specific point `n`
- * \param xk the data set to perform a dft on
- * \param N the size of the data set
- * \param n the `n` in f(n)
- * \param T the time period over which these samples were collected,
- *  how long it took to collect these samples.
- */
-long long dft(short * xk, int N, int n, double T);
+template<typename TYP>
+void pkdft(TYP * xt, TYP * pk, int n);
 
 /** \brief parses a song into a light show
  * \param sd - A struct containing the song metadata.

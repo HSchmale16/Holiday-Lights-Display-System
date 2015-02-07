@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <cmath>
+#include <iomanip>
 
 const double PI = 3.14159265;
 
@@ -45,9 +46,11 @@ int main()
 	pkdft(samps, ret, 100);
 
 	// output data
+	std::cout << "Index\tPower\tFreq" << std::endl;
 	for(int i = 0; i < 100; i++)
 	{
-		std::cout << i << "   " << ret[i] << std::endl;
+		std::cout << std::scientific << std::setprecision(5) << i << "\t" << ret[i] 
+			  << "\t" << (i * 44100) / 100 << std::endl;
 	}
 	return 0;			
 }

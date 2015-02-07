@@ -7,11 +7,34 @@
 #include <iostream>
 #include <cmath>
 
+const double PI = 3.14159265;
+
 template<typename TYP>
 void pkdft(TYP *xt, TYP *pk, int n)
 {
 	TYP * iXk = new TYP[n];
 	TYP * rXk = new TYP[n];
+
+	// DFT
+	for(int k = 0; k < n; k++)
+	{
+		iXk[k] = 0;
+		rXk[k] = 0;
+		for(int t = 0; t < n; t++)
+		{
+			iXk[k] += (xt[t] * std::cos((2 * PI * k * t) / n));
+			rXk[k] += (xt[t] * std::sin((2 * PI * k * t) / n));
+		}
+	}
+
+	// Calculate Power Spectrum
+	for(int k = 0; k < n; k++)
+	{
+		pk[k] = (rXk[k] * rXk[k]) + (iXk[k] * iXk[k]);
+	} 
+	
+	delete[] iXk;
+	delete[] rXk;
 }
 
 int main()
@@ -24,5 +47,7 @@ int main()
 	// output data
 	for(int i = 0; i < 100; i++)
 	{
-			
+		std::cout << i << "   " << ret[i] << std::endl;
+	}
+	return 0;			
 }

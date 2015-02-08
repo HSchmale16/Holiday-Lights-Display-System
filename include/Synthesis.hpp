@@ -51,13 +51,34 @@ void pkdft(TYP * xt, TYP * pk, int n);
 std::string parseSong(hl::SongData &sd, int channels, int res);
 
 
-/** \brief Performs analysis on a song
+/** \deprecated This function is now deprecated due to being absolute crap at
+ * analyzing a song section. It didn't work accurately at all, and depended on
+ * the volume of the song more than anything else. It's implementation is very
+ * limited in what it supports, so it's been replaced with a templeted function
+ * which uses a dft.
+ * \brief Performs analysis on a song
  * \param buff - section analyese
  * \param buffSz - Number of samples in buffer
  * \param channels - Only 2-channel audio is supported
  */
 long long analysis(short *buff, int buffSz, int channels);
 
+/** \brief This function performs analysis on a section of a song by using a dft
+ * and interpreting the data returned with minimum required level filter, and
+ * will custom design the output based on how many channels it can output on.
+ * \return The lights that should be light as a 64 bit string.
+ * \param buff The data to analyse.
+ * \param buffSz Elements in buff
+ * \param outChannels number of channels on clientdevice, __64 channels max__.
+ * \param inChannels number of channels in the song
+ *
+ * This function generates the show based on what frequencies make up the
+ * section that is to be analyzed.
+ */
+template<typename TYP>
+long long songAnalyze(TYP * buff, int buffSz, int outChannels, int inChannels);
+
+// ======================== New Namespace ===================================
 /** \brief functions to work with the show editor
  */
 namespace se

@@ -80,7 +80,7 @@ const char *generateVisualizer(char c[8])
             }
             else
             {
-                ch[index] = ' ';
+                ch[index] = '_';
             }
             index++;
         }

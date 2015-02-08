@@ -85,6 +85,7 @@ std::string syn::parseSong(hl::SongData &sd, int channels, int res)
     return show;
 }
 
+// Not Used any more deprecated
 long long syn::analysis(short *buff, int buffSz, int channels)
 {
     long long myLong = 0;

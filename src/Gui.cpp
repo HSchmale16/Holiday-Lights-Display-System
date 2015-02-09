@@ -95,7 +95,7 @@ void gui::updateShowGui(ServerData sd)
     mvprintw(0, (COLS - sd.m_currSong.length()) / 2, sd.m_currSong.c_str());
     // Song visualizer
     unsigned int tIndex =
-        difftime(sd.m_now, sd.m_songStarted) * BYTES_PER_INSTRUCT;
+        difftime(sd.m_now, sd.m_songStarted) * BYTES_PER_INSTRUCT * 10;
     ConversionUnion myCU;
     if(tIndex < sd.m_currShow.length())
     {
@@ -110,7 +110,7 @@ void gui::updateShowGui(ServerData sd)
     // Status messages bottom left corner
     mvprintw(LINES - 3, 0, "%d Clients Connected", clients.size());
     mvprintw(LINES - 2, 0, "dT Index: %d of %d",
-             int(difftime(sd.m_now, sd.m_songStarted)),
+             int(difftime(sd.m_now, sd.m_songStarted)) * 10,
              sd.m_waitPeriod);
     mvprintw(LINES - 1, 0, "Server Has Been Running: %d Seconds",
              int(difftime(sd.m_now, sd.m_serverStarted)));

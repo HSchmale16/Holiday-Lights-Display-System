@@ -155,7 +155,7 @@ long long syn::songAnalyze(TYP * buff, int buffSz, int outChannels,
     {
         // calc freq for this value of k
         int freq = (k * sampleRate) / buffSz;
-        if(freq > (freqIncre * (i + 1)))
+        if((freq > (freqIncre * (i + 1))) && (i < 64))
         {
             i++;
             CHECK(i < 64) << "Buffer Overflow in analysis";

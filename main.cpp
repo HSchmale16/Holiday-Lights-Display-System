@@ -11,6 +11,7 @@
 #include "include/Admin.hpp"
 #include "include/Gui.hpp"
 #include "Defaults.hpp"
+#include "version.h"
 
 // Global Variables
 int SERVER_RUNS_FOR_SEC; // server runs for this many seconds
@@ -27,6 +28,18 @@ int main(int argc, char** argv)
     FLAGS_log_dir = "./logs/";
     google::InitGoogleLogging(argv[0]);
     LOG(INFO) << "Initialized Google Logging";
+    // Log the build revision of this program
+    LOG(INFO) << "Program Version is "
+              << AutoVersion::FULLVERSION_STRING;
+    LOG(INFO) << "Program has been built "
+              << AutoVersion::BUILDS_COUNT << " times";
+#ifdef BUILD_DEBUG
+    LOG(INFO) << "This is the debug build of the program";
+#elifdef BUILD_RELEASE
+    LOG(INFO) << "This is the release build of the program";
+#elifdef BUILD_PROFILE
+    LOG(INFO) << "This is the profiling build of the program";
+#endif // BUILD_DEBUG
     // check if the args passed from terminal were bad or if the args were
     // auto-exit
     if(admin::parseArgs(argc, argv))

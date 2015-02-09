@@ -117,8 +117,8 @@ void gui::updateShowGui(ServerData sd)
              int(difftime(sd.m_now, sd.m_serverStarted)));
     /// Build Version - Bottom Right Hand Corner
     mvprintw(LINES - 1,
-             COLS - 2 - strlen(AutoVersion::FULLVERSION_STRING),
-             AutoVersion::FULLVERSION_STRING);
+             COLS - (strlen(AutoVersion::FULLVERSION_STRING) + 10),
+             "Version: %s", AutoVersion::FULLVERSION_STRING);
     refresh();
 }
 

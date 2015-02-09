@@ -9,6 +9,7 @@
 #include "../include/HolidayLights.hpp"
 #include "../Defaults.hpp"
 #include "../SQL_CMDS.hpp"
+#include "../include/FastMath.hpp"
 #include <iostream>
 #include <cstdlib>
 #include <math.h>
@@ -25,7 +26,7 @@
 // @date Jan 2015
 // =============================================================================
 
-const long double PI = 3.14159265;
+const float PI = 3.14159265;
 
 template<typename TYP>
 void syn::pkdft(TYP * xt, TYP * pk, int n)
@@ -71,7 +72,7 @@ std::string syn::parseSong(hl::SongData &sd, int channels, int res)
     file = SndfileHandle(sd.m_path.c_str());
     int buffSz = file.samplerate() * file.channels();
     LOG(INFO) << "song = " << sd.m_name << "\tBuff=" << buffSz;
-    short *buff = new short[buffSz];
+    float *buff = new float[buffSz];
     while(file.read(buff, buffSz) == buffSz)
     {
         // perform analysis
@@ -134,7 +135,7 @@ long long syn::songAnalyze(TYP * buff, int buffSz, int outChannels,
     syn::pkdft(buff, pk, buffSz);
 
     // Analyze the power spectrum
-    int *counts = new int[outChannels];
+    int *counts = new int[64];
     int freqIncre = (sampleRate / 2) / outChannels; //!< Nyquelist's frequency
     int i = 0;
     for(int k = 0; k < buffSz; k++)

@@ -18,7 +18,8 @@ LD_FLAGS= \
 	-lncurses \
 	-lcdk \
 	-lsndfile \
-	-lglog
+	-lglog \
+	-lfftw3
 
 # Sources to compile
 SOURCES= \

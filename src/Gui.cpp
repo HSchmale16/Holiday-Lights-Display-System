@@ -116,9 +116,12 @@ void gui::updateShowGui(ServerData sd)
     mvprintw(LINES - 1, 0, "Server Has Been Running: %d Seconds",
              int(difftime(sd.m_now, sd.m_serverStarted)));
     /// Build Version - Bottom Right Hand Corner
+    mvprintw(LINES - 2,
+             COLS - (strlen(AutoVersion::FULLVERSION_STRING) + 10),
+             "Build: %d", AutoVersion::BUILDS_COUNT); // Build
     mvprintw(LINES - 1,
              COLS - (strlen(AutoVersion::FULLVERSION_STRING) + 10),
-             "Version: %s", AutoVersion::FULLVERSION_STRING);
+             "Version: %s", AutoVersion::FULLVERSION_STRING); // Version String
     refresh();
 }
 

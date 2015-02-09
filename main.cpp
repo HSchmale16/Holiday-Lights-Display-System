@@ -34,12 +34,14 @@ int main(int argc, char** argv)
     LOG(INFO) << "Program has been built "
               << AutoVersion::BUILDS_COUNT << " times";
 #ifdef BUILD_DEBUG
-    LOG(INFO) << "This is the debug build of the program";
-#elifdef BUILD_RELEASE
-    LOG(INFO) << "This is the release build of the program";
-#elifdef BUILD_PROFILE
-    LOG(INFO) << "This is the profiling build of the program";
+    LOG(INFO) << "This is the DEBUG build of the program";
 #endif // BUILD_DEBUG
+#ifdef BUILD_RELEASE
+    LOG(INFO) << "This is the RELEASE build of the program";
+#endif // BUILD_RELEASE
+#ifdef BUILD_PROFILE
+    LOG(INFO) << "This is the PROFILING build of the program";
+#endif // BUILD_PROFILE
     // check if the args passed from terminal were bad or if the args were
     // auto-exit
     if(admin::parseArgs(argc, argv))

@@ -42,8 +42,8 @@ void syn::pkdft(TYP * xt, TYP * pk, int n)
         rXk[k] = 0;
         for(int t = 0; t < n; t++)
         {
-            iXk[k] = (xt[t] * std::cos((2 * PI * k * t) / n));
-            rXk[k] = (xt[t] * std::sin((2 * PI * k * t) / n));
+            iXk[k] = (xt[t] * fm::fcos((2 * PI * k * t) / n));
+            rXk[k] = (xt[t] * fm::fsin((2 * PI * k * t) / n));
         }
     }
 

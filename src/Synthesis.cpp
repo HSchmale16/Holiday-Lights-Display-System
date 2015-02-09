@@ -141,8 +141,9 @@ long long syn::songAnalyze(TYP * buff, int buffSz, int outChannels,
     out = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * buffSz);
     p = fftw_plan_dft_r2c_1d(buffSz, buff, out, FFTW_ESTIMATE);
     fftw_execute(p);
-    for(int i = 0; i < (buffSz / 2) + 1; i++){
-
+    for(int i = 0; i < (buffSz / 2) + 1; i++)
+    {
+        pk[i] = (out[i][0] * out[i][0]) + (out[i][1] * out[i][1]);
     }
 
     // Analyze the power spectrum

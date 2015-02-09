@@ -18,6 +18,8 @@
 #include <glog/logging.h>
 #include <sqlite3.h>
 #include <sndfile.hh>
+#include <complex.h>
+#include <fftw3.h>
 
 // =============================================================================
 // Synthesis Functions
@@ -72,7 +74,7 @@ std::string syn::parseSong(hl::SongData &sd, int channels, int res)
     file = SndfileHandle(sd.m_path.c_str());
     int buffSz = file.samplerate() * file.channels();
     LOG(INFO) << "song = " << sd.m_name << "\tBuff=" << buffSz;
-    float *buff = new float[buffSz];
+    double *buff = new double[buffSz];
     while(file.read(buff, buffSz) == buffSz)
     {
         // perform analysis
@@ -130,12 +132,22 @@ long long syn::songAnalyze(TYP * buff, int buffSz, int outChannels,
 
     // allocate memory
     TYP * pk = new TYP[buffSz];
+    for(int i = 0; i < buffSz; i++)
+        pk[i] = 0;
 
     // Get Power Spectrum
-    syn::pkdft(buff, pk, buffSz);
+    fftw_complex *out;
+    fftw_plan p;
+    out = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * buffSz);
+    p = fftw_plan_dft_r2c_1d(buffSz, buff, out, FFTW_ESTIMATE);
+    fftw_execute(p);
+    for(int i = 0; i < (buffSz / 2) + 1; i++){
+
+    }
 
     // Analyze the power spectrum
-    int *counts = new int[64];
+    long long *counts = new long long[64];
+    counts[0] = 0;
     int freqIncre = (sampleRate / 2) / outChannels; //!< Nyquelist's frequency
     int i = 0;
     for(int k = 0; k < buffSz; k++)
@@ -145,7 +157,8 @@ long long syn::songAnalyze(TYP * buff, int buffSz, int outChannels,
         if(freq > (freqIncre * (i + 1)))
         {
             i++;
-            CHECK(i < outChannels) << "Buffer Overflow in analysis";
+            CHECK(i < 64) << "Buffer Overflow in analysis";
+            counts[i] = 0; // 0 the next index, dyn alloc mem is not zeroed
         }
         counts[i] += pk[k];
     }
@@ -169,6 +182,8 @@ long long syn::songAnalyze(TYP * buff, int buffSz, int outChannels,
     // deallocate memory, clean up
     delete[] counts;
     delete[] pk;
+    fftw_destroy_plan(p);
+    fftw_free(out);
 
     // return
     return lights;

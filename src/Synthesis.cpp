@@ -72,7 +72,7 @@ std::string syn::parseSong(hl::SongData &sd, int channels, int res)
     std::string show;
     SndfileHandle file;
     file = SndfileHandle(sd.m_path.c_str());
-    int buffSz = file.samplerate() * file.channels();
+    int buffSz = (file.samplerate() * file.channels()) * (res / 1000.0);
     LOG(INFO) << "song = " << sd.m_name << "\tBuff=" << buffSz;
     double *buff = new double[buffSz];
     while(file.read(buff, buffSz) == buffSz)
@@ -141,7 +141,7 @@ long long syn::songAnalyze(TYP * buff, int buffSz, int outChannels,
     out = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * buffSz);
     p = fftw_plan_dft_r2c_1d(buffSz, buff, out, FFTW_ESTIMATE);
     fftw_execute(p);
-    for(int i = 0; i < (buffSz / 2) + 1; i++)
+    for(int i = 0; i < (buffSz); i++)
     {
         pk[i] = (out[i][0] * out[i][0]) + (out[i][1] * out[i][1]);
     }
@@ -175,7 +175,7 @@ long long syn::songAnalyze(TYP * buff, int buffSz, int outChannels,
     long long lights = 0;
     for(i = 0; i < outChannels; i++)
     {
-        if(counts[i] > average)
+        if(counts[i] > (average))
         {
             lights |= BIT_FLAGS[i];
         }

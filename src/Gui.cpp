@@ -4,6 +4,7 @@
  */
 
 #include "../include/Gui.hpp"
+#include "../version.h"
 #include <cstdlib>
 #include <cstring>
 #include <iostream>
@@ -114,6 +115,10 @@ void gui::updateShowGui(ServerData sd)
              sd.m_waitPeriod);
     mvprintw(LINES - 1, 0, "Server Has Been Running: %d Seconds",
              int(difftime(sd.m_now, sd.m_serverStarted)));
+    /// Build Version - Bottom Right Hand Corner
+    mvprintw(LINES - 1,
+             COLS - 2 - strlen(AutoVersion::FULLVERSION_STRING),
+             AutoVersion::FULLVERSION_STRING);
     refresh();
 }
 

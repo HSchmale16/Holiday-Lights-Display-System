@@ -75,7 +75,9 @@ std::string syn::parseSong(hl::SongData &sd, int channels, int res)
     while(file.read(buff, buffSz) == buffSz)
     {
         // perform analysis
-        myCU.numericValue = analysis(buff, buffSz, channels);
+        myCU.numericValue = syn::songAnalyze(buff, buffSz, channels,
+                                             file.channels(),
+                                             file.samplerate());
         for(unsigned int i = 0; i < sizeof(long long); i++)
         {
             show += myCU.byteValues[i];
@@ -113,6 +115,62 @@ long long syn::analysis(short *buff, int buffSz, int channels)
         }
     }
     return myLong;
+}
+
+
+template<typename TYP>
+long long syn::songAnalyze(TYP * buff, int buffSz, int outChannels,
+                           int inChannels, int sampleRate)
+{
+    // Check that the data is good to work with
+    CHECK(inChannels > 0) << "inChannels cannot be 0";
+    CHECK(outChannels > 0) << "outChannels cannot be 0";
+    CHECK(outChannels <= 64) << "outChannels cannot be greater than 64";
+
+    // allocate memory
+    TYP * pk = new TYP[buffSz];
+
+    // Get Power Spectrum
+    syn::pkdft(buff, pk, buffSz);
+
+    // Analyze the power spectrum
+    int *counts = new int[outChannels];
+    int freqIncre = (sampleRate / 2) / outChannels; //!< Nyquelist's frequency
+    int i = 0;
+    for(int k = 0; k < buffSz; k++)
+    {
+        // calc freq for this value of k
+        int freq = (k * sampleRate) / buffSz;
+        if(freq > (freqIncre * (i + 1)))
+        {
+            i++;
+            CHECK(i < outChannels) << "Buffer Overflow in analysis";
+        }
+        counts[i] += pk[k];
+    }
+
+    // What lights do I light up?
+    long long average = 0;
+    for(i = 0; i < outChannels; i++)
+    {
+        average += counts[i];
+    }
+    average /= outChannels;
+
+    long long lights = 0;
+    for(i = 0; i < outChannels; i++)
+    {
+        if(counts[i] > average)
+        {
+            lights |= BIT_FLAGS[i];
+        }
+    }
+    // deallocate memory, clean up
+    delete[] counts;
+    delete[] pk;
+
+    // return
+    return lights;
 }
 
 // =============================================================================

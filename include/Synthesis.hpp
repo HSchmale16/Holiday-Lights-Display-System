@@ -18,11 +18,14 @@
  */
 namespace syn
 {
+
+/** \brief I'm not sure what this is for, but I'm not touching this.
+ */
 struct ShowData
 {
-    int m_channels;		// How many channels this show has
-    int m_resMilliSec;	// Resolution of song parse in milliseconds
-    std::string m_data;	// Show data to send to client
+    int m_channels;		//!< How many channels this show has
+    int m_resMilliSec;	//!< Resolution of song parse in milliseconds
+    std::string m_data;	//!< Show data to send to client
 
     // ctor
     ShowData(int channels, std::string show)
@@ -70,13 +73,15 @@ long long analysis(short *buff, int buffSz, int channels);
  * \param buff The data to analyse.
  * \param buffSz Elements in buff
  * \param outChannels number of channels on clientdevice, __64 channels max__.
- * \param inChannels number of channels in the song
+ * \param inChannels number of channels in the song, _limited to 2 for now_
+ * \param sampleRate the sample rate of the data being analyzed
  *
  * This function generates the show based on what frequencies make up the
  * section that is to be analyzed.
  */
 template<typename TYP>
-long long songAnalyze(TYP * buff, int buffSz, int outChannels, int inChannels);
+long long songAnalyze(TYP * buff, int buffSz, int outChannels,
+                      int inChannels, int sampleRate);
 
 // ======================== New Namespace ===================================
 /** \brief functions to work with the show editor

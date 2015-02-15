@@ -92,6 +92,7 @@ public:
     // Regular Member Functions
 
     /** \brief updates the socket connection
+     * \todo Implement ME!
      *
      * This function should be called after using any of the setter methods.
      */

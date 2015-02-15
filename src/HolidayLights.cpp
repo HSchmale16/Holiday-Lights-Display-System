@@ -5,6 +5,7 @@
 #define SQL_NULL_CALLBACK
 #include "../include/HolidayLights.hpp"
 #include "../include/Synthesis.hpp"
+#include "../include/ClientDevice.h"     //!< The Client Device Class Header
 #include "../Defaults.hpp"
 #include "../SQL_CMDS.hpp"
 #include <cstdlib>

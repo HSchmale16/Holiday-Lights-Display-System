@@ -38,10 +38,10 @@ static int cbSong(void *NotUsed, int argc, char **argv, char **azColName)
 std::vector<hl::ClientDevice> clients;
 static int cbClients(void *NotUsed, int argc, char **argv, char **azColName)
 {
-    hl::ClientDevice cli;
     // fill in the struct
     if(argc >= 6)
     {
+        hl::ClientDevice cli;
         cli.m_name = argv[1];
         cli.m_ipAddress = argv[2];
         cli.m_port = strtol(argv[4], NULL, 10);
@@ -62,6 +62,11 @@ static int cbClients(void *NotUsed, int argc, char **argv, char **azColName)
             LOG(WARNING) << "There is a bad client in the database. Client Name"
                          << " is " << cli.m_name;
         }
+    }
+    else // Something went wrong in the client device sql querry
+    {
+        LOG(ERROR) << "There weren't enough arguements returned by the SQL"
+                   << " Querry to the Clients Table.";
     }
     return 0;
 }

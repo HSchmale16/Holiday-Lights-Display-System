@@ -15,6 +15,10 @@
 class ClientDevice
 {
 public:
+    /** \brief the default ctor, with params inited to default values
+     */
+    ClientDevice();
+
     /** \brief Constructs this device fully and completely with all params
      * inited.
      * \param ipAddress the ip address of this device
@@ -27,6 +31,10 @@ public:
                  int listeningPort,
                  int channels);
 
+    /** \brief The Copy Ctor
+     * \param cdSrc A ClientDevice instance to copy from.
+     */
+    ClientDevice(const ClientDevice &cdSrc);
     // dtor
     virtual ~ClientDevice();
 

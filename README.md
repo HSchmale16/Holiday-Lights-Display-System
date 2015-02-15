@@ -1,11 +1,11 @@
 # Holiday-Lights-Display-System
 
-	This project is about creating a server process to control some lights
-driven by microcontrollers. It is meant to run on a traditional desktop computer
-that is connected to a couple of arduinos with ethernet shields on them. It is
-meant to allow you select from a couple of shows (you program the shows
-yourself) held in an SQLite database or you can let the server generate the show
-to the music based on frequency analysis.
+This project is about creating a server process to control some lights
+driven by microcontrollers. It is meant to run on a traditional desktop
+computer that is connected to a couple of arduinos with ethernet shields
+on them. It is meant to allow you select from a couple of shows
+(you program the shows yourself) held in an SQLite database or you can
+let the server generate the show to the music based on frequency analysis.
 
 # Important notes
 * MP3 Files are not supported. Use ogg or wav files instead.
@@ -21,6 +21,7 @@ are no clients connected.
 This program has some odd limitations.
 * It can run up to 2 clients with the current arduino sketch. It needs to be
 modified to use a handshake protocal with the server.
+* There can be no spaces in audio file names
 
 #How To Build
 This is written with assumption that you're running a Fedora or yum based distro.
@@ -36,6 +37,8 @@ and run:
 * `libsndfile-devel`
 * `glog-devel` (Note: on fedora you also need to grab `gflags-devel` )
 * ` ffmpeg`
+* `fftw-devel`
+
 These are the packages as named on the Fedora repo.
 
 ## instructions
@@ -58,3 +61,4 @@ It will also perform basic configuration on the program.
 * ffmpeg
 * libsndfile 
 * Curses Development Kit
+* fftw

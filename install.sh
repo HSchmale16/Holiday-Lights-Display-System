@@ -108,15 +108,16 @@ function dbCfg
 	# begin conversion
 	echo "converting files"
 	cd $songResDir
-	for f in $( ls ) ; do
+	for f in $(find $songResDir -name "*.mp3" ) ; do
 		ffmpeg -v quiet -i $f $f.ogg
 	done
 	rm -r *.mp3 # remove incompatible files
 	rm -r *.MP3
 	# add to database
 	cd $installDir
-	for f in $( ls resources/songs ) ; do
-		inst="Insert into MEDIA(name, path) values('$f', 'resources/songs/$f');"
+	for f in $( find $songResDir -name "*.ogg" ) ; do
+		inst="Insert into MEDIA(name, path) values" \
+               "('$f', 'resources/songs/$f');"
 		sqlite3 $dbFile "$inst"
 	done
 	# @todo configure devices

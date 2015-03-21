@@ -28,13 +28,14 @@ const char SQL_MEDIA_TB[] =
  * CHANNELS is how many channels that controller has available
  * MAC is the MAC address of the device
  */
-const char SQL_DEVICE_TB[] = "Create table if not exists DEVICES("
-                             "ID INTEGER PRIMARY KEY AUTOINCREMENT,"
-                             "NAME TEXT UNIQUE,"
-                             "IP TEXT UNIQUE,"
-                             "MAC TEXT UNIQUE,"
-                             "PORT INTEGER,"
-                             "CHANNELS INTEGER);";
+const char SQL_DEVICE_TB[] =
+    "Create table if not exists DEVICES("
+        "ID   INTEGER PRIMARY KEY AUTOINCREMENT,"
+        "NAME TEXT UNIQUE,"
+        "IP   TEXT UNIQUE,"
+        "MAC TEXT UNIQUE,"
+        "PORT INTEGER,"
+        "CHANNELS INTEGER);";
 
 // Selects a random song to load
 const char SQL_SELECT_SONG[] = "Select * from MEDIA ORDER BY"

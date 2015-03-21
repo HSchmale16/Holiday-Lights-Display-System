@@ -14,7 +14,7 @@ updateMedia(){
     # OGGS
     for f in $( find . -name "*.ogg" ) ; do
 	    echo "Found $f"
-	    insert="Insert into MEDIA(name, path)\
+        insert="Insert into MEDIA(name, path)\
          values('$f', '$f');"
 	    sqlite3 $dbFile "$insert"
     done

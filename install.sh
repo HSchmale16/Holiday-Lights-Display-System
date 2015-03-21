@@ -116,8 +116,8 @@ function dbCfg
 	# add to database
 	cd $installDir
 	for f in $( find $songResDir -name "*.ogg" ) ; do
-		inst="Insert into MEDIA(name, path) values" \
-               "('$f', 'resources/songs/$f');"
+		inst="Insert into MEDIA(name, path) values\
+             ('$f', '$f');"
 		sqlite3 $dbFile "$inst"
 	done
 	# @todo configure devices
@@ -131,7 +131,7 @@ function dbCfg
 		read devIP
 		echo -n "Enter Device Listening Port: "
 		read devPort
-		echo -n "Enter Device Channels: "
+		echo -n "Enter Number of Channels Device Has: "
 		read devCh
 		# create querry
 		q="INSERT INTO DEVICES(NAME, IP, PORT, CHANNELS) VALUES('$devName', '$devIP', $devPort, $devCh);"

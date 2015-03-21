@@ -29,7 +29,7 @@ bin/*
 #project files
 *.depend
 *.layout
-
+*_build_log.html
 # Thing created by doxygen
 doxygen/*
 
@@ -41,10 +41,11 @@ ValgrindOut.*
 #resource files
 *.db
 resources/*
+testdata/*
 
 # log files
 *.log*
 *.INFO*
 *.WARN*
 *.ERR*
-logs/*
+logs/

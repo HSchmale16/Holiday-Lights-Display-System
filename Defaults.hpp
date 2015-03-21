@@ -106,8 +106,7 @@ const long long BIT_FLAGS[64] = {0x1l,
 
 /** \brief Holds the current state of the server
  */
-struct ServerData
-{
+struct ServerData {
     std::string m_currSong;	//!< Song currently playing
     std::string m_currShow;	//!< A Show string
     int m_waitPeriod;		//!< Seconds to wait before starting next show

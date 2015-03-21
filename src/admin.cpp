@@ -15,36 +15,27 @@
 
 extern int SERVER_RUNS_FOR_SEC; // how long the server should run for
 
-int admin::parseArgs(int argc, char** argv)
-{
-    if(argc <= 1)
-    {
+int admin::parseArgs(int argc, char** argv) {
+    if(argc <= 1) {
         admin::args::noArgs();
         return 1;
     }
     std::vector<std::string> args = admin::args::createArgVector(argc, argv);
-    for(unsigned int i = 0;  i < args.size(); i++)
-    {
-        for(unsigned int j = 0; j < admin::args::NUM_POSSIBLE_ARGS; j++)
-        {
-            if(args[i].compare(admin::args::POSSIBLE_ARGS[j]) == 0)
-            {
-                switch(j)
-                {
+    for(unsigned int i = 0;  i < args.size(); i++) {
+        for(unsigned int j = 0; j < admin::args::NUM_POSSIBLE_ARGS; j++) {
+            if(args[i].compare(admin::args::POSSIBLE_ARGS[j]) == 0) {
+                switch(j) {
                 case HELP_ARG:
                     LOG(INFO) << "Just printing the help and then exiting";
                     admin::args::help();
                     return 1;
                 case START_ARG:
-                    if(args.size() > (i + 1))
-                    {
+                    if(args.size() > (i + 1)) {
                         SERVER_RUNS_FOR_SEC = strtol(args[i+1].c_str(),
                                                      NULL, 10);
                         LOG(INFO) << "Server has been set to run for "
                                   <<SERVER_RUNS_FOR_SEC << " Seconds";
-                    }
-                    else
-                    {
+                    } else {
                         // No Num specified, just run forever
                         SERVER_RUNS_FOR_SEC = 0;
                         LOG(INFO) << "Server has been set to run forever";
@@ -75,8 +66,7 @@ int admin::parseArgs(int argc, char** argv)
 }
 
 // Song Editor Init
-int admin::initSongEditor()
-{
+int admin::initSongEditor() {
     // init
     hl::initDB();
     int rc = syn::se::ShowEditor();	// begin show editor, this blocks
@@ -86,15 +76,12 @@ int admin::initSongEditor()
 }
 
 // --- Implementation of  admin::args functions below ---
-std::vector<std::string> admin::args::createArgVector(int argc, char ** argv)
-{
+std::vector<std::string> admin::args::createArgVector(int argc, char ** argv) {
     std::vector<std::string> vec;
-    for(int i = 1; i < argc; i++)
-    {
+    for(int i = 1; i < argc; i++) {
         std::string s;
         int j = 0;
-        while(argv[i][j] != '\0')
-        {
+        while(argv[i][j] != '\0') {
             s += argv[i][j];
             j++;
         }
@@ -103,24 +90,21 @@ std::vector<std::string> admin::args::createArgVector(int argc, char ** argv)
     return vec;
 }
 
-int admin::args::noArgs()
-{
+int admin::args::noArgs() {
     printf("No args passed to program\n");
     printf("Usage: HolidayLights {args}\n");
     printf("See help for more information: HolidayLights --help\n");
     return ARG_FAIL;
 }
 
-int admin::args::badArgs()
-{
+int admin::args::badArgs() {
     printf("Bad Args passed to program\n");
     printf("Usage: HolidayLights {args}\n");
     printf("See help for more information: HolidayLights --help\n");
     return ARG_FAIL;
 }
 
-int admin::args::help()
-{
+int admin::args::help() {
     using namespace std;
     cout << "--help\tPrints out the help message, then quits" << endl;
     cout << "--start n\tStarts the server and runs for n seconds" << endl;

@@ -15,53 +15,42 @@ ClientDevice::ClientDevice(std::string ipAddress,
       m_name(name),
       m_listeningPort(listeningPort),
       m_channels(channels),
-      m_thread(&ClientDevice::sendShow, this)
-{
+      m_thread(&ClientDevice::sendShow, this) {
     if(m_socket.connect(sf::IpAddress(m_ipAddress),
-                        m_listeningPort) != sf::Socket::Done)
-    {
+                        m_listeningPort) != sf::Socket::Done) {
         LOG(WARNING) << "Couldn't connect to client listed in database with ip "
                      << "of " << m_ipAddress << " listening on port "
                      << m_listeningPort;
     }
 }
 
-ClientDevice::~ClientDevice()
-{
+ClientDevice::~ClientDevice() {
     //dtor
     m_socket.disconnect(); // disconnect from the clients
     LOG(INFO) << "ClientDevice DTOR: name = " << m_name;
 }
 
 
-void ClientDevice::updateConnection()
-{
+void ClientDevice::updateConnection() {
 
 }
 
 /// Sets the data to send
-void ClientDevice::setShowToSend(std::string show)
-{
+void ClientDevice::setShowToSend(std::string show) {
     m_show = show;
 }
 
-void ClientDevice::sendShow()
-{
+void ClientDevice::sendShow() {
     if(m_socket.connect(sf::IpAddress(m_ipAddress),
-                        m_listeningPort) != sf::Socket::Done)
-    {
+                        m_listeningPort) != sf::Socket::Done) {
         LOG(WARNING) << "Couldn't connect to client listed in database with ip "
                      << "of " << m_ipAddress << " listening on port "
                      << m_listeningPort;
-    }
-    else
-    {
-        for(unsigned int i = 0; i < m_show.length(); i += this->SHOW_CHUNK_SZ)
-        {
+    } else {
+        for(unsigned int i = 0; i < m_show.length(); i += this->SHOW_CHUNK_SZ) {
             // Prepare a chunk to send over the network
             std::string chunk = m_show.substr(i, i + this->SHOW_CHUNK_SZ);
-            if(m_socket.send(chunk.c_str(), chunk.length()) != sf::Socket::Done)
-            {
+            if(m_socket.send(chunk.c_str(), chunk.length()) != sf::Socket::Done) {
                 LOG(WARNING) << "Data Transmission Interupted: Name = "
                              << m_name << "Fail Code = "
                              << "Wouldn't you like to know";
@@ -73,16 +62,13 @@ void ClientDevice::sendShow()
     m_socket.disconnect();
 }
 
-void ClientDevice::beginShow()
-{
+void ClientDevice::beginShow() {
     m_thread.launch();
 }
 
-bool ClientDevice::ping()
-{
+bool ClientDevice::ping() {
     if(m_socket.connect(sf::IpAddress(m_ipAddress),
-                        m_listeningPort != sf::Socket::Done)) // FAIL
-    {
+                        m_listeningPort != sf::Socket::Done)) { // FAIL
         return false;
     }
     m_socket.disconnect();

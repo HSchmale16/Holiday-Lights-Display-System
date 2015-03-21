@@ -12,8 +12,7 @@
  * \date February 1, 2015
  *
  */
-class ClientDevice
-{
+class ClientDevice {
 public:
     /** \brief the default ctor, with params inited to default values
      */
@@ -41,58 +40,50 @@ public:
     // Getters
     /** \return the ip_address string
      */
-    std::string getIPAddress()
-    {
+    std::string getIPAddress() {
         return m_ipAddress;
     }
 
     /** \return The name of the device
      */
-    std::string getName()
-    {
+    std::string getName() {
         return m_name;
     }
 
     /** \return the port this device is listening on
      */
-    int getListeningPort()
-    {
+    int getListeningPort() {
         return m_listeningPort;
     }
 
     /** \return the number of channnels on this device
      */
-    int getChannels()
-    {
+    int getChannels() {
         return m_channels;
     }
 
     // Setters
     /** \brief set the current ip address string
      */
-    void setIPAddress(std::string ip)
-    {
+    void setIPAddress(std::string ip) {
         m_ipAddress = ip;
     }
 
     /** \brief set the name of this device
      */
-    void setName(std::string nm)
-    {
+    void setName(std::string nm) {
         m_name = nm;
     }
 
     /** \brief set the listening port for this device
      */
-    void setListeningPort(int p)
-    {
+    void setListeningPort(int p) {
         m_listeningPort = p;
     }
 
     /** \brief set the number of output channels on this device
      */
-    void setChannels(int c)
-    {
+    void setChannels(int c) {
         m_channels = c;
     }
 

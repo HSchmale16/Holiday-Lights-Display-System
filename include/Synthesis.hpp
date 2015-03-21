@@ -16,20 +16,17 @@
 /** \brief Sound and waveform analysis functions are here
  *
  */
-namespace syn
-{
+namespace syn {
 
 /** \brief I'm not sure what this is for, but I'm not touching this.
  */
-struct ShowData
-{
+struct ShowData {
     int m_channels;		//!< How many channels this show has
     int m_resMilliSec;	//!< Resolution of song parse in milliseconds
     std::string m_data;	//!< Show data to send to client
 
     // ctor
-    ShowData(int channels, std::string show)
-    {
+    ShowData(int channels, std::string show) {
         m_channels = channels;
         m_data = show;
     }
@@ -86,8 +83,7 @@ long long songAnalyze(TYP * buff, int buffSz, int outChannels,
 // ======================== New Namespace ===================================
 /** \brief functions to work with the show editor
  */
-namespace se
-{
+namespace se {
 // Show Editor Entry Point
 int ShowEditor();
 

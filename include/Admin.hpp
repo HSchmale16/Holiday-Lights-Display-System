@@ -10,8 +10,7 @@
 #include <string>	// args
 
 //!< Contains functions to administer this program
-namespace admin
-{
+namespace admin {
 /** \brief Parses the command line arguements
  *
  * \param argc - arguement count
@@ -32,8 +31,7 @@ int parseArgs(int argc, char** argv);
 int initSongEditor();
 
 //!< Contains the command line arg parser functions
-namespace args
-{
+namespace args {
 /** \brief Creates a vector of strings from arguements passed
  * \note it skips the 0th arguement (prog name)
  * \param argc - arguement count
@@ -55,8 +53,7 @@ int help();
 
 // Arguement List
 const unsigned int NUM_POSSIBLE_ARGS = 5;
-const std::string POSSIBLE_ARGS[] =
-{
+const std::string POSSIBLE_ARGS[] = {
     "--help",		// Print Help the Quit
     "--start",		// Starts the server process for n seconds
     "--updateDB",	// Update the database

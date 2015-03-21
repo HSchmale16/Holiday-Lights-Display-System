@@ -6,11 +6,9 @@
 
 /**\brief Contains all the functions that control the actual show
  */
-namespace hl
-{
+namespace hl {
 /// Struct for holding song data
-    struct SongData
-{
+struct SongData {
     int m_songID;			//!< Song Id Number
     std::string m_name;		//!< Song Title
     std::string m_path;		//!< Path to the song file
@@ -20,8 +18,7 @@ namespace hl
     // ctor
     SongData() {};	// empty ctor
 
-    SongData(int id, std::string name, std::string path)
-    {
+    SongData(int id, std::string name, std::string path) {
         m_songID = id;
         m_name = name;
         m_path = path;
@@ -35,8 +32,7 @@ namespace hl
  * stupidity.
  * \brief Contains data about the client
  */
-struct ClientDevice
-{
+struct ClientDevice {
     std::string m_name;			//!< User friendly name
     std::string m_ipAddress;    //!< Ip Address of client
     int m_port;					//!< Port Client is listening on

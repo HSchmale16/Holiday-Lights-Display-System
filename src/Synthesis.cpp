@@ -31,19 +31,16 @@
 const float PI = 3.14159265;
 
 template<typename TYP>
-void syn::pkdft(TYP * xt, TYP * pk, int n)
-{
+void syn::pkdft(TYP * xt, TYP * pk, int n) {
     TYP * iXk = new TYP[n];
     TYP * rXk = new TYP[n];
 
     /// Discrete Fourier Transform
     /// X(k) = sum(x(t) * e^(2 * Pi * k * t), 0, n)
-    for(int k = 0; k < n; k++)
-    {
+    for(int k = 0; k < n; k++) {
         iXk[k] = 0;
         rXk[k] = 0;
-        for(int t = 0; t < n; t++)
-        {
+        for(int t = 0; t < n; t++) {
             iXk[k] = (xt[t] * fm::fcos((2 * PI * k * t) / n));
             rXk[k] = (xt[t] * fm::fsin((2 * PI * k * t) / n));
         }
@@ -51,8 +48,7 @@ void syn::pkdft(TYP * xt, TYP * pk, int n)
 
     /// Calculate Power Spectrum
     /// P(k) = Re(X(k))^2 + Im(X(k))^2
-    for(int k = 0; k < n; k++)
-    {
+    for(int k = 0; k < n; k++) {
         pk[k] = (rXk[k] * rXk[k]) + (iXk[k] * iXk[k]);
     }
 
@@ -61,11 +57,9 @@ void syn::pkdft(TYP * xt, TYP * pk, int n)
 }
 
 // parses a song
-std::string syn::parseSong(hl::SongData &sd, int channels, int res)
-{
+std::string syn::parseSong(hl::SongData &sd, int channels, int res) {
     LOG(INFO) << "Begining Analysis of song with file path = " << sd.m_path;
-    union ConversionUnion
-    {
+    union ConversionUnion {
         long long numericValue;
         char byteValues[sizeof(long long)];
     } myCU;
@@ -75,14 +69,12 @@ std::string syn::parseSong(hl::SongData &sd, int channels, int res)
     int buffSz = (file.samplerate() * file.channels()) * (res / 1000.0);
     LOG(INFO) << "song = " << sd.m_name << "\tBuff=" << buffSz;
     double *buff = new double[buffSz];
-    while(file.read(buff, buffSz) == buffSz)
-    {
+    while(file.read(buff, buffSz) == buffSz) {
         // perform analysis
         myCU.numericValue = syn::songAnalyze(buff, buffSz, channels,
                                              file.channels(),
                                              file.samplerate());
-        for(unsigned int i = 0; i < sizeof(long long); i++)
-        {
+        for(unsigned int i = 0; i < sizeof(long long); i++) {
             show += myCU.byteValues[i];
         }
     }
@@ -91,29 +83,23 @@ std::string syn::parseSong(hl::SongData &sd, int channels, int res)
 }
 
 // Not Used any more deprecated
-long long syn::analysis(short *buff, int buffSz, int channels)
-{
+long long syn::analysis(short *buff, int buffSz, int channels) {
     long long myLong = 0;
     double average = 0;
-    for(int i = 0; i < buffSz; i++)
-    {
+    for(int i = 0; i < buffSz; i++) {
         average += buff[i];
     }
     average /= buffSz;
     // determine amount of time that volume is higher than average
     int greaterThanAvg = 0;
-    for(int i = 0; i < buffSz; i++)
-    {
-        if(buff[i] > average)
-        {
+    for(int i = 0; i < buffSz; i++) {
+        if(buff[i] > average) {
             greaterThanAvg++;
         }
     }
     int percentToFlip = double(greaterThanAvg) / buffSz * 100;
-    for(int i = 0; i < 64; i++)
-    {
-        if((rand() % 100) < percentToFlip)
-        {
+    for(int i = 0; i < 64; i++) {
+        if((rand() % 100) < percentToFlip) {
             myLong ^= BIT_FLAGS[i];
         }
     }
@@ -123,8 +109,7 @@ long long syn::analysis(short *buff, int buffSz, int channels)
 
 template<typename TYP>
 long long syn::songAnalyze(TYP * buff, int buffSz, int outChannels,
-                           int inChannels, int sampleRate)
-{
+                           int inChannels, int sampleRate) {
     // Check that the data is good to work with
     CHECK(inChannels > 0) << "inChannels cannot be 0";
     CHECK(outChannels > 0) << "outChannels cannot be 0";
@@ -141,8 +126,7 @@ long long syn::songAnalyze(TYP * buff, int buffSz, int outChannels,
     out = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * buffSz);
     p = fftw_plan_dft_r2c_1d(buffSz, buff, out, FFTW_ESTIMATE);
     fftw_execute(p);
-    for(int i = 0; i < (buffSz); i++)
-    {
+    for(int i = 0; i < (buffSz); i++) {
         pk[i] = (out[i][0] * out[i][0]) + (out[i][1] * out[i][1]);
     }
 
@@ -151,12 +135,10 @@ long long syn::songAnalyze(TYP * buff, int buffSz, int outChannels,
     counts[0] = 0;
     int freqIncre = (sampleRate / 2) / outChannels; //!< Nyquelist's frequency
     int i = 0;
-    for(int k = 0; k < buffSz; k++)
-    {
+    for(int k = 0; k < buffSz; k++) {
         // calc freq for this value of k
         int freq = (k * sampleRate) / buffSz;
-        if((freq > ((freqIncre * (i + 1)) / 2)) && (i < 63))
-        {
+        if((freq > ((freqIncre * (i + 1)) / 2)) && (i < 63)) {
             i++;
             CHECK(i < 64) << "Buffer Overflow in analysis";
             counts[i] = 0; // 0 the next index, dyn alloc mem is not zeroed
@@ -166,17 +148,14 @@ long long syn::songAnalyze(TYP * buff, int buffSz, int outChannels,
 
     // What lights do I light up?
     long long average = 0;
-    for(i = 0; i < outChannels; i++)
-    {
+    for(i = 0; i < outChannels; i++) {
         average += counts[i];
     }
     average /= outChannels;
 
     long long lights = 0;
-    for(i = 0; i < outChannels; i++)
-    {
-        if(counts[i] > (average))
-        {
+    for(i = 0; i < outChannels; i++) {
+        if(counts[i] > (average)) {
             lights |= BIT_FLAGS[i];
         }
     }
@@ -196,13 +175,11 @@ long long syn::songAnalyze(TYP * buff, int buffSz, int outChannels,
 // =============================================================================
 
 // Show Editor Entry Point
-int syn::se::ShowEditor()
-{
+int syn::se::ShowEditor() {
     return 0;
 }
 
 // Menu to selectW a song
-int syn::se::SelectShow()
-{
+int syn::se::SelectShow() {
     return 0;
 }

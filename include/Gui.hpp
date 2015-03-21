@@ -12,8 +12,7 @@
 #include <ncurses.h>
 #include <cdk.h>
 
-namespace gui
-{
+namespace gui {
 // --- Functions ---
 //!< Initializes the gui namespace
 void init();

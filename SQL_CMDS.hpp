@@ -12,11 +12,13 @@ namespace sql {
 * NAME is the name of the song
 * PATH holds the relative file path from the current working dir to the song
 */
-const char SQL_MEDIA_TB[] = "Create table if not exists MEDIA("
-                            "ID     INTEGER PRIMARY KEY AUTOINCREMENT,"
-                            "NAME   TEXT UNIQUE,"
-                            "PATH   TEXT UNIQUE,"
-                            "ARTIST TEXT);";
+const char SQL_MEDIA_TB[] =
+    "Create table if not exists MEDIA("
+        "ID     INTEGER PRIMARY KEY AUTOINCREMENT,"
+        "NAME   TEXT UNIQUE,"
+        "PATH   TEXT UNIQUE,"
+        "ARTIST TEXT,"
+        "ALBUM  TEXT);";
 
 /* Creates a table to hold data about the microcontrollers in use
  * ID is the row id.

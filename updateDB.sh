@@ -8,12 +8,13 @@
 # db File name
 dbFile="lights.db"
 
-# Empty the media table
-sqlite3 $dbFile "Delete from Media;"
-
-for f in $( ls resources/songs ) ; do
-	echo "Found $f"
-	insert="Insert into MEDIA(name, path) values('$f', 'resources/songs/$f');"
-	sqlite3 $dbFile "$insert"	
-done
+updateMedia(){
+    # Empty the media table
+    sqlite3 $dbFile "Delete from Media;"
+    for f in $( find resources/songs -name "*.ogg" ) ; do
+	    echo "Found $f"
+	    insert="Insert into MEDIA(name, path) values('$f', 'resources/songs/$f');"
+	    sqlite3 $dbFile "$insert"
+    done
+}
 

@@ -61,6 +61,7 @@ void setup()
 	{
 		while(checkForbidden(p++));
 		pinMode(p, OUTPUT);
+        digitalWrite(p, LOW);
 		outs++;
 #ifdef DEBUG_MODE
 		Serial.print("Output: ");
@@ -118,6 +119,9 @@ int powi(int m, int n)
 	return m;
 }
 
+/** Checks if a pin is on the forbidden list. If it is it returns true.
+ *  else it returns false.
+ */
 bool checkForbidden(int pin)
 {
 	for(int i = 0; i < NUM_FORBIDDEN; i++){

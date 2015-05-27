@@ -45,6 +45,7 @@ $(EXE): $(OBJECTS)
 	$(CXX) -c $(CXX_FLAGS) -o $@ $<
 
 # Remove all the object files
+.PHONY: clean
 clean:
 	if [ -e $(EXE) ] ; then rm $(EXE); fi
 	rm -rf *.o

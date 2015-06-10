@@ -1,6 +1,9 @@
-/* pgm entry point
+/**@file main.cpp
  * @author Henry Schmale
  * @date January 11, 2015
+ * \mainpage Holiday Lights Display Server
+ * A system to dynamically generate a light show to some music then stream
+ * some shows to a couple of embedded computers over TCP.
  */
 
 #include <iostream>

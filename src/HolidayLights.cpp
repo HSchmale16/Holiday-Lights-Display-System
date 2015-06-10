@@ -33,6 +33,7 @@ static int cbSong(void *NotUsed, int argc, char **argv, char **azColName) {
 }
 
 // This callback tests for clients, pings them, then pushes them into a vector
+// For usage later
 std::vector<hl::ClientDevice> clients;
 static int cbClients(void *NotUsed, int argc, char **argv, char **azColName) {
     // fill in the struct

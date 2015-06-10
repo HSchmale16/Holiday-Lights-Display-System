@@ -33,7 +33,8 @@ struct ShowData {
 };
 
 /** \brief Performs a discrete fourier transform on a set of real numbers
- * \return the power spectrum of the dft derived from the data via pointer.
+ * \return An integer power spectrum of the dft derived from the data via
+ *         pointer using the parameter pk.
  * \param xt The set of _real_ numbers to analyeze.
  * \param pk The set of return set, This will hold the power spectrum.
  * \param n The number of elements in the data set.
@@ -55,10 +56,10 @@ std::string parseSong(hl::SongData &sd, int channels, int res);
  * analyzing a song section. It didn't work accurately at all, and depended on
  * the volume of the song more than anything else. It's implementation is very
  * limited in what it supports, so it's been replaced with a templeted function
- * which uses a dft.
+ * which uses a discrete fourier transform.
  * \brief Performs analysis on a song
- * \param buff - section analyese
- * \param buffSz - Number of samples in buffer
+ * \param buff - section to analyese
+ * \param buffSz - Number of samples in buff
  * \param channels - Only 2-channel audio is supported
  */
 long long analysis(short *buff, int buffSz, int channels);

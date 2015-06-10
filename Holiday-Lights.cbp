@@ -71,13 +71,11 @@
 		<Unit filename="SQL_CMDS.hpp" />
 		<Unit filename="include/Admin.hpp" />
 		<Unit filename="include/ClientDevice.h" />
-		<Unit filename="include/FastMath.hpp" />
 		<Unit filename="include/Gui.hpp" />
 		<Unit filename="include/HolidayLights.hpp" />
 		<Unit filename="include/Synthesis.hpp" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/ClientDevice.cpp" />
-		<Unit filename="src/FastMath.cpp" />
 		<Unit filename="src/Gui.cpp" />
 		<Unit filename="src/HolidayLights.cpp" />
 		<Unit filename="src/Synthesis.cpp" />
@@ -90,16 +88,16 @@
 			<debugger />
 			<DoxyBlocks>
 				<comment_style block="0" line="1" />
-				<doxyfile_project />
+				<doxyfile_project project_number="0.0.0" use_auto_version="1" />
 				<doxyfile_build />
 				<doxyfile_warnings />
-				<doxyfile_output />
+				<doxyfile_output latex="1" />
 				<doxyfile_dot />
 				<general />
 			</DoxyBlocks>
 			<AutoVersioning>
-				<Scheme minor_max="10" build_max="1000" rev_max="1000" rev_rand_max="100" build_times_to_increment_minor="100" />
-				<Settings autoincrement="1" date_declarations="1" use_define="0" update_manifest="1" do_auto_increment="0" ask_to_increment="0" language="C++" svn="0" svn_directory="" header_path="version.h" />
+				<Scheme minor_max="10" build_max="1000" rev_max="1000" rev_rand_max="20" build_times_to_increment_minor="500" />
+				<Settings autoincrement="1" date_declarations="1" use_define="0" update_manifest="1" do_auto_increment="1" ask_to_increment="0" language="C++" svn="0" svn_directory="" header_path="version.h" />
 				<Changes_Log show_changes_editor="0" app_title="released version %M.%m.%b of %p" changeslog_path="ChangesLog.txt" />
 				<Code header_guard="VERSION_H" namespace="AutoVersion" prefix="" />
 			</AutoVersioning>
